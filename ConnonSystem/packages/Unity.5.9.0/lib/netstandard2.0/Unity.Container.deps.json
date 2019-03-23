@@ -1,0 +1,85 @@
+{
+  "runtimeTarget": {
+    "name": ".NETStandard,Version=v2.0/",
+    "signature": "651143d915113ea202201c2bd39c3310dee3df40"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETStandard,Version=v2.0": {},
+    ".NETStandard,Version=v2.0/": {
+      "Unity.Container/5.9.0": {
+        "dependencies": {
+          "NETStandard.Library": "2.0.3",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.2",
+          "Unity.Abstractions": "4.0.0"
+        },
+        "runtime": {
+          "Unity.Container.dll": {}
+        }
+      },
+      "Microsoft.NETCore.Platforms/1.1.0": {},
+      "NETStandard.Library/2.0.3": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+        "runtime": {
+          "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "assemblyVersion": "4.0.4.1",
+            "fileVersion": "4.6.26919.2"
+          }
+        }
+      },
+      "System.ValueTuple/4.5.0": {},
+      "Unity.Abstractions/4.0.0": {
+        "dependencies": {
+          "System.ValueTuple": "4.5.0"
+        },
+        "runtime": {
+          "Unity.Abstractions.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Unity.Container/5.9.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.NETCore.Platforms/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-d15KS6WIdb5TzAEQiNM7KxB5TYb7cgiRk/767t83xYicHpHoqekPHXLWOc6gyh/FDF77dj4oR1/qg2tnPRfM1g==",
+      "path": "microsoft.netcore.platforms/1.1.0",
+      "hashPath": "microsoft.netcore.platforms.1.1.0.nupkg.sha512"
+    },
+    "NETStandard.Library/2.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tPWvrxEoydwKR5+Q79JKqoJexpfjOz+tK5a3IkLyc+QNNC1fkLyWzjBe3l0k3tvKMi7lug1v479LHSvCkzAW2Q==",
+      "path": "netstandard.library/2.0.3",
+      "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
+    },
+    "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hMkdWxksypQlFXB7JamQegDscxEAQO4FHd/lw/zlSZU9dZgAij65xjCrXer183wvoNAzJic5zzjj2oc9/dloWg==",
+      "path": "system.runtime.compilerservices.unsafe/4.5.2",
+      "hashPath": "system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512"
+    },
+    "System.ValueTuple/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2XTuQk0XMNISXCC56nTqmf/BrEDUsT42N+NSB+wRSlQCOIjV2QaBrbVaR89kD4RX7U5KwfK/fT9J9XEo6QiZ6g==",
+      "path": "system.valuetuple/4.5.0",
+      "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
+    },
+    "Unity.Abstractions/4.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
