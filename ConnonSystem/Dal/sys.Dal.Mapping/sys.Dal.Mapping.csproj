@@ -64,6 +64,13 @@
     <Compile Include="BaseManage\UserMap.cs" />
     <Compile Include="BaseManage\UserRelationMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicInfoManage\EmailAddresseeMap.cs" />
+    <Compile Include="PublicInfoManage\EmailCategoryMap.cs" />
+    <Compile Include="PublicInfoManage\EmailContentMap.cs" />
+    <Compile Include="PublicInfoManage\FileFolderMap.cs" />
+    <Compile Include="PublicInfoManage\FileInfoMap.cs" />
+    <Compile Include="PublicInfoManage\NewsMap.cs" />
+    <Compile Include="PublicInfoManage\ScheduleMap.cs" />
     <Compile Include="SystemManage\AreaMap.cs" />
     <Compile Include="SystemManage\CodeRuleMap.cs" />
     <Compile Include="SystemManage\CodeRuleSeedMap.cs" />

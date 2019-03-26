@@ -1,4 +1,7 @@
-﻿namespace sys.Bll.Repository
+﻿using sys.Util;
+using System;
+
+namespace sys.Bll.Repository
 {
     /// <summary>
     /// 版 本 2.0
@@ -17,7 +20,8 @@
         /// <returns></returns>
         public IRepository<T> BaseRepository(string connString)
         {
-            return new Repository<T>(DbFactory.Base(connString, DatabaseType.SqlServer));
+            DatabaseType DatabaseType = (DatabaseType)Enum.Parse(typeof(DatabaseType), Config.GetValue("connDataType"));
+            return new Repository<T>(DbFactory.Base(connString, DatabaseType));
         }
         /// <summary>
         /// 定义仓储（基础库）

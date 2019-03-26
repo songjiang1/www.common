@@ -423,7 +423,7 @@ namespace sys.Bll.Dapper
                     OrderBy = "order by (select 0 from dual)";
                 }
                 sb.Append("Select * From (Select ROW_NUMBER() Over (" + OrderBy + ")");
-                sb.Append(" As rowNum, * From (" + strSql + ") As T ) As N Where rowNum > " + num + " And rowNum < " + (num1 + 1).ToString() + "");
+                sb.Append(" As rowNum, T.* From (" + strSql + ") As T ) As N Where rowNum > " + num + " And rowNum < " + (num1 + 1).ToString() + "");
                 total = Convert.ToInt32(new DbHelper(dbConnection).ExecuteScalar(CommandType.Text, "Select Count(1) From (" + strSql + ") As t", dbParameter));
                 var IDataReader = new DbHelper(dbConnection).ExecuteReader(CommandType.Text, sb.ToString(), dbParameter);
                 return ConvertExtension.IDataReaderToList<T>(IDataReader);

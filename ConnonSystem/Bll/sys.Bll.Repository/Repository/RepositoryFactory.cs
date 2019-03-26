@@ -21,10 +21,10 @@ namespace sys.Bll.Repository
         /// <returns></returns>
         public IRepository BaseRepository(string connString)
         {
-            DatabaseType  s=(DatabaseType)Enum.Parse(typeof(DatabaseType), Config.GetValue("connDataType")); 
+            DatabaseType DatabaseType = (DatabaseType)Enum.Parse(typeof(DatabaseType), Config.GetValue("connDataType")); 
 
 
-            return new Repository(DbFactory.Base(connString, DatabaseType.MySql));
+            return new Repository(DbFactory.Base(connString, DatabaseType));
         }
         /// <summary>
         /// 定义仓储（基础库）

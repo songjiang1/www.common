@@ -60,6 +60,13 @@
     <Compile Include="BaseManage\UserEntity.cs" />
     <Compile Include="BaseManage\UserRelationEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicInfoManage\EmailAddresseeEntity.cs" />
+    <Compile Include="PublicInfoManage\EmailCategoryEntity.cs" />
+    <Compile Include="PublicInfoManage\EmailContentEntity.cs" />
+    <Compile Include="PublicInfoManage\FileFolderEntity.cs" />
+    <Compile Include="PublicInfoManage\FileInfoEntity.cs" />
+    <Compile Include="PublicInfoManage\NewsEntity.cs" />
+    <Compile Include="PublicInfoManage\ScheduleEntity.cs" />
     <Compile Include="SystemManage\AreaEntity.cs" />
     <Compile Include="SystemManage\CodeRuleEntity.cs" />
     <Compile Include="SystemManage\CodeRuleFormatEntity.cs" />

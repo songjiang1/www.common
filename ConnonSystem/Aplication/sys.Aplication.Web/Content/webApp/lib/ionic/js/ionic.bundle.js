@@ -24968,8 +24968,8 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
       };
 
       var requestError = function() {
-        // The response is always empty
-        // See https://xhr.spec.whatwg.org/#request-error-steps and https://fetch.spec.whatwg.org/#concept-network-error
+        //// The response is always empty
+        //// See https://xhr.spec.whatwg.org/#request-error-steps and https://fetch.spec.whatwg.org/#concept-network-error
         completeRequest(callback, -1, null, null, '');
       };
 

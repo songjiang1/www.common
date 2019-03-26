@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "UploadifyForm";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+@*<link href="~/Content/scripts/plugins/uploadify/uploadify.css" rel="stylesheet" />
+<link href="~/Content/scripts/plugins/uploadify/uploadify.extension.css" rel="stylesheet" />*@
+@*    <script src="~/Content/scripts/plugins/uploadify/jquery.uploadify.min.js"></script>*@
+<script type="text/javascript" src="~/Content/scripts/plupload/plupload.full.min.js"></script>
+
+@*<script type="text/javascript" src="~/Content/scripts/hash/hash.js"></script>
+    <script type="text/javascript" src="~/Content/scripts/hash/sha.js"></script>*@
+<script type="text/javascript" src="~/Content/scripts/0custom/file.js"></script>
+<script type="text/javascript" src="~/Content/scripts/0custom/upload.js"></script>
+@*<script src="~/Content/scripts/jquery/jquery.query-2.1.7.js"></script>*@
+<style>
+    .ui-jqgrid-htable th.ui-th-column {
+        background-color: #F7F7F7;
+    }
+</style>
+<script type="text/javascript">
+    debugger;
+    var folderId = request('folderId');
+    var category = request('category'); 
+    var mime_types = '';
+    console.log(folderId + "======category=====" + category + "=======mime_types===" + mime_types)
+    switch (category) {
+        case "video":
+            mime_types = [{ title: "Vedio files", extensions: "mp4,flv,avi,mpg" }];
+            break;
+        case "image":
+            mime_types = [{ title: "Image files", extensions: "jpg,gif,png,jpeg,bmp" }];
+            break;
+        case "document":
+            mime_types = [{ title: "Doc files", extensions: "txt,xls,xlsx,doc,docx,ppt,pptx,zip,rar,7z,pdf,html" }];
+            break;
+        default:
+            mime_types = [{ title: "Sound files", extensions: "wav,mp3,ogg,midi,mp2,mp1,aac,wma" }];
+            break;
+    }
+     
+</script>
+<div style="margin: 10px">
+    @*<div style="height: 38px;">
+            <div style="float: right; line-height: 26px; color: #337ab7; cursor: pointer; position: relative;">
+                上传必知
+            </div>
+            <input id="uploadify" name="uploadify" type="file" />
+        </div>
+        <div class="border" style="height: 295px; border-radius: 5px;">
+            <div class="drag-tip" style="text-align: center; padding-top: 100px;">
+                <h1 style="color: #666; font-size: 20px; font-family: Microsoft Yahei; padding-bottom: 2px;">试试将电脑里的文件拖拽到此上传</h1>
+                <p style="color: #666; font-size: 12px;">
+                    （您的浏览器不支持此拖拽功能）
+                </p>
+            </div>
+        </div>*@
+    <span id="container">
+        <button class="btn btn-info" type="button" id="pickfiles">
+            <i class="icon-cloud-upload"></i>
+            选择文件
+        </button>
+    </span>
+</div>
+<div id="msg_win" style="display:none;">
+    <div class="icos">
+        <a id="msg_min" title="最小化" href="javascript:void 0">_</a>
+        <a id="msg_close" title="关闭" href="javascript:void 0">×</a>
+    </div>
+    <div id="msg_title">上传文件</div>
+    <div id="msg_content">
+        <ul class="pull-left" id="progress"></ul>
+    </div>
+</div>
+<script type="text/javascript">  
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,html4',
+        browse_button: 'pickfiles',
+        container: document.getElementById('container'),
+        url: '/PublicInfoManage/ResourceFile/UploadifyFile',
+        flash_swf_url: '/Content/scripts/plupload/Moxie.swf',
+        filters: { 
+            max_file_size: '24mb',
+            mime_types: mime_types,
+        },
+        multipart_params: { folderId: folderId, category: category },
+        init: {
+            FilesAdded: function (up, files) {
+                debugger;
+                plupload.each(files, function (file) {
+                    $('#progress').append(
+                        $('<li><div class="uploadTitle pull-left">' + file.name + '</div>'
+                            + '<div class="uploadSize pull-left">' + plupload.formatSize(file.size) + '</div>'
+                            + '<div id="' + file.id + '" class="uploadProportion pull-right">'
+                            + '</div></li>')
+                    );
+                    Message.init();
+                    uploader.start();
+                });
+            },
+            FileUploaded: function (u, f, rep) {
+                debugger;
+                var d = JSON.parse(rep.response);
+                if (d.state == "success") {
+                    $('#' + f.id).html('上传成功');
+                    file.createNewRow(d.data);
+                    setTimeout('Message.close()', 4000);
+                } else {
+                    $('#' + f.id).html(d.message);
+                }
+            },
+            UploadComplete: function (up, files) {
+                uploader.splice();
+                uploader.refresh();
+            },
+            UploadProgress: function (up, file) {
+                debugger;
+                $('#' + file.id).html('<div class="progress progress-xs"><div style="width: ' + file.percent + '%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="' + file.percent + '" role="progressbar" class="progress-bar progress-bar-info"></div></div></div>');
+            },
+            Error: function (up, err) {
+                if (err.code == plupload.FILE_SIZE_ERROR) {
+                    $('#progress').append(
+                        $('<li><div class="uploadTitle pull-left">' + err.file.name + '</div>'
+                            + '<div class="uploadSize pull-left">' + plupload.formatSize(err.file.size) + '</div>'
+                            + '<div id="' + err.file.id + '" class="uploadProportion pull-right">'
+                            + '</div></li>')
+                    );
+                    $('#' + err.file.id).html('文件大小超过限制');
+                    Message.init();
+                } else if (err.code == plupload.FILE_EXTENSION_ERROR) {
+                    $('#progress').append(
+                        $('<li><div class="uploadTitle pull-left">' + err.file.name + '</div>'
+                            + '<div class="uploadSize pull-left">' + plupload.formatSize(err.file.size) + '</div>'
+                            + '<div id="' + err.file.id + '" class="uploadProportion pull-right">'
+                            + '</div></li>')
+                    );
+                    $('#' + err.file.id).html('此文件夹不能上传此文件');
+                    Message.init();
+                }
+            }
+        }
+    });
+    uploader.init();
+</script>

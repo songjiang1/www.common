@@ -63,6 +63,13 @@
     <Compile Include="BaseManage\UserGroupService.cs" />
     <Compile Include="BaseManage\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicInfoManage\EmailCategoryService.cs" />
+    <Compile Include="PublicInfoManage\EmailContentService.cs" />
+    <Compile Include="PublicInfoManage\FileFolderService.cs" />
+    <Compile Include="PublicInfoManage\FileInfoService.cs" />
+    <Compile Include="PublicInfoManage\NewsService.cs" />
+    <Compile Include="PublicInfoManage\NoticeService.cs" />
+    <Compile Include="PublicInfoManage\ScheduleService.cs" />
     <Compile Include="SystemManage\AreaService.cs" />
     <Compile Include="SystemManage\CodeRuleService.cs" />
     <Compile Include="SystemManage\DataBaseBackupService.cs" />
