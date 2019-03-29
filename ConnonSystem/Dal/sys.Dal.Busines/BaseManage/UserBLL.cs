@@ -48,6 +48,14 @@ namespace sys.Dal.Busines.BaseManage
             return service.GetList();
         }
         /// <summary>
+        /// 根据条件查询用户
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<UserEntity> GetUserSearch(UserEntity user)
+        {
+            return service.GetUserSearch(user);
+        }
+        /// <summary>
         /// 用户列表
         /// </summary>
         /// <param name="pagination">分页</param>

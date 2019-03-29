@@ -59,5 +59,14 @@ namespace sys.Dal.Entity
         /// 密钥
         /// </summary>
         public string Secretkey { get; set; }
+
+        /// <summary>
+        /// 微信OpenId
+        /// </summary>
+        public string OpenId { get; set; }
+        /// <summary>
+        /// 用户来源 如 微信用户，APP用户
+        /// </summary>
+        public int Usource { get; set; }
     }
 }

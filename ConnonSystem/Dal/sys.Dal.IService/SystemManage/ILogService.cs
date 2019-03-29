@@ -29,12 +29,18 @@ namespace sys.Dal.IService.SystemManage
         LogEntity GetEntity(string keyValue);
         #endregion
 
-        #region 提交数据 
+        #region 提交数据
         /// <summary>
-        /// 提交，修改
+        /// 清空日志
+        /// </summary>
+        /// <param name="categoryId">日志分类Id</param>
+        /// <param name="keepTime">保留时间段内</param>
+        void RemoveLog(int categoryId, string keepTime);
+        /// <summary>
+        /// 写日志
         /// </summary>
         /// <param name="logEntity">对象</param>
-        void SaveForm(LogEntity logEntity);
+        void WriteLog(LogEntity logEntity);
         #endregion
     }
 }

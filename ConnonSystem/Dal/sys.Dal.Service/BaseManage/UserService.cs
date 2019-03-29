@@ -171,6 +171,25 @@ namespace sys.Dal.Service.BaseManage
             return this.BaseRepository().FindEntity(keyValue);
         }
         /// <summary>
+        /// 根据条件查询
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public IEnumerable<UserEntity> GetUserSearch(UserEntity user)
+        {
+            var expression = LinqExtensions.True<UserEntity>(); 
+            expression = expression.And(t => t.EnabledMark == 1).And(t => t.UserId != "System");
+            if (!string.IsNullOrWhiteSpace(user.OpenId))
+            {
+                expression = expression.And(t => t.OpenId == user.OpenId);
+            }
+            if (!string.IsNullOrWhiteSpace(user.UserId))
+            {
+                expression = expression.And(t => t.UserId == user.UserId);
+            }
+            return this.BaseRepository().IQueryable(expression).OrderByDescending(t => t.CreateDate);  
+        }
+        /// <summary>
         /// 登录验证
         /// </summary>
         /// <param name="username">用户名</param>

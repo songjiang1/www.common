@@ -113,10 +113,6 @@
       <Project>{9522b26d-aae2-4665-a8d9-a7ac67280d3c}</Project>
       <Name>sys.Util.WebControl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Util\sys.Util.WeChat\sys.Util.WeChat.csproj">
-      <Project>{74f153ea-7322-47f0-94fb-9983fcb54cc5}</Project>
-      <Name>sys.Util.WeChat</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Util\sys.Util\sys.Util.csproj">
       <Project>{f35195fb-0615-4ffb-b48c-148c8f6ff394}</Project>
       <Name>sys.Util</Name>

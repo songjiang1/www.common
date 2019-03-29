@@ -229,7 +229,7 @@ namespace sys.Application.Web.Controllers
                 smsModel.url = Config.GetValue("SMSUrl");
                 smsModel.mobile = mobileCode;
                 smsModel.msg = "验证码 " + data + "，(请确保是本人操作且为本人手机，否则请忽略此短信)";
-                SmsHelper.SendSmsByJM(smsModel);
+                JMSmsHelper.SendSmsByJM(smsModel);
             }
             return Success("获取成功。");
         }

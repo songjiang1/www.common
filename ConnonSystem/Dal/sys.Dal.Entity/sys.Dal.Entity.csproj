@@ -84,6 +84,7 @@
     <Compile Include="SystemManage\LogEntity.cs" />
     <Compile Include="SystemManage\ViewModel\DataItemModel.cs" />
     <Compile Include="UserInfoModel.cs" />
+    <Compile Include="WeChatInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Aplication\sys.Aplication.Code\sys.Aplication.Code.csproj">

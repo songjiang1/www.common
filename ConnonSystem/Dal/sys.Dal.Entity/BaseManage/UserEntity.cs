@@ -137,7 +137,7 @@ namespace sys.Dal.Entity.BaseManage
         /// <summary>
         /// 单点登录标识
         /// </summary>		
-        public int? OpenId { get; set; }
+        public int? SingleFlag { get; set; }
         /// <summary>
         /// 密码提示问题
         /// </summary>		
@@ -222,6 +222,17 @@ namespace sys.Dal.Entity.BaseManage
         /// 修改用户
         /// </summary>		
         public string ModifyUserName { get; set; }
+
+        /// <summary>
+        /// 微信OpenId
+        /// </summary>
+        public string OpenId { get; set; }
+
+
+        /// <summary>
+        /// 用户来源 如 微信用户，APP用户
+        /// </summary>
+        public int Usource { get; set; }
         #endregion
 
         #region 扩展操作

@@ -26,6 +26,11 @@ namespace sys.Dal.IService.BaseManage
         /// <returns></returns>
         IEnumerable<UserEntity> GetList();
         /// <summary>
+        /// 根据条件查询用户
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<UserEntity> GetUserSearch(UserEntity user);
+        /// <summary>
         /// 用户列表
         /// </summary>
         /// <param name="pagination">分页</param>

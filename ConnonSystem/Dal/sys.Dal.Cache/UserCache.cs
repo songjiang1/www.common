@@ -52,6 +52,21 @@ namespace sys.Dal.Cache
             }
             return data;
         }
+        /// <summary>
+        /// 用户信息
+        /// </summary>
+        /// <param name="openid"></param>
+        /// <returns></returns>
+        public UserEntity GetSearchList(string openid)
+        {
+            var data = this.GetList();
+            UserEntity user = new UserEntity();
+            if (!string.IsNullOrEmpty(openid))
+            {
+                user = data.Where(t => t.OpenId == openid).FirstOrDefault();
+            }
+            return user;
+        }
         //public Dictionary<string,appUserInfoModel> GetListToApp()
         //{
         //    Dictionary<string, appUserInfoModel> data = new Dictionary<string,appUserInfoModel>();
