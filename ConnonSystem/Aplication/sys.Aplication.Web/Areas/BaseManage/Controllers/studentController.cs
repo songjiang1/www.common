@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace sys.Application.Web.Areas.BaseManage.Controllers
 {
     /// <summary>
-    /// 版 本 6.1
+    /// 版 本 2.0
     /// Copyright (c)  
     /// 创 建：超级管理员
     /// 日 期：2017-03-01 09:20

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace sys.Dal.Busines.PublicInfoManage
 {
     /// <summary>
-    /// 版 本 6.1
+    /// 版 本 2.0
     /// Copyright (c)  
     /// 创建人：宋江
     /// 日 期：2015.12.15 10:56

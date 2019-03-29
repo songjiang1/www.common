@@ -20,6 +20,17 @@ namespace sys.Util
         private static Regex RegDecimalSign = new Regex("^[+-]?[0-9]+[.]?[0-9]+$"); //等价于^[+-]?\d+[.]?\d+$
         private static Regex RegEmail = new Regex(@"^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$");//w 英文字母或数字的字符串，和 [a-zA-Z0-9] 语法一样 
         private static Regex RegCHZN = new Regex("[\u4e00-\u9fa5]");
+        private static Regex RegMobile = new Regex(@"^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$");
+
+        #region MyRegion电话号码格式
+      
+        public static bool IsMobile(string mobile)
+        {
+            Match m = RegMobile.Match(mobile);
+            return m.Success;
+        }
+        #endregion
+
 
         #region 用户名密码格式
 

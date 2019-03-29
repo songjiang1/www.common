@@ -51,8 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\ReturnResult.cs" />
     <Compile Include="Attributes\EntityAttribute.cs" />
     <Compile Include="Attributes\EnumAttribute.cs" />
+    <Compile Include="CCPRestSDK.cs" />
     <Compile Include="CommonHelper.cs" />
     <Compile Include="Comparint.cs" />
     <Compile Include="Compress\GZip.cs" />
@@ -73,11 +75,13 @@
     <Compile Include="Security\DESEncrypt.cs" />
     <Compile Include="Security\Md5Helper.cs" />
     <Compile Include="Serialize.cs" />
-    <Compile Include="SmsHelper.cs" />
+    <Compile Include="JMSmsHelper.cs" />
+    <Compile Include="CCPSMSHelper.cs" />
     <Compile Include="Str.cs" />
     <Compile Include="Sys.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="ValidateUtil.cs" />
+    <Compile Include="CCPSMSNotifyUtil.cs" />
     <Compile Include="WebHelper.cs" />
     <Compile Include="XmlHelper.cs" />
   </ItemGroup>

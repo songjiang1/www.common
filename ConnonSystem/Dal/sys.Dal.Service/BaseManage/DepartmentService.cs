@@ -15,7 +15,7 @@ using sys.Dal.BaseManage;
 namespace sys.Dal.Service.BaseManage
 {
     /// <summary>
-    /// 版 本 6.1
+    /// 版 本 2.0
     /// Copyright (c)  
     /// 创建人：宋江
     /// 日 期：2015.11.02 14:27

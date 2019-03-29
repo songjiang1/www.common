@@ -60,6 +60,7 @@
     <Compile Include="BaseManage\IUserService.cs" />
     <Compile Include="BaseManage\studentIService.cs" />
     <Compile Include="IAccountService.cs" />
+    <Compile Include="INotifyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicInfoManage\IEmailCategoryService.cs" />
     <Compile Include="PublicInfoManage\IEmailContentService.cs" />
@@ -104,6 +105,9 @@
       <Project>{eaf3c7cb-d115-439b-8513-cb298e8e55c9}</Project>
       <Name>sys.Dal.Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AppManager\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace sys.Dal.IService.PublicInfoManage
 {
     /// <summary>
-    /// 版 本 6.1
+    /// 版 本 2.0
     /// Copyright (c)  
     /// 创 建：佘赐雄
     /// 日 期：2016-04-25 10:45

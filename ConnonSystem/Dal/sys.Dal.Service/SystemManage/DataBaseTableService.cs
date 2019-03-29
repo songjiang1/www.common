@@ -11,7 +11,7 @@ using System.Text;
 namespace sys.Dal.Service.SystemManage
 {
     /// <summary>
-    /// 版 本 6.1
+    /// 版 本 2.0
     /// Copyright (c)  
     /// 创建人：宋江
     /// 日 期：2015.11.18 11:02

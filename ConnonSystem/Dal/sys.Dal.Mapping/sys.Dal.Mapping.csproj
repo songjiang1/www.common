@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountMap.cs" />
+    <Compile Include="AppManager\MessageReadMap.cs" />
     <Compile Include="AuthorizeManage\AuthorizeDataMap.cs" />
     <Compile Include="AuthorizeManage\AuthorizeMap.cs" />
     <Compile Include="AuthorizeManage\FilterIPMap.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="BaseManage\studentMap.cs" />
     <Compile Include="BaseManage\UserMap.cs" />
     <Compile Include="BaseManage\UserRelationMap.cs" />
+    <Compile Include="NotifyMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicInfoManage\EmailAddresseeMap.cs" />
     <Compile Include="PublicInfoManage\EmailCategoryMap.cs" />
@@ -93,5 +95,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,7 +11,7 @@ using sys.Util.Extension;
 namespace sys.Dal.Service.SystemManage
 {
     /// <summary>
-    /// 版 本 6.1
+    /// 版 本 2.0
     /// Copyright (c)  
     /// 创 建：超级管理员
     /// 日 期：2017-03-31 15:17
