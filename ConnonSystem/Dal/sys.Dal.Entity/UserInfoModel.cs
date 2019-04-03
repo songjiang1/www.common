@@ -67,6 +67,36 @@ namespace sys.Dal.Entity
         /// <summary>
         /// 用户来源 如 微信用户，APP用户
         /// </summary>
-        public int Usource { get; set; }
+        public string Usource { get; set; }
+
+        #region MyRegion 新增字段
+        /// <summary>
+        /// 民族
+        /// </summary>
+        public string Nation { get; set; }
+
+        /// <summary>
+        /// 身份
+        /// </summary>
+        public string Identity { get; set; }
+        /// <summary>
+        /// 党派
+        /// </summary>
+        public string Party { get; set; }
+        /// <summary>
+        /// 审核标记 1通过审核； 0提交；2打回，信息有误
+        /// </summary> 
+        public int VerifyMark { get; set; }
+
+        /// <summary>
+        /// 岗位
+        /// </summary>
+        public string Post { get; set; }
+        /// <summary>
+        /// 职位
+        /// </summary>
+        public string Position { get; set; }
+
+        #endregion
     }
 }

@@ -68,11 +68,11 @@ namespace sys.Dal.Busines
         /// </summary>
         /// <param name="mobile"></param>
         ///   
-        public bool UpdateNotify(string mobile)
+        public bool UpdateNotify(string mobile, string Code)
         {
             try
             {
-              return  service.UpdateNotify(mobile);
+              return  service.UpdateNotify(mobile, Code);
             }
             catch (Exception)
             {

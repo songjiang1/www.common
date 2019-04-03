@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountService.cs" />
+    <Compile Include="AppManage\MessageReadService.cs" />
+    <Compile Include="AppManage\MeetingService.cs" />
+    <Compile Include="AppManage\NoticeService.cs" />
     <Compile Include="AuthorizeManage\AuthorizeService.cs" />
     <Compile Include="AuthorizeManage\AuthorizeService.T.cs" />
     <Compile Include="AuthorizeManage\FilterIPService.cs" />
@@ -58,6 +61,7 @@
     <Compile Include="BaseManage\JobService.cs" />
     <Compile Include="BaseManage\OrganizeService.cs" />
     <Compile Include="BaseManage\PostService.cs" />
+    <Compile Include="BaseManage\RegisterUserService.cs" />
     <Compile Include="BaseManage\RoleService.cs" />
     <Compile Include="BaseManage\studentService.cs" />
     <Compile Include="BaseManage\UserGroupService.cs" />
@@ -123,8 +127,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AppManager\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

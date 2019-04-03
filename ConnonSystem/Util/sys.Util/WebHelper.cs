@@ -218,7 +218,7 @@ namespace sys.Util
                 cookie = new HttpCookie(strName);
             }
             cookie.Value = strValue;
-            cookie.Expires = DateTime.Now.AddMinutes(expires);
+            cookie.Expires = DateTime.Now.AddHours(expires);
             HttpContext.Current.Response.AppendCookie(cookie);
         }
         /// <summary>

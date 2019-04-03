@@ -35,14 +35,16 @@
                    {
                        label: '所在公司', name: 'OrganizeName', width: 250, align: 'left', sortable: false,
                        formatter: function (cellvalue, options, rowObject) {
-                           var organizeId = top.clientdepartmentData[rowObject.OrganizeId].OrganizeId;
-                           return top.clientorganizeData[organizeId].FullName;
+                           
+                           var organizeId = top.clientdepartmentData[rowObject.OrganizeId] == undefined ? "" : top.clientdepartmentData[rowObject.OrganizeId].OrganizeId;
+                           return organizeId==""?"":top.clientorganizeData[organizeId].FullName;
                        }
                    },
                 {
                     label: '所在部门', name: 'DepartmentName', width: 100, align: 'left', sortable: false,
                     formatter: function (cellvalue, options, rowObject) {
-                        return top.clientdepartmentData[rowObject.OrganizeId].FullName;
+                        
+                        return top.clientdepartmentData[rowObject.OrganizeId] == undefined ? "" : top.clientdepartmentData[rowObject.OrganizeId].FullName;
                     }
                 },
                 {

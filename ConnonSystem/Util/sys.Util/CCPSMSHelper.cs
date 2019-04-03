@@ -35,11 +35,11 @@ namespace sys.Util
             port = Config.GetValue("CCPport");
         }
         // return SMSService.SendTemplateSMS(mobile, "227982", new string[] { code,"30" }, "vender");
-        public static ReturnResult SendTemplateSMS(string mobile, string template, string[] data)
+        public static int SendTemplateSMS(string mobile, string template, string[] data)
         {
             if (!ValidateUtil.IsMobile(mobile))
             {
-                return new ReturnResult { Msg = "错误的手机号", Code = 1 };
+                return 1;
             }
             try
             {
@@ -54,21 +54,21 @@ namespace sys.Util
                 if (isInit)
                 {
                     //短信发送
-                    //retData = api.SendTemplateSMS(mobile, template, data); 
+                    retData = api.SendTemplateSMS(mobile, template, data); 
                     var  ret = getDictionaryData(retData);
                     if (retData["statusCode"].ToString() == "000000")
-                        return new ReturnResult { Msg = "发送短信成功", Code = 0 };
+                        return 0;
                     else
                     { 
-                        return new ReturnResult { Msg = "验证码请求超过3次了", Code = 1 };
+                        return 1;
                     }
                 }
                 else
                 {
-                    return new ReturnResult { Msg = "短信模块初始化失败", Code = 1 };
+                    return 1;
                 }
             }
-            catch { return new ReturnResult { Msg = "短信发送失败", Code = 1 }; }
+            catch { return 1; }
         }
         /// <summary>
         /// 

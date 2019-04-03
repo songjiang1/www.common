@@ -36,8 +36,8 @@
                 e.stopPropagation();
             });
             //错误提示
-            if (top.$.cookie('learun_login_error') != null) {
-                switch (top.$.cookie('learun_login_error')) {
+            if (top.$.cookie('sys_login_error') != null) {
+                switch (top.$.cookie('sys_login_error')) {
                     case "Overdue":
                         formMessage('登录已超时,请重新登录');
                         break;
@@ -50,7 +50,7 @@
                     default:
                         break;
                 }
-                top.$.cookie('learun_login_error', '', { path: "/", expires: -1 });
+                top.$.cookie('sys_login_error', '', { path: "/", expires: -1 });
             }
             //是否自动登录
             if (top.$.cookie('sys_autologin') == 1) {
@@ -382,7 +382,7 @@
     <div class="copyright">
         北京技术有限公司出品
         @*<br>
-        LR-ADMS 敏捷开发框架官方网站：http://www.learun.cn/adms/index.html*@ 
+        LR-ADMS 敏捷开发框架官方网站：http:///adms/index.html*@ 
     </div>
     <div class="rides-cs" style="display: none;">
         <div style="float: left;">

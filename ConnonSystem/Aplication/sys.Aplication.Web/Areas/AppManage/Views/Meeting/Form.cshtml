@@ -1,0 +1,316 @@
+﻿@{
+    ViewBag.Title = "会议管理";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<link href="~/Content/scripts/plugins/simditor/css/simditor.css" rel="stylesheet" />
+<script src="~/Content/scripts/plugins/simditor/js/module.min.js"></script>
+<script src="~/Content/scripts/plugins/simditor/js/uploader.min.js"></script>
+<script src="~/Content/scripts/plugins/simditor/js/hotkeys.min.js"></script>
+<script src="~/Content/scripts/plugins/simditor/js/simditor.min.js"></script>
+<link href="~/Content/scripts/plugins/cxColor/css/jquery.cxcolor.css" rel="stylesheet" />
+<link href="~/Content/scripts/plugins/datepicker/skin/WdatePicker.css" rel="stylesheet" />
+<script src="~/Content/scripts/plugins/datepicker/DatePicker.js"></script>
+<style>
+    .ui-jqgrid-htable th.ui-th-column {
+        background-color: #F7F7F7;
+    }
+</style>
+<script src="~/Content/scripts/plugins/cxColor/js/jquery.cxcolor.js"></script>
+<style>
+    .userlist_span {
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        border: 1px solid blue;
+        font-size: 28px;
+        text-align: center;
+        line-height: 15px;
+        cursor: pointer;
+        color: greenyellow;
+    }
+
+    .userspan {
+        border: 1px solid green;
+        background-color: springgreen;
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+        border-radius: 30px;
+        text-align: center;
+        line-height: 30px;
+    }
+    .ml-10 {
+        margin-left:10px;
+    }
+</style>
+@*上传插件引用*@
+<script type="text/javascript" src="~/Content/scripts/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="~/Content/scripts/0custom/file.js"></script>
+<script type="text/javascript" src="~/Content/scripts/0custom/upload.js"></script>
+<script>
+    var keyValue = request('keyValue');
+    var editor = null;
+    $(function () {
+        editor = new Simditor({
+            textarea: $('#MeetingContent'),
+            placeholder: '这里输入会议内容...',
+            toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent']
+        });
+        initControl();
+    })
+    //初始化控件
+    function initControl() {
+       
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../AppManage/Meeting/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                     if (data.Cover == null || data.Cover == "") {
+                        data.Cover = "@sys.Util.Config.GetValue("DefaultImg")";
+                    }
+                    $("#Cover").attr("src", data.Cover)
+                    editor.setValue(data.MeetingContent);
+                    $("#FullHead").attr("color", data.FullHeadColor).css("color", data.FullHeadColor);
+                    var html = "";
+                    if (data.ObjectName != null && data.ObjectName != "") {
+                        var usersplit = data.ObjectName.split('|');
+                        $.each(usersplit, function (index, obj) {
+                            if (obj != null && obj != "") {
+                                var objsplit = obj.split(",");
+                                html += ('<span class="userspan ml-10" data-id="' + objsplit[0] + '" data-name="' + objsplit[1] + '">' + objsplit[1] + '</span>');
+
+                            }
+                        })
+                        $("#userList").html(html);
+                    } else {
+                        $("#userList").html("");
+                    } 
+                }
+            });
+        }
+    }
+    //选择颜色-设置标题色彩
+    function SelectColorEvent() {
+        var mycolor = $("#select_color").cxColor();
+        mycolor.show();
+        $("#select_color").bind("change", function () {
+            $("#FullHead").css("color", this.value).attr("color", this.value);
+        });
+    }
+    //保存表单
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var user = []; 
+        $("#userList .userspan").each(function () { 
+            var userStr = $(this).attr('data-id') + "," + $(this).attr('data-name');
+            user.push(userStr); 
+        })
+        var postData = {
+           
+            FullHead: $("#FullHead").val(),
+            FullHeadColor: $('#FullHead').attr('color'), 
+            Cover: $("#Cover").attr("src"),
+            MeetingContent: editor.getValue(),
+            ConveneSTime: $("#ConveneSTime").val(),
+            ConveneETime: $("#ConveneETime").val(),
+            MeetingAddress: $("#MeetingAddress").val(), 
+            ObjectName: user.join('|'),
+            Description: $("#Description").val(),
+        }
+        $.SaveForm({
+            url: "../../AppManage/Meeting/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+    //新增
+    function btn_addMember() {
+        dialogOpen({
+            id: "AllotMember",
+            title: '参会人员',
+            url: '/AppManage/RegistUser/AllotMember',
+            width: "1000px",
+            height: "600px",
+            callBack: function (iframeId) { 
+                var att = top.frames[iframeId].AcceptClick(); 
+                var html = "";
+                if (att.user != null && att.user != "") {  
+                    
+                    var usersplit = att.user.split('|');
+                    $.each(usersplit, function (index, obj) {
+                        if (obj != null && obj != "") {
+                            var objsplit = obj.split(",");  
+                            html += ('<span class="userspan ml-10" data-id="' + objsplit[0] + '" data-name="' + objsplit[1] +'">' + objsplit[1] + '</span>');
+                            
+                        } 
+                    })
+                    $("#userList").html(html);
+                } else { 
+                    $("#userList").html("");
+                } 
+                top.frames[iframeId].close();
+            }
+        });
+    };
+</script>
+<div style="margin-top: 20px; margin-right: 30px;">
+
+
+    <table class="form" style="table-layout: auto;">
+        <tr>
+            <td class="formTitle">封面<font face="宋体">*</font></td>
+            <td class="formTitle">
+                <img id="Cover" src="@sys.Util.Config.GetValue("DefaultImg")" style="width:104px;height:100px;" />
+                <span id="container">
+                    <button class="btn btn-info" type="button" id="pickfiles">
+                        <i class="icon-cloud-upload"></i>
+                        选择图片
+                    </button>
+                </span>
+            </td>
+             
+        </tr>
+        <tr>
+            <td class="formTitle">标题<font face="宋体">*</font></td>
+            <td class="formValue" colspan="3">
+                <input id="FullHead" type="text" class="form-control" style="color: #000000;" placeholder="请输入标题" isvalid="yes" checkexpession="NotNull" />
+                <span id="select_color" class="input-button" style="width: 18px; margin-top: -9px; height: auto;" title="使用彩色标题" onclick="SelectColorEvent()">
+                    <img src="~/Content/images/large_tiles.png" />
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">会议开始时间<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="ConveneSTime" type="text" placeholder="会议开始时间" class="form-control input-wdatepicker" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+            </td>
+            <td class="formTitle">会议结束时间</td>
+            <td class="formValue">
+
+                <input id="ConveneETime" type="text" placeholder="会议结束时间" class="form-control input-wdatepicker" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">会议地址</td>
+            <td class="formValue"  colspan="3">
+                <input id="MeetingAddress" type="text" class="form-control" />
+            </td> 
+        </tr>
+        <tr>
+            <th class="formTitle" valign="top" style="padding-top: 4px;">参会人员</th>
+            <td class="formValue" colspan="3"> 
+                <div id="userList"></div>
+                <span  class="userlist_span" onclick="btn_addMember()">+</span>
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle" valign="top" style="padding-top: 4px;">会议备注</th>
+            <td class="formValue" colspan="3">
+                <textarea id="Description" class="form-control" rows="3"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle" valign="top" style="padding-top: 4px;">会议内容</th>
+            <td class="formValue" colspan="3">
+                <textarea id="MeetingContent" class="form-control" rows="5"></textarea>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="msg_win" style="display:none;">
+    <div class="icos">
+        <a id="msg_min" title="最小化" href="javascript:void 0">_</a>
+        <a id="msg_close" title="关闭" href="javascript:void 0">×</a>
+    </div>
+    <div id="msg_title">上传文件</div>
+    <div id="msg_content">
+        <ul class="pull-left" id="progress"></ul>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,html4',
+        browse_button: 'pickfiles',
+        container: document.getElementById('container'),
+        url: '/PublicInfoManage/ResourceFile/PublicUpload',
+        flash_swf_url: '/Content/scripts/plupload/Moxie.swf',
+        filters: {
+            max_file_size: '1mb',
+            mime_types: [{ title: "Image files", extensions: "jpg,gif,png,jpeg,bmp" }],
+        },
+        multipart_params: {},
+        multi_selection: false,
+        multiple_queues: false,
+        init: {
+            FilesAdded: function (up, files) {
+                
+                if (uploader.files.length > 1) {
+                    return alert("只能上传单张图片");
+                }
+                plupload.each(files, function (file) {
+                    $('#progress').append(
+                        $('<li><div class="uploadTitle pull-left">' + file.name + '</div>'
+                            + '<div class="uploadSize pull-left">' + plupload.formatSize(file.size) + '</div>'
+                            + '<div id="' + file.id + '" class="uploadProportion pull-right">'
+                            + '</div></li>')
+                    );
+                    Message.init();
+                    uploader.start();
+                });
+            },
+            FileUploaded: function (u, f, rep) {
+                
+                var d = JSON.parse(rep.response);
+                if (d.state == "success" || d.type == 1) {
+                    $('#' + f.id).html('上传成功');
+                    $("#Cover").attr("src", d.message.replace("~", ""));
+                    file.createNewRow(d.data);
+                    setTimeout('Message.close()', 4000);
+                } else {
+                    $('#' + f.id).html(d.message);
+                }
+            },
+            UploadComplete: function (up, files) {
+                uploader.splice();
+                uploader.refresh();
+            },
+            UploadProgress: function (up, file) {
+                
+                $('#' + file.id).html('<div class="progress progress-xs"><div style="width: ' + file.percent + '%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="' + file.percent + '" role="progressbar" class="progress-bar progress-bar-info"></div></div></div>');
+            },
+            Error: function (up, err) {
+                if (err.code == plupload.FILE_SIZE_ERROR) {
+                    $('#progress').append(
+                        $('<li><div class="uploadTitle pull-left">' + err.file.name + '</div>'
+                            + '<div class="uploadSize pull-left">' + plupload.formatSize(err.file.size) + '</div>'
+                            + '<div id="' + err.file.id + '" class="uploadProportion pull-right">'
+                            + '</div></li>')
+                    );
+                    $('#' + err.file.id).html('文件大小超过限制');
+                    Message.init();
+                } else if (err.code == plupload.FILE_EXTENSION_ERROR) {
+                    $('#progress').append(
+                        $('<li><div class="uploadTitle pull-left">' + err.file.name + '</div>'
+                            + '<div class="uploadSize pull-left">' + plupload.formatSize(err.file.size) + '</div>'
+                            + '<div id="' + err.file.id + '" class="uploadProportion pull-right">'
+                            + '</div></li>')
+                    );
+                    $('#' + err.file.id).html('此文件夹不能上传此文件');
+                    Message.init();
+                }
+            }
+        }
+    });
+    uploader.init();
+</script>

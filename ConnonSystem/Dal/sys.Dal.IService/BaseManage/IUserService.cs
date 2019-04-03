@@ -54,6 +54,13 @@ namespace sys.Dal.IService.BaseManage
         /// <param name="username">用户名</param>
         /// <returns></returns>
         UserEntity CheckLogin(string username);
+
+        /// <summary>
+        /// 自动审核---手机验证
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        UserEntity CheckMobile(string Mobile);
         /// <summary>
         /// 导出用户列表
         /// </summary>

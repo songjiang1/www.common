@@ -191,25 +191,34 @@ namespace sys.Dal.Busines.BaseManage
             {
                 if (userEntity.EnabledMark == 1)
                 {
-                    string dbPassword = Md5Helper.MD5(DESEncrypt.Encrypt(password.ToLower(), userEntity.Secretkey).ToLower(), 32).ToLower();
-                    if (dbPassword == userEntity.Password)
+                    if (userEntity.VerifyMark == 1)
                     {
-                        DateTime LastVisit = DateTime.Now;
-                        int LogOnCount = (userEntity.LogOnCount).ToInt() + 1;
-                        if (userEntity.LastVisit != null)
+                        string dbPassword = Md5Helper.MD5(DESEncrypt.Encrypt(password.ToLower(), userEntity.Secretkey).ToLower(), 32).ToLower();
+                        if (dbPassword == userEntity.Password)
                         {
-                            userEntity.PreviousVisit = userEntity.LastVisit.ToDate();
+                            DateTime LastVisit = DateTime.Now;
+                            int LogOnCount = (userEntity.LogOnCount).ToInt() + 1;
+                            if (userEntity.LastVisit != null)
+                            {
+                                userEntity.PreviousVisit = userEntity.LastVisit.ToDate();
+                            }
+                            userEntity.LastVisit = LastVisit;
+                            userEntity.LogOnCount = LogOnCount;
+                            userEntity.UserOnLine = 1;
+                            service.UpdateEntity(userEntity);
+                            return userEntity;
                         }
-                        userEntity.LastVisit = LastVisit;
-                        userEntity.LogOnCount = LogOnCount;
-                        userEntity.UserOnLine = 1;
-                        service.UpdateEntity(userEntity);
-                        return userEntity;
+                        else
+                        {
+                            throw new Exception("密码和账户名不匹配");
+                        }
+
                     }
                     else
                     {
-                        throw new Exception("密码和账户名不匹配");
+                        throw new Exception("账户审核未通过，请联系管理员");
                     }
+                    
                 }
                 else
                 {
@@ -220,6 +229,15 @@ namespace sys.Dal.Busines.BaseManage
             {
                 throw new Exception("账户不存在，请重新输入");
             }
+        }
+        /// <summary>
+        /// 自动审核---手机验证
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public UserEntity CheckMobile(string Mobile)
+        {
+            return service.CheckMobile(Mobile); 
         }
         /// <summary>
         /// 更新实时通信用户列表

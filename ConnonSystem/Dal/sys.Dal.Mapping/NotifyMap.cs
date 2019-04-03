@@ -1,5 +1,5 @@
 ﻿using sys.Dal.Entity;
-using sys.Dal.Entity.AppManager;
+using sys.Dal.Entity.AppManage;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;

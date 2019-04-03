@@ -1,0 +1,293 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="/content/js/mui.min.js"></script>
+    <link rel="stylesheet" href="/content/css/home_page.css" />
+    <link rel="stylesheet" href="/content/css/mui.min.css" />
+
+    <!--框架必需start-->
+    <script src="~/Content/js/jquery/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/js/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <script src="~/Content/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <script src="~/Content/js/plugins/datepicker/WdatePicker.js"></script>
+    <script src="~/Content/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/Content/js/utils/sys.js"></script>
+
+    <link href="~/Content/js/plugins/wizard/wizard.css" rel="stylesheet" />
+    <link href="~/Content/js/plugins/datetime/pikaday.css" rel="stylesheet" />
+    <link href="~/Content/css/sys-ui.css" rel="stylesheet" />
+    <link href="~/Content/js/plugins/tree/tree.css" rel="stylesheet" />
+
+    <script src="~/Content/js/plugins/wizard/wizard.js"></script>
+    <script src="~/Content/js/plugins/datetime/pikaday.js"></script>
+    <script src="~/Content/js/plugins/datetime/moment.min.js"></script>
+    <script src="~/Content/js/plugins/validator/validator.js"></script>
+
+
+    <script src="~/Content/js/plugins/cookie/jquery.cookie.js"></script>
+    <script src="~/Content/js/plugins/dialog/dialog.js"></script>
+    <script src="~/Content/js/plugins/validator/validator.js"></script>
+    <script src="~/Content/js/plugins/tipso.min.js"></script>
+
+
+
+    <style>
+        .input-wdatepicker {
+            cursor: pointer;
+            outline: 0;
+            width: auto;
+            height: 28px;
+            line-height: 26px;
+            position: relative;
+            background: #fff url(/Content/images/a2.png) no-repeat right center;
+        }
+
+        .width_3 {
+            width: 29% !important;
+        }
+
+        .position-input {
+            position: absolute;
+            width: 60%;
+            float: left;
+            margin-top: -28px;
+            margin-left: 30%;
+        }
+
+        .post-input {
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</a>
+        <h1 class="mui-title">信息填写</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
+    <form id="form1">
+        @Html.AntiForgeryToken()
+        <div class="Info">
+
+            <div class="Info_title"><span>基本信息填写</span></div>
+            <div class="Info_it">
+                <input type="text" placeholder="姓名" id="RealName" isvalid="yes" checkexpession="NotNull" />
+            </div>
+            <div class="Info_it">
+                <div style="width:45%;">
+                    <div id="OrganizeId" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+                     
+                </div>
+                <div style="width:45%;float:left;margin-left:50%;margin-top:-20px;" id="Gender" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull">
+                    <ul>
+                        <li data-value="1">男</li>
+                        <li data-value="0">女</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="Info_it">
+                <input id="Birthday_Year" type="text" placeholder="出生年" class="form-control input-wdatepicker width_3" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy'})" />
+                <input id="Birthday_Month" type="text" placeholder="出生月" class="form-control input-wdatepicker width_3" onfocus="WdatePicker({skin:'default',dateFmt:'MM'})" />
+                <input id="Birthday_Day" type="text" placeholder="出生日" class="form-control input-wdatepicker width_3" onfocus="WdatePicker({skin:'default',dateFmt:'dd'})" />
+            </div>
+            <div class="Info_it">
+                <div id="Nation" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+            </div>
+            <div class="Info_it">
+                <div id="Party" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+            </div>
+            <div class="Info_it">
+                <div id="Identity" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+            </div>
+            <div class="Info_it">
+                <input id="WorkUnit" name="WorkUnit" type="text" placeholder="工作单位">
+            </div>
+            <div class="Info_it">
+                <div id="Post" type="select" class="ui-select post-input" isvalid="yes" checkexpession="NotNull"></div>
+                <div id="Position" type="select" class="ui-select position-input" isvalid="yes" checkexpession="NotNull"></div>
+            </div>
+            <div class="Info_title"><span>账号密码设置</span></div>
+            <div class="Info_it">
+                <input id="Mobile" type="text" class="form-control" placeholder="手机号" isvalid="yes" checkexpession="NotNull" />
+               
+                <butten id="SendVerify" onclick="SendVerify()"><span id="time">发送验证码</span> </butten>
+            </div>
+            <div class="Info_it">
+                <input id="Verify" isvalid="yes" checkexpession="NotNull" type="text" placeholder="填写验证码">
+            </div>
+            <div class="Info_it">
+                <input id="Password" type="text" class="form-control" placeholder="登录密码" isvalid="yes" checkexpession="NotNull" />
+            </div>
+            <div class="Info_btn">
+                <a class="st_btn" onclick="AcceptClick()">提交审核</a>
+            </div>
+
+
+        </div>
+    </form>
+
+</body>
+</html>
+<script>
+    $(function () {
+        initControl();
+    })
+    //初始化控件
+    function initControl() {
+        //性别
+        $("#Gender").ComboBox({
+            description: "性别",
+        });
+        //民族
+        
+        $("#OrganizeId").ComboBox({
+            url: "/DataItem/GetOrganizeJson",
+            param: {},
+            id: "OrganizeId",
+            text: "FullName",
+            description: "地区",
+            height: "200px"
+        });
+        $("#Nation").ComboBox({
+            url: "/DataItem/GetDataItemListJson",
+            param: { EnCode: "NationCategory" },
+            id: "ItemValue",
+            text: "ItemName",
+            description: "民族",
+            height: "200px"
+        });
+
+        //党派
+        $("#Party").ComboBox({
+            url: "/DataItem/GetDataItemListJson",
+            param: { EnCode: "PartyCategory" },
+            id: "ItemValue",
+            text: "ItemName",
+            description: "党派",
+            height: "200px"
+        });
+
+        //身份
+        $("#Identity").ComboBox({
+            url: "/DataItem/GetDataItemListJson",
+            param: { EnCode: "IdentityCategory" },
+            id: "ItemValue",
+            text: "ItemName",
+            description: "身份",
+            height: "200px"
+        });
+        //岗位
+        $("#Post").ComboBox({
+            url: "/DataItem/GetDataItemListJson",
+            param: { EnCode: "PostCategory" },
+            id: "ItemValue",
+            text: "ItemName",
+            description: "岗位",
+            height: "200px"
+        });
+        //职务
+        $("#Position").ComboBox({
+            url: "/DataItem/GetDataItemListJson",
+            param: { EnCode: "PositionCategory" },
+            id: "ItemValue",
+            text: "ItemName",
+            description: "职务",
+            height: "200px"
+        });
+
+    }
+    //保存表单
+    function AcceptClick() {
+        
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls();
+        postData["Birthday"] = $("#Birthday_Year").val() + "-" + $("#Birthday_Month").val() + "-" + $("#Birthday_Day").val();
+        if (postData["Birthday"] == "&nbsp;") {
+            postData["Birthday"] = "";
+        }
+        //var _instanceData = $("#frmpreview").frmGetData();
+        //var moduleFormInstanceEntity = { "FormId": formId, "FormInstanceJson": JSON.stringify(_instanceData) };
+        //$.SaveForm({
+        //    url: "/Regist/SaveForm",
+        //    param: { "strUserEntity": JSON.stringify(postData), "verify": $("#Verify").val() },
+        //    loading: "正在保存数据...",
+        //    success: function (data) {
+        //        //$.currentIframe().$("#gridTable").trigger("reloadGrid"); 
+        //        setTimeout(function () {
+        //            window.location.href = "/Regist/Audit";
+        //        }, 1000);
+
+        //    }
+        //}) 
+        $.ajax({
+            url: "/Regist/SaveForm",
+            data: { "strUserEntity": JSON.stringify(postData), "verify": $("#Verify").val() },
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data.type == 1) {
+                    window.location.href = "/Regist/Audit?Mobile=" + $("#Mobile").val();
+                } else {
+                    alert(data.message);
+
+                }
+            }
+        });
+    }
+    function formMessage(msg, type) {
+        $('.login_tips').remove();
+        $('.login_tips-succeed').remove();
+        var _class = "login_tips";
+        if (type == 1) {
+            _class = "login_tips-succeed";
+        }
+        $('.lr-input-form').prepend('<div class="' + _class + '"><i class="fa fa-question-circle"></i>' + msg + '</div>');
+    }
+    var t = 60;
+    function SendVerify() { 
+        document.getElementById("SendVerify").disabled = true; 
+        t = setInterval("test()", 1000); 
+        //$.SaveForm({
+        //    url: "/Regist/SendVerify",
+        //    param: { "Mobile": $("#Mobile").val() },
+        //    loading: "正在保存数据...",
+        //    success: function (data) {
+        //        alert("发送成功");
+
+
+        //    }
+        //})
+        $.ajax({
+            url: "/Regist/SendVerify",
+            data: { "Mobile": $("#Mobile").val() },
+            type: "post",
+            dataType: "json",
+            success: function (data) { 
+            }
+        });
+    }
+    function test() { 
+        var btn = document.getElementById("SendVerify").disabled = true; 
+        var time = document.getElementById("time");
+
+        if (time.innerHTML == "发送验证码")
+            $("#time").html(60); 
+        if (time.innerHTML == 0) {
+            $("#time").html("发送验证码");  
+            document.getElementById("SendVerify").disabled = false; 
+            clearInterval(t);
+        } else {
+            time.innerHTML = time.innerHTML - 1;
+        }
+    }
+</script>

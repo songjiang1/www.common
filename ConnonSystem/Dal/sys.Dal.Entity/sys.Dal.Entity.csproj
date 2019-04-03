@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountEntity.cs" />
-    <Compile Include="AppManager\MessageReadEntity.cs" />
+    <Compile Include="AppManage\MessageReadEntity.cs" />
+    <Compile Include="AppManage\MeetingEntity.cs" />
+    <Compile Include="AppManage\NoticeEntity.cs" />
     <Compile Include="AuthorizeManage\AuthorizeDataEntity.cs" />
     <Compile Include="AuthorizeManage\AuthorizeEntity.cs" />
     <Compile Include="AuthorizeManage\FilterIPEntity.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="BaseEntity.cs" />
     <Compile Include="BaseManage\DepartmentEntity.cs" />
     <Compile Include="BaseManage\OrganizeEntity.cs" />
+    <Compile Include="BaseManage\RegisterUserEntity.cs" />
     <Compile Include="BaseManage\RoleEntity.cs" />
     <Compile Include="BaseManage\studentEntity.cs" />
     <Compile Include="BaseManage\UserEntity.cs" />

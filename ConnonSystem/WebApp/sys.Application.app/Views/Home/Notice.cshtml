@@ -1,0 +1,67 @@
+﻿ 
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title> 
+    <link rel="stylesheet" href="/content/css/mui.min.css" />
+    <link rel="stylesheet" href="/content/css/home_page.css?v=@Guid.NewGuid().ToString()" />
+    <script type="text/javascript" src="/content/js/jquery-2.1.0.js"></script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="javascript:window.history.back()">返回</a>
+        <h1 class="mui-title">通知公告</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
+    <div class="ch">
+        <div class="Hd" style="border:none;">
+            @*<div class="juzhon">消息</div>*@
+
+        </div>
+        <div class="sh">
+            <div class="info">
+                <div class="info_content">
+                    <ul>
+                        <li>
+                            <label>五常人大</label><div class="content">
+                                <span>关于app用户完善基本信息</span><b>未读</b>
+                                <a href="/Home/NoticeDetail"><p>人大通手机端上线后使用后，请各个人大代表尽快投入使用</p></a>
+                                <layer></layer>
+                            </div>
+                        </li>
+                        <li>
+                            <label>五常人大</label><div class="content">
+                                <span>关于app用户完善基本信息</span><b>未读</b>
+                                <p>人大通手机端上线后使用后，请各个人大代表尽快投入使用</p>
+                                <layer></layer>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+</body>
+<script>
+
+	$(function(){
+		$(".info").show().siblings().hide();
+		 $(".Hd a:even").addClass("Bj");
+		$(".Hd a").click(function(){
+		var $as=$(this).index();
+		  $(".Hd a:even").removeAttr("Bj");
+		  alert($as);
+		  $(this).parent().siblings().children().eq($as).show().siblings().hide();
+		  $(this).addClass("Bj").siblings().removeClass("Bj");
+		});
+		var time=new Date();
+
+		$(".info_content ul li layer").text(time.getHours()+":"+time.getMinutes());
+
+	});
+
+
+
+</script>
+</html>

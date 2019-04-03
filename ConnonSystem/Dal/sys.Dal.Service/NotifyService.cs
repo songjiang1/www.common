@@ -57,16 +57,22 @@ namespace sys.Dal.Service
         {
             var expression = LinqExtensions.True<NotifyEntity>();
             expression = expression.And(t => t.Mobile == mobile);
+            expression = expression.And(t => t.Code == code);
             expression = expression.And(t => t.Status ==true);
             var NotifyData= this.BaseRepository().IQueryable(expression).OrderByDescending(t => t.CreateDate).FirstOrDefault();
             if (NotifyData == null)
             {
-                throw new Exception("短信验证码不正确。");
+                throw new Exception("手机号错误");
+            }
+            if (NotifyData.Code != code)
+            {
+                throw new Exception("验证码错误。");
             }
             if (NotifyData.ExpiresDate <= DateTime.Now)
             {
                 throw new Exception("验证码已过期。");
             }
+           
             return true;
         }
         #endregion
@@ -78,6 +84,7 @@ namespace sys.Dal.Service
         /// <param name="notify"></param>
         public void SaveForm(string keyValue, NotifyEntity notify)
         {
+
             if (!string.IsNullOrEmpty(keyValue))
             {
                 notify.Modify(keyValue);
@@ -85,6 +92,17 @@ namespace sys.Dal.Service
             }
             else
             {
+                //var expression = LinqExtensions.True<NotifyEntity>();
+                //expression = expression.And(t => t.Mobile == notify.Mobile);
+                //expression = expression.And(t => t.Status == true);
+                //var NotifyData = this.BaseRepository().IQueryable(expression).OrderByDescending(t => t.CreateDate).FirstOrDefault();
+                //if (NotifyData != null)
+                //{
+                //    if (NotifyData.ExpiresDate > DateTime.Now)
+                //    {
+                //        throw new Exception("操作太频繁");
+                //    }
+                //} 
                 notify.Create();
                 this.BaseRepository().Insert(notify);
             }
@@ -93,11 +111,11 @@ namespace sys.Dal.Service
         /// 更新短信状态
         /// </summary>
         /// <param name="mobile"></param>
-        public bool UpdateNotify(string mobile)
+        public bool UpdateNotify(string mobile, string Code)
         {
             var expression = LinqExtensions.True<NotifyEntity>();
             expression = expression.And(t => t.Mobile == mobile);
-            expression = expression.And(t => t.Status == true);
+            expression = expression.And(t => t.Code == Code); 
             var NotifyData = this.BaseRepository().IQueryable(expression).OrderByDescending(t => t.CreateDate).FirstOrDefault();
 
             NotifyData.Status = true;

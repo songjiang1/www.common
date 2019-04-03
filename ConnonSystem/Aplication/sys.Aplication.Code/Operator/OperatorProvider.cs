@@ -50,16 +50,16 @@ namespace sys.Aplication.Code
                 if (LoginProvider == "Cookie")
                 {
                     #region 解决cookie时，设置数据权限较多时无法登陆的bug
-                    CacheFactory.Cache().WriteCache(user.DataAuthorize, LoginUserKey, user.LogTime.AddHours(12));
+                    CacheFactory.Cache().WriteCache(user.DataAuthorize, LoginUserKey, user.LogTime.AddHours(24));
                     user.DataAuthorize = null;
                     #endregion
-                    WebHelper.WriteCookie(LoginUserKey, DESEncrypt.Encrypt(user.ToJson()),120);
+                    WebHelper.WriteCookie(LoginUserKey, DESEncrypt.Encrypt(user.ToJson()),24);
                 }
                 else
                 {
                     WebHelper.WriteSession(LoginUserKey, DESEncrypt.Encrypt(user.ToJson()));
                 }
-                CacheFactory.Cache().WriteCache(user.Token, user.UserId, user.LogTime.AddHours(12));//问题出在这？
+                CacheFactory.Cache().WriteCache(user.Token, user.UserId, user.LogTime.AddHours(24));//问题出在这？
             }
             catch (Exception ex)
             {

@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "组织成员";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+<script>
+    var organizeId = request('organizeId');
+    $(function () {
+        InitialPage();
+        GetMember();
+        GetTree();
+    });
+    //初始化页面
+    function InitialPage() {
+        //layout布局
+        $('#layout').layout({
+            applyDemoStyles: true,
+            west__size: 160,
+            spacing_open: 0,
+            onresize: function () {
+                $(window).resize()
+            }
+        });
+        $(".center-Panel").height($(window).height() - 40)
+    }
+    //加载树
+    var organizeid = "card-box";
+    function GetTree() {
+        var item = {
+            height: $(window).height() - 1,
+            url: "../../BaseManage/Organize/GetTreeJson",
+            onnodeclick: function (item) {
+                Loading(true);
+                
+                window.setTimeout(function () {
+                    //if (item.parentnodes == "0") {
+                    //    $(".card-box").show();
+                    //    organizeid = "card-box";
+                    //} else {
+                        $(".card-box").hide();
+                        $('.' + item.id).show();
+                        organizeid = item.id;
+                    //}
+                    Loading(false);
+                }, 200);
+            }
+        };
+        //初始化
+        $("#itemTree").treeview(item);
+    }
+    //加载成员
+    function GetMember() {
+        $.ajax({
+            url: "../../AppManage/RegistUser/GetListJson?organizeId=" + organizeId,
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                
+                var _html = "";
+                $.each(data, function (i) {
+                    var row = data[i];
+                    //if (row.isdefault == 0) {
+                    var imgName = "UserCard02.png";
+                    if (row.Gender != null && row.Gender != 1) {
+                        imgName = "UserCard01.png";
+                    }
+                    var active = "";
+                    if (row.ischeck == 1) {
+                        active = "active";
+                    }
+                    _html += '<div data-id="' + row.UserId + '" data-name="' + row.RealName +'"   class="card-box ' + row.OrganizeId + ' ' + active + '">';
+                    _html += '    <div class="card-box-img">';
+                    _html += '        <img src="/Content/images/' + imgName + '" />';
+                    _html += '    </div>';
+                    _html += '    <div id="' + row.UserId + '" class="card-box-content" data-id="' + row.UserId + '" data-name="' + row.RealName+'">';
+                    _html += '        <p>姓名：' + row.RealName + '</p>';
+                    _html += '        <p>手机：' + row.Mobile + '</p>';
+                    _html += '    </div><i></i>';
+                    _html += '</div>';
+                    //}
+                });
+                $(".gridPanel").html(_html);
+                $(".card-box").click(function () {
+                    if (!$(this).hasClass("active")) {
+                        $(this).addClass("active")
+                    } else {
+                        $(this).removeClass("active")
+                    }
+                })
+                Loading(false);
+            }, beforeSend: function () {
+                Loading(true);
+            }
+        });
+        //模糊查询用户（注：这个方法是理由jquery查询）
+        $("#txt_TreeKeyword").keyup(function () {
+            var value = $(this).val();
+            if (value != "") {
+                window.setTimeout(function () {
+                    $("." + organizeid)
+                        .hide()
+                        .filter(":contains('" + (value) + "')")
+                        .show();
+                }, 200);
+            } else {
+                $("." + organizeid).show();
+            }
+        }).keyup();
+    }
+    //保存表单
+    function AcceptClick() { 
+        var user = []; 
+        $('.gridPanel .active').each(function () {
+            
+            var userStr = "";
+            userStr = $(this).attr('data-id') + "," + $(this).attr('data-name');
+            user.push(userStr); 
+        }); 
+        var userTstring = user.join("|"); 
+        var ret = { user: userTstring}
+        return ret;
+    }
+
+    function close() { 
+        dialogClose();
+    }
+</script>
+<div class="ui-layout" id="layout" style="height: 100%; width: 100%;">
+    <div class="ui-layout-west" style="width:190px;">
+        <div class="west-Panel" style="margin: 0px; border-top: none; border-left: none; border-bottom: none;">
+            <div id="itemTree"></div>
+        </div>
+    </div>
+    <div class="ui-layout-center" style="left:200px;">
+        <div class="treesearch">
+            <input id="txt_TreeKeyword" type="text" class="form-control" style="border-top: none;" placeholder="请输入要查询关键字" />
+            <span id="btn_TreeSearch" class="input-query" title="Search"><i class="fa fa-search"></i></span>
+        </div>
+        <div class="center-Panel" style="margin: 0px; border-right: none; border-left: none; border-bottom: none; background-color: #fff; overflow: auto; padding-bottom: 10px;">
+            <div class="gridPanel">
+            </div>
+        </div>
+    </div>
+</div>

@@ -244,7 +244,7 @@ loadnav = function () {
     //动态加载导航菜单
     var _html = "";
     var index = 0;
-    console.log(authorizeMenuData);
+    //console.log(authorizeMenuData);
     $.each(authorizeMenuData, function (i) {
         var row = authorizeMenuData[i];
         if (row.ParentId == '0') {

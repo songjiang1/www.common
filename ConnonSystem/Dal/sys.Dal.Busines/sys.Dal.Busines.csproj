@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountBLL.cs" />
-    <Compile Include="AppManager\MessageReadBLL.cs" />
+    <Compile Include="AppManage\MessageReadBLL.cs" />
+    <Compile Include="AppManage\MeetingBLL.cs" />
+    <Compile Include="AppManage\NoticeBLL.cs" />
     <Compile Include="AuthorizeManage\AuthorizeBLL.cs" />
     <Compile Include="AuthorizeManage\FilterIPBLL.cs" />
     <Compile Include="AuthorizeManage\FilterTimeBLL.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="BaseManage\JobBLL.cs" />
     <Compile Include="BaseManage\OrganizeBLL.cs" />
     <Compile Include="BaseManage\PostBLL.cs" />
+    <Compile Include="BaseManage\RegisterUserBLL.cs" />
     <Compile Include="BaseManage\RoleBLL.cs" />
     <Compile Include="BaseManage\studentBLL.cs" />
     <Compile Include="BaseManage\UserBLL.cs" />

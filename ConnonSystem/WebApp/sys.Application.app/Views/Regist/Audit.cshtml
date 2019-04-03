@@ -1,0 +1,45 @@
+﻿@{ 
+    sys.Dal.Entity.BaseManage.RegisterUserEntity entity = ViewBag.userEntity;
+    }
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>审核提交</title>
+    <script src="/content/js/mui.min.js"></script>
+    <link rel="stylesheet" href="/content/css/mui.min.css" />
+    <link rel="stylesheet" href="/content/css/home_page.css" />
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</a>
+        <h1 class="mui-title">审核提交</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
+    <div class="Sh">
+        <div class="Sh_info">
+            <p>您所提交的审核账号</p>
+            @{
+                if (entity.VerifyMark == 0)
+                {
+                    <p>@Session["Mobile"]</p>
+                    <p>审核通过后会以短信通知您！</p>
+                }
+                else if (entity.VerifyMark == 1)
+                {
+                    <p>@Session["Mobile"]</p>
+                    <p>已审核通过！</p>
+                }
+                else
+                {
+                    <p>@Session["Mobile"]</p>
+                    <p>@entity.VerifyDescribe</p>
+                }
+            }
+
+
+        </div>
+    </div>
+</body>
+</html>

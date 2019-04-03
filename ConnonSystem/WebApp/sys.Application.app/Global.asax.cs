@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -13,6 +14,10 @@ namespace sys.Application.app
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+             
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters); 
+            //依赖注入 
         }
     }
 }

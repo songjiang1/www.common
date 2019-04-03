@@ -132,6 +132,12 @@ namespace sys.Application.Web.Areas.BaseManage.Controllers
             var data = organizeBLL.GetEntity(keyValue);
             return Content(data.ToJson());
         }
+        [HttpGet]
+        public ActionResult GetOrganizeJson(string EnCode)
+        {
+            var data = organizeBLL.GetList();
+            return Content(data.ToJson());
+        }
         #endregion
 
         #region 验证数据

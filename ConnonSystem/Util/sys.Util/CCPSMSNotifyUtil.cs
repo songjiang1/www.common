@@ -16,7 +16,7 @@ namespace sys.Util
         /// <param name="mobile"></param>
         /// <param name="code"></param>
         /// <param name="expires"></param>
-        public static ReturnResult  TestNotify(string mobile,string code,string expires)
+        public static int  TestNotify(string mobile,string code,string expires,string type="1")
         {
            return  CCPSMSHelper.SendTemplateSMS(mobile, "1", new string[] { code,expires });
         }
@@ -26,7 +26,7 @@ namespace sys.Util
         /// <param name="mobile"></param>
         /// <param name="code"></param>
         /// <param name="expires"></param>
-        public static void RegisterNotify(string mobile, string code, string expires)
+        public static void RegisterNotify(string mobile, string code, string expires, string type = "1")
         {
             CCPSMSHelper.SendTemplateSMS(mobile, "227972", new string[] { code, expires });
         }
@@ -34,7 +34,7 @@ namespace sys.Util
         /// 系统通知
         /// </summary>
         /// <param name="mobile"></param> 
-        public static void Notice(string mobile, string code, string expires)
+        public static void Notice(string mobile, string code, string expires, string type = "1")
         {
             CCPSMSHelper.SendTemplateSMS(mobile, "227972", new string[] { code, expires });
         }

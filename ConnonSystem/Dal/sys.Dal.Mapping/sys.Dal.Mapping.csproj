@@ -48,7 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountMap.cs" />
-    <Compile Include="AppManager\MessageReadMap.cs" />
+    <Compile Include="AppManage\MessageReadMap.cs" />
+    <Compile Include="AppManage\MeetingMap.cs" />
+    <Compile Include="AppManage\NoticeMap.cs" />
     <Compile Include="AuthorizeManage\AuthorizeDataMap.cs" />
     <Compile Include="AuthorizeManage\AuthorizeMap.cs" />
     <Compile Include="AuthorizeManage\FilterIPMap.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="AuthorizeManage\ModuleMap.cs" />
     <Compile Include="BaseManage\DepartmentMap.cs" />
     <Compile Include="BaseManage\OrganizeMap.cs" />
+    <Compile Include="BaseManage\RegisterUserMap.cs" />
     <Compile Include="BaseManage\RoleMap.cs" />
     <Compile Include="BaseManage\studentMap.cs" />
     <Compile Include="BaseManage\UserMap.cs" />

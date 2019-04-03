@@ -13,7 +13,9 @@
     <script src="~/Content/scripts/plugins/cookie/jquery.cookie.js"></script>
     <script src="~/Content/scripts/plugins/dialog/dialog.js"></script>
     <script src="~/Content/scripts/plugins/validator/validator.js"></script>
-    <script src="~/Content/scripts/plugins/tipso.min.js"></script>
+    <script src="~/Content/scripts/plugins/tipso.min.js"></script> 
+
+ 
     <script>
         var contentPath = '/'.substr(0, '/'.length - 1);
         var isIE = !!window.ActiveXObject;
@@ -51,8 +53,8 @@
 
         function initialControl() {
             //错误提示
-            if (top.$.cookie('learun_login_error') != null) {
-                switch (top.$.cookie('learun_login_error')) {
+            if (top.$.cookie('sys_login_error') != null) {
+                switch (top.$.cookie('sys_login_error')) {
                     case "Overdue":
                         formMessage('登录已超时,请重新登录');
                         break;
@@ -68,7 +70,7 @@
                     default:
                         break;
                 }
-                top.$.cookie('learun_login_error', '', { path: "/", expires: -1 });
+                top.$.cookie('sys_login_error', '', { path: "/", expires: -1 });
             }
             //是否自动登录
             if (top.$.cookie('sys_autologin') == 1) {

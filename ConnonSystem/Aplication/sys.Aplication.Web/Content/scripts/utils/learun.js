@@ -149,7 +149,7 @@ function(n, t) {
             n.type == -1 && (n.type = 2);
             top.layer.alert(n.msg, {
                 icon: n.type,
-                title: "力软提示",
+                title: "系统提示",
                 success: function() {
                     t.loading({
                         isShow: !1
@@ -160,7 +160,7 @@ function(n, t) {
         dialogConfirm: function(n) {
             top.layer.confirm(n.msg, {
                 icon: 7,
-                title: "力软提示",
+                title: "系统提示",
                 btn: ["确认", "取消"],
                 success: function() {
                     t.loading({

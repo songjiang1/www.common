@@ -18,7 +18,7 @@
     }
 </style>
 <script type="text/javascript">
-    debugger;
+    
     var folderId = request('folderId');
     var category = request('category'); 
     var mime_types = '';
@@ -85,7 +85,7 @@
         multipart_params: { folderId: folderId, category: category },
         init: {
             FilesAdded: function (up, files) {
-                debugger;
+                
                 plupload.each(files, function (file) {
                     $('#progress').append(
                         $('<li><div class="uploadTitle pull-left">' + file.name + '</div>'
@@ -98,7 +98,7 @@
                 });
             },
             FileUploaded: function (u, f, rep) {
-                debugger;
+                
                 var d = JSON.parse(rep.response);
                 if (d.state == "success") {
                     $('#' + f.id).html('上传成功');
@@ -113,7 +113,7 @@
                 uploader.refresh();
             },
             UploadProgress: function (up, file) {
-                debugger;
+                
                 $('#' + file.id).html('<div class="progress progress-xs"><div style="width: ' + file.percent + '%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="' + file.percent + '" role="progressbar" class="progress-bar progress-bar-info"></div></div></div>');
             },
             Error: function (up, err) {

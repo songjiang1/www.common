@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Senparc.Weixin">
       <HintPath>..\..\..\..\..\..\..\Project\项目\NET框架\core\ConnonSystem\ConnonSystem\lib\Senparc.Weixin.dll</HintPath>
     </Reference>
@@ -40,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,6 +59,7 @@
     <Compile Include="Comm\HttpHelper.cs" />
     <Compile Include="Comm\Program.cs" />
     <Compile Include="Comm\Sample.cs" />
+    <Compile Include="Comm\SendWeChatMessage.cs" />
     <Compile Include="Comm\WXBizMsgCrypt.cs" />
     <Compile Include="Model\Attribute\IAttribute.cs" />
     <Compile Include="Model\Attribute\IsNotNullAttribute.cs" />
@@ -121,6 +126,9 @@
       <Project>{f35195fb-0615-4ffb-b48c-148c8f6ff394}</Project>
       <Name>sys.Util</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppManage\IMessageReadService.cs" />
+    <Compile Include="AppManage\IMeetingService.cs" />
+    <Compile Include="AppManage\INoticeService.cs" />
     <Compile Include="AuthorizeManage\IAuthorizeService.cs" />
     <Compile Include="AuthorizeManage\IAuthorizeService.T.cs" />
     <Compile Include="AuthorizeManage\IFilterIPService.cs" />
@@ -55,6 +58,7 @@
     <Compile Include="BaseManage\IJobService.cs" />
     <Compile Include="BaseManage\IOrganizeService.cs" />
     <Compile Include="BaseManage\IPostService.cs" />
+    <Compile Include="BaseManage\IRegisterUserService.cs" />
     <Compile Include="BaseManage\IRoleService.cs" />
     <Compile Include="BaseManage\IUserGroupService.cs" />
     <Compile Include="BaseManage\IUserService.cs" />
@@ -106,8 +110,6 @@
       <Name>sys.Dal.Entity</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AppManager\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

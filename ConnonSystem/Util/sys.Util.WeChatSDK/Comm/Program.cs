@@ -113,15 +113,15 @@ namespace sys.Util.WeChat
             //        new SendNews.SendItem
             //        {
             //        description="测试新闻",
-            //        picurl="http://www.learun.cn/images/banner3.jpg",
-            //        url="http://www.learun.cn/fdms/index.html",
+            //        picurl="http:///images/banner3.jpg",
+            //        url="http:///fdms/index.html",
             //        title="力软在线"
             //        },
             //                            new SendNews.SendItem
             //        {
             //        description="测试新闻二",
-            //        picurl="http://www.learun.cn/images/banner3.jpg",
-            //        url="http://www.learun.cn",
+            //        picurl="http:///images/banner3.jpg",
+            //        url="http://",
             //        title="力软在线"
             //        }
                     

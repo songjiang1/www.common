@@ -202,6 +202,17 @@ namespace sys.Dal.Service.BaseManage
             expression = expression.Or(t => t.Email == username);
             return this.BaseRepository().FindEntity(expression);
         }
+        /// <summary>
+        /// 自动审核---手机验证
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public UserEntity CheckMobile(string Mobile)
+        {
+            var expression = LinqExtensions.True<UserEntity>();
+            expression = expression.And(t => t.Mobile == Mobile); 
+            return this.BaseRepository().FindEntity(expression);
+        }
         #endregion
 
         #region 验证数据

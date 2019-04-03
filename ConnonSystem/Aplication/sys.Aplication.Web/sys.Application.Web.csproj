@@ -53,10 +53,10 @@
       <HintPath>..\..\lib\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Unity.5.9.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>..\..\packages\Unity.5.9.1\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Unity.5.9.0\lib\net45\System.ValueTuple.dll</HintPath>
+      <HintPath>..\..\packages\Unity.5.9.1\lib\net45\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -118,10 +118,10 @@
       <HintPath>..\..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Abstractions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Unity.5.9.0\lib\net45\Unity.Abstractions.dll</HintPath>
+      <HintPath>..\..\packages\Unity.5.9.1\lib\net45\Unity.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Container, Version=5.9.0.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Unity.5.9.0\lib\net45\Unity.Container.dll</HintPath>
+    <Reference Include="Unity.Container, Version=5.9.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.5.9.1\lib\net45\Unity.Container.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -174,6 +174,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\AppManage\Controllers\MeetingController.cs" />
+    <Compile Include="Areas\AppManage\Controllers\NoticeController.cs" />
     <Compile Include="Areas\AuthorizeManage\AuthorizeManageAreaRegistration.cs" />
     <Compile Include="Areas\AuthorizeManage\Controllers\FilterIPController.cs" />
     <Compile Include="Areas\AuthorizeManage\Controllers\FilterTimeController.cs" />
@@ -186,6 +188,8 @@
     <Compile Include="Areas\AuthorizeManage\Controllers\PermissionRoleController.cs" />
     <Compile Include="Areas\AuthorizeManage\Controllers\PermissionUserController.cs" />
     <Compile Include="Areas\AuthorizeManage\Controllers\PermissionUserGroupController.cs" />
+    <Compile Include="Areas\AppManage\AppManageAreaRegistration.cs" />
+    <Compile Include="Areas\AppManage\Controllers\RegistUserController.cs" />
     <Compile Include="Areas\BaseManage\BaseManageAreaRegistration.cs" />
     <Compile Include="Areas\BaseManage\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\BaseManage\Controllers\JobController.cs" />
@@ -1526,6 +1530,16 @@
     <Content Include="Areas\PublicInfoManage\Views\Signet\Index.cshtml" />
     <Content Include="Areas\PublicInfoManage\Views\Web.config" />
     <Content Include="Content\scripts\plupload\Moxie.xap" />
+    <Content Include="Areas\AppManage\Views\RegistUser\Form.cshtml" />
+    <Content Include="Areas\AppManage\Views\RegistUser\Index.cshtml" />
+    <Content Include="Areas\AppManage\Views\RegistUser\RevisePassword.cshtml" />
+    <Content Include="Areas\AppManage\Views\Web.config" />
+    <Content Include="Areas\AppManage\Views\Notice\Form.cshtml" />
+    <Content Include="Areas\AppManage\Views\Notice\Index.cshtml" />
+    <Content Include="Areas\AppManage\Views\RegistUser\Audit.cshtml" />
+    <Content Include="Areas\AppManage\Views\Meeting\Form.cshtml" />
+    <Content Include="Areas\AppManage\Views\Meeting\Index.cshtml" />
+    <Content Include="Areas\AppManage\Views\RegistUser\AllotMember.cshtml" />
     <None Include="packages.config" />
     <Content Include="Resource\DocumentFile\System\20151216\55f6e360-c3ce-4f87-8f58-86cf63d129f3.doc" />
     <Content Include="Resource\DocumentFile\System\20151216\58007cfb-c39a-4fc0-938e-3868e66b7933.xlsx" />

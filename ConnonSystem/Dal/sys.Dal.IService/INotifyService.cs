@@ -52,7 +52,7 @@ namespace sys.Dal.IService
         /// 更新短信状态
         /// </summary>
         /// <param name="mobile"></param>
-        bool UpdateNotify(string mobile);
+        bool UpdateNotify(string mobile, string code);
         #endregion
     }
 }
