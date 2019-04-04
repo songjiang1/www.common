@@ -1,4 +1,5 @@
 ﻿using sys.Dal.Entity.AppManage;
+using sys.Util;
 using System.Collections.Generic;
 
 namespace sys.Dal.IService.AppManage
@@ -50,6 +51,13 @@ namespace sys.Dal.IService.AppManage
         /// <param name="emailCategoryEntity">分类实体</param>
         /// <returns></returns>
         void SaveForm(string keyValue, MessageReadEntity messageReadEntity);
+        /// g更新操作
+        /// </summary>
+        /// <param name="uid">用户主键</param>
+        /// <param name="oid">关联主键</param>
+        /// <param name="category">类型</param>
+        /// <param name="operatType"></param>
+       void SetForm(string uid, string oid, string category, OperatType operatType);
         #endregion
     }
 }

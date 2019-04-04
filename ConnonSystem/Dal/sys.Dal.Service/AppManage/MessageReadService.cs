@@ -4,6 +4,8 @@ using sys.Bll.Repository;
 using sys.Util.Extension;
 using System.Collections.Generic;
 using System.Linq;
+using sys.Util;
+using System;
 
 namespace sys.Dal.Service.AppManage
 {
@@ -24,7 +26,11 @@ namespace sys.Dal.Service.AppManage
         /// <returns></returns>
         public IEnumerable<MessageReadEntity> GetList(string UserId)
         {
-            var expression = LinqExtensions.True<MessageReadEntity>(); 
+            var expression = LinqExtensions.True<MessageReadEntity>();
+            if (!string.IsNullOrWhiteSpace(UserId))
+            {
+                expression.And(t => t.UserId == UserId);
+            }
             return this.BaseRepository().IQueryable(expression).ToList();
         }
         /// <summary>
@@ -47,7 +53,7 @@ namespace sys.Dal.Service.AppManage
         public bool ExistUser(string messageId, string userId, string type, string keyValue)
         {
             var expression = LinqExtensions.True<MessageReadEntity>();
-            expression = expression.And(t => t.MessageId == messageId&&t.UserId==userId&&t.Category== type);
+            expression = expression.And(t => t.MessageId == messageId && t.UserId == userId && t.Category == type);
             if (!string.IsNullOrEmpty(keyValue))
             {
                 expression = expression.And(t => t.Uniqueid != keyValue);
@@ -81,8 +87,41 @@ namespace sys.Dal.Service.AppManage
             else
             {
                 messageReadEntity.Create();
+                messageReadEntity.Uniqueid = Guid.NewGuid().ToString();
                 this.BaseRepository().Insert(messageReadEntity);
             }
+        }
+        /// g更新操作
+        /// </summary>
+        /// <param name="uid">用户主键</param>
+        /// <param name="oid">关联主键</param>
+        /// <param name="category">类型</param>
+        /// <param name="operatType"></param>
+        public void SetForm(string uid, string oid, string category, OperatType operatType)
+        {
+            string Uniqueid = "";
+            MessageReadEntity messageReadEntity = new MessageReadEntity();
+            var expression = LinqExtensions.True<MessageReadEntity>();
+            expression = expression.And(t => t.UserId == uid && t.MessageId == oid && t.Category == category);
+            var message= this.BaseRepository().FindEntity(expression);
+            if (message != null)
+            {
+                Uniqueid = message.Uniqueid;
+                messageReadEntity.ModifyDate = DateTime.Now;
+                messageReadEntity.Uniqueid = Uniqueid;
+            }
+            else
+            { 
+                messageReadEntity.CreateDate = DateTime.Now;
+                messageReadEntity.MessageId = oid;
+                messageReadEntity.UserId = uid;
+                messageReadEntity.Category = category;
+            }
+            messageReadEntity.IsRead = true;
+            if (operatType == OperatType.AppRead) { messageReadEntity.AppRead = true; }
+            if (operatType == OperatType.IsLike) { messageReadEntity.IsLike = true; }
+            if (operatType == OperatType.PCRead) { messageReadEntity.PCRead = true; }
+            SaveForm(Uniqueid, messageReadEntity);
         }
         #endregion
     }

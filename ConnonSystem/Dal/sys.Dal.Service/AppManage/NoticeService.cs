@@ -5,6 +5,8 @@ using sys.Util;
 using sys.Util.Extension;
 using sys.Util.WebControl;
 using System.Collections.Generic;
+using System.Data;
+using System.Text;
 
 namespace sys.Dal.Service.AppManage
 {
@@ -50,6 +52,17 @@ namespace sys.Dal.Service.AppManage
         {
             return this.BaseRepository().FindEntity(keyValue);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetTable(Pagination pagination)
+        {
+            var strSql = new StringBuilder();
+            strSql.Append(@" SELECT * FROM  b_notice b  WHERE 1=1  ORDER BY  "+ pagination.sidx+ "  "+ pagination .sord+ "  ");
+            strSql.Append(" LIMIT "+ (pagination.page - 1) * pagination.rows + ", "+ pagination.rows + " ");
+            return this.BaseRepository().FindTable(strSql.ToString());
+        }
         #endregion
 
         #region 提交数据
@@ -81,6 +94,17 @@ namespace sys.Dal.Service.AppManage
                 newsEntity.TypeId = 2;
                 this.BaseRepository().Insert(newsEntity);
             }
+        }
+        /// <summary>
+        /// 更新浏览量
+        /// </summary>
+        /// <param name="keyValue"></param>
+        public void PvPlusOne(string keyValue)
+        {
+            NoticeEntity noticeEntity = new NoticeEntity();
+            noticeEntity.NewsId = keyValue;
+            noticeEntity.PV = this.BaseRepository().FindEntity(keyValue).PV+1; 
+            this.BaseRepository().Update(noticeEntity);
         }
         #endregion
     }

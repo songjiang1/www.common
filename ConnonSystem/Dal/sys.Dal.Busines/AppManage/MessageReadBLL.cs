@@ -1,6 +1,8 @@
 ﻿using sys.Dal.Entity.AppManage;
 using sys.Dal.IService.AppManage;
 using sys.Dal.Service.AppManage;
+using sys.Util;
+using sys.Util.Extension;
 using System;
 using System.Collections.Generic;
 
@@ -68,7 +70,7 @@ namespace sys.Dal.Busines.AppManage
             }
         }
         /// <summary>
-        /// 保存分类表单（新增、修改）
+        /// 保存表单（新增、修改）
         /// </summary>
         /// <param name="keyValue">主键值</param>
         /// <param name="emailCategoryEntity">分类实体</param>
@@ -78,6 +80,24 @@ namespace sys.Dal.Busines.AppManage
             try
             {
                 service.SaveForm(keyValue, messageReadEntity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        /// <summary>
+        /// g更新
+        /// </summary>
+        /// <param name="uid">用户主键</param>
+        /// <param name="oid">关联主键</param>
+        /// <param name="category">类型</param>
+        /// <param name="operatType"></param>
+        public void SetForm(string uid,string oid,string category, OperatType operatType)
+        {
+            try
+            {
+                service.SetForm(uid, oid, category, operatType);
             }
             catch (Exception)
             {

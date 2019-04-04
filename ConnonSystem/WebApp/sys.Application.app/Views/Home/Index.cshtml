@@ -9,63 +9,64 @@
     <link rel="stylesheet" href="/content/css/mui.min.css" />
     <link rel="stylesheet" type="text/css" href="/content/css/home_page.css" />
 </head>  
-<body style="background-color:#f9fdff;">
-    <header class="mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</a>
-        <h1 class="mui-title">首页</h1>
-        <div class="mui-icon mui-icon-more mui-pull-right"></div>
-    </header>
-    <div class="Lb" id="Lb">
-        <div class="Lb_Img">
-            <i><img src="images/1.jpg"></i>
-            <i><img src="images/2.jpg"></i>
-            <i><img src="images/3.jpg"></i>
-            <i><img src="images/Inter.jpg"></i>
-            <i><img src="images/3.jpg"></i>
-        </div>
-        <ul class="xiaoyuandian">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-    </div>
-    <div class="Hp_fn">
-        <div class="fn_icon">
-            <span><a href="/Home/Notice">通知公告</a></span>
-        </div>
-        <div class="fn_icon">
-            <span>会议签到</span>
-        </div>
-        <div class="fn_icon">
-            <span>代表会议</span>
-        </div>
-        <div class="fn_icon"><span>议案建议</span></div>
-        <div class="fn_icon"><span>问卷调查</span></div>
-        <div class="fn_icon"><span>数据大观</span></div>
-    </div>
-    <div class="Pingtai">
-        <div class="Pingtai_top"><span>掌上平台</span></div>
-        <div class="Pingtai_Img">
-            <div class="Pt_img"><img src="images/1.jpg"><span>五常人大</span></div>
-            <div class="Pt_img"><img src="images/2.jpg"><span>乡镇人大</span></div>
+<body style="background-color:#f9fdff;" >
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</a>
+			<h1 class="mui-title">首页</h1>
+			<div class="mui-icon mui-icon-more mui-pull-right"></div>
+		</header>
+		
+		<div class="Lb" id="Lb">
+			<div class="Lb_Img">
+				<i><img src="images/1.jpg"></i>
+				<i><img src="images/2.jpg"></i>
+				<i><img src="images/3.jpg"></i>
+				<i><img src="images/Inter.jpg"></i>
+				<i><img src="images/3.jpg"></i>
+			</div>
+			<ul class="xiaoyuandian">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div class="Hp_fn">
+			<div class="fn_icon">
+				<span><a href="/home/notice">通知公告</a></span>
+			</div>
+			<div class="fn_icon">
+				<span><a href="Hyqd.html">会议签到</a></span>
+			</div>
+			<div class="fn_icon">
+				<span>代表会议</span>
+			</div>
+			<div class="fn_icon"><span>议案建议</span></div>
+			<div class="fn_icon"><span>问卷调查</span></div>
+			<div class="fn_icon"><span>数据大观</span></div>
+		</div>
+		<div class="Pingtai">
+			<div class="Pingtai_top"><span>掌上平台</span></div>
+			<div class="Pingtai_Img">
+				<div class="Pt_img"><img src="images/1.jpg"><span>五常人大</span></div>
+				<div class="Pt_img"><img src="images/2.jpg"><span>乡镇人大</span></div>
 
-        </div>
-    </div>
+			</div>
+		</div>
 
-    <div class="footer">
-        <ul>
-            <li><img src="images/home.png"><a href="#">首页</a></li>
-            <li><img src="images/da.png"><a href="#">履职档案</a></li>
-            <li><img src="images/hudong.png"><a href="#">双联活动</a></li>
-            <li><img src="images/liuyan.png"><a href="#">留言回音</a></li>
-            <li><img src="images/wode.png"><a href="#">我的</a></li>
-        </ul>
-    </div>
+		<div class="footer">
+			<ul>
+				<li><img src="images/home.png"><a href="#">首页</a></li>
+				<li><img src="images/da.png"><a href="#">履职档案</a></li>
+				<li><img src="images/hudong.png"><a href="#">双联活动</a></li>
+				<li><img src="images/liuyan.png"><a href="#">留言回音</a></li>
+				<li><img src="images/wode.png"><a href="#">我的</a></li>
+			</ul>
+		</div>
 
-</body>
-<script type="text/javascript">
+	</body>
+	<script type="text/javascript">
 		var imgobj = document.getElementsByTagName("i");
 
 		var lis = document.getElementsByTagName("li");
@@ -93,7 +94,7 @@
 		}
 		Lb.onmouseout = function() { //鼠标移出开始计时
 			t = setInterval("imgshow()", 1000);
-		}
+        }
 
 		//循环遍历小圆点
 		for (var i = 0; i < lis.length; i++) {
@@ -108,5 +109,5 @@
 				lis[j].style.backgroundColor = "blue";
 			}
 		}
-</script>
+	</script>
 </html>

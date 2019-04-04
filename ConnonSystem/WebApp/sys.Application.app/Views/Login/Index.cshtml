@@ -123,13 +123,13 @@
         }
     })
     //回车键
-    document.onkeydown = function (e) {
-        if (!e) e = window.event;
-        if ((e.keyCode || e.which) == 13) {
-            var btlogin = document.getElementById("btnlogin");
-            btnlogin.click();
-        }
-    }
+    //document.onkeydown = function (e) {
+    //    if (!e) e = window.event;
+    //    if ((e.keyCode || e.which) == 13) {
+    //        var btlogin = document.getElementById("btnlogin");
+    //        btnlogin.click();
+    //    }
+    //}
     function CheckLogin(autologin) { 
         var username = $.trim($("#username").val());
         var password = $.trim($("#password").val());  

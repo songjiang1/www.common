@@ -1,67 +1,171 @@
-﻿ 
+﻿
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title></title> 
+    <title></title>
     <link rel="stylesheet" href="/content/css/mui.min.css" />
-    <link rel="stylesheet" href="/content/css/home_page.css?v=@Guid.NewGuid().ToString()" />
+    <link rel="stylesheet" href="/content/css/home_page.css?v=@DateTime.Now.ToString("HHmmss")" />
+    <link href="~/Content/css/dropload.css" rel="stylesheet" />
+
     <script type="text/javascript" src="/content/js/jquery-2.1.0.js"></script>
+    <script src="~/Content/js/swiper.min.js"></script>
+    <script src="~/Content/js/dropload.min.js"></script>
+    <script src="~/Content/js/together.js"></script>
 </head>
 <body>
     <header class="mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="javascript:window.history.back()">返回</a>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="/home/index">返回</a>
         <h1 class="mui-title">通知公告</h1>
         <div class="mui-icon mui-icon-more mui-pull-right"></div>
     </header>
     <div class="ch">
-        <div class="Hd" style="border:none;">
-            @*<div class="juzhon">消息</div>*@
-
-        </div>
+        <input type="hidden" id="page" value="0" />
         <div class="sh">
-            <div class="info">
+            <div class="info" style="margin-top:70px;">
                 <div class="info_content">
-                    <ul>
-                        <li>
-                            <label>五常人大</label><div class="content">
-                                <span>关于app用户完善基本信息</span><b>未读</b>
-                                <a href="/Home/NoticeDetail"><p>人大通手机端上线后使用后，请各个人大代表尽快投入使用</p></a>
-                                <layer></layer>
-                            </div>
-                        </li>
-                        <li>
-                            <label>五常人大</label><div class="content">
-                                <span>关于app用户完善基本信息</span><b>未读</b>
-                                <p>人大通手机端上线后使用后，请各个人大代表尽快投入使用</p>
-                                <layer></layer>
-                            </div>
-                        </li>
+                    <ul id="info_contentul">
+                        @*<li>
+                                <label>五常人大</label><div class="content">
+                                    <span>关于app用户完善基本信息</span><b>未读</b>
+                                    <a href="xiaoxi.html"><p>人大通手机端上线后使用后，请各个人大代表尽快投入使用</p></a>
+                                    <layer>9:20</layer>
+                                </div>
+                            </li>*@
+
                     </ul>
                 </div>
             </div>
 
         </div>
 </body>
-<script>
+@*<script>
 
-	$(function(){
-		$(".info").show().siblings().hide();
-		 $(".Hd a:even").addClass("Bj");
-		$(".Hd a").click(function(){
-		var $as=$(this).index();
-		  $(".Hd a:even").removeAttr("Bj");
-		  alert($as);
-		  $(this).parent().siblings().children().eq($as).show().siblings().hide();
-		  $(this).addClass("Bj").siblings().removeClass("Bj");
-		});
-		var time=new Date();
+        $(function () {
+            $(".info").show().siblings().hide();
+            $(".Hd a:even").addClass("Bj");
+            $(".Hd a").click(function () {
+                var $as = $(this).index();
+                $(".Hd a:even").removeAttr("Bj");
+                alert($as);
+                $(this).parent().siblings().children().eq($as).show().siblings().hide();
+                $(this).addClass("Bj").siblings().removeClass("Bj");
+            });
+            var time = new Date();
+            $(".info_content ul li layer").text(time.getHours() + ":" + time.getMinutes());
 
-		$(".info_content ul li layer").text(time.getHours()+":"+time.getMinutes());
-
-	});
-
+        });
 
 
+
+    </script>*@
+</html> 
+<script src="~/Content/js/common/sys.dateFormat.js"></script>
+<script type="text/javascript">
+
+    var pageIndex;
+    //下拉手势
+    var dropload = $('#info_contentul').dropload({
+        domUp: {
+            domClass: 'dropload-up',
+            domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+            domUpdate: '<div class="dropload-update">↑释放更新</div>',
+            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+        },
+        domDown: {
+            domClass: 'dropload-down',
+            domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+            domUpdate: '<div class="dropload-update">↓释放加载</div>',
+            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+            domNoData: '<div class="dropload-noData">暂无数据</div>'
+        },
+        loadDownFn: function (me) {
+            GetBindList();
+        }
+    });
+    function GetBindList() {
+        pageIndex = parseInt($("#page").val()) + 1;
+        $("#page").val(pageIndex);
+        var queryJson = {
+            keyword:""
+        }
+        $.ajax({
+            async: false,
+            type: "post",
+            url: "/Home/GetJisonList",
+            data: {
+                pageIndex: pageIndex,
+                queryJson: JSON.stringify(queryJson),
+            },
+            success: function (d) {
+
+                var obj = eval("(" + d + ")");
+                var data = "";
+                var readrows = "";
+                var newhtml5 = '';
+                if (obj.type == 1) {
+                    data = eval("(" + obj.message + ")");
+                    //if (obj.readrows != "" && data.readrows.length > 0) {
+                    //    readrows = obj.readrows;
+                    //} 
+                    if (obj.message != "" &&data.rows.length>0) {
+                        newhtml5 = addHtmldata(data.rows);
+                        $('#info_contentul').append(newhtml5);
+                    }
+                }
+
+                // 为了测试，延迟1秒加载
+                //setTimeout(function () {
+
+                //    if (newhtml5 != "") {
+                //    }
+                //    me.resetload();
+                //}, 1000);
+            },
+            error: function (xhr, type) {
+                //alert('Ajax error!');
+                me.resetload();
+            }
+        });
+    }
+    function addHtmldata(data) {
+        var html = '';
+        $.each(data, function (i, item) {
+            html += '  <li><a style="display: block;" href="/Home/NoticeDetail?Id=' + item.NewsId + '">';
+            if (item.Cover == null || item.Cover == "") {
+                html += '<img style="width:100px;height:60px;" src="@sys.Util.Config.GetValue("ImgDefault")">';
+            } else {
+                html += '<img style="width:100px;height:60px;" src="@sys.Util.Config.GetValue("ImgHost")' + item.Cover + '">';
+            }
+            html += '        <div class="content">';
+            html += '              <span  style="' + item.FullHeadColor + ';">' + item.FullHead + '</span>'
+            if (item.IsRead) {
+                html += '<b>已读</b>'; 
+            } else {
+                html +=  '<b>未读</b>'; 
+            }
+           
+            html +=    htmlDecode(item.NewsContent);
+            html += '             <layer>' + dateFormat(item.CreateDate,"HH:mm")+'</layer>';
+            html += '              </div> </a> </li>';
+        });
+        return html;
+    }
+    //Html编码获取Html转义实体
+    function htmlEncode() {
+        var htmlstr = editor1.html();
+        $("#Content").val($('<div/>').text(htmlstr).html());
+    }
+
+    //Html解码获取Html实体
+    function htmlDecode(value) {
+        return $('<div/>').html(value).text();
+    }
 </script>
-</html>
+<script type="text/javascript">
+    var preview = "";
+    $(function () {
+        GetBindList();
+        //Together.Index.init();
+    });
+</script>

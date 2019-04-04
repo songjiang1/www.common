@@ -143,12 +143,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Test.xml" />
+    <Content Include="Content\css\DbXx.css" />
+    <Content Include="Content\css\dropload.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\home_page.css" />
     <Content Include="Content\css\sys-ui.css" />
     <Content Include="Content\css\mui.css" />
     <Content Include="Content\css\mui.min.css" />
     <Content Include="Content\css\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\css\sys.common.css" />
     <Content Include="Content\images\1.jpg" />
     <Content Include="Content\images\2.jpg" />
     <Content Include="Content\images\3.jpg" />
@@ -166,6 +169,10 @@
     <Content Include="Content\images\ph6.png" />
     <Content Include="Content\images\phone.png" />
     <Content Include="Content\images\Sh_bj.jpg" />
+    <Content Include="Content\js\common\sys.dateFormat.js" />
+    <Content Include="Content\js\dropload.min.js" />
+    <Content Include="Content\js\swiper.jquery.min.js" />
+    <Content Include="Content\js\together.js" />
     <Content Include="Content\js\jquery-2.1.0.js" />
     <Content Include="Content\js\jquery\jquery-1.10.2.min.js" />
     <Content Include="Content\js\jquery\jquery-2.0.3.min.js" />
@@ -605,6 +612,8 @@
     <Content Include="Content\js\plugins\jquery-ui\jquery-ui.min.css" />
     <Content Include="Content\js\plugins\jquery-ui\jquery-ui.min.js" />
     <Content Include="Content\js\plugins\jquery.md5.js" />
+    <Content Include="Content\js\plugins\layer\layer.js" />
+    <Content Include="Content\js\common\sys.common.js" />
     <Content Include="Content\js\plugins\layout\jquery.layout.js" />
     <Content Include="Content\js\plugins\pagination\jquery.pagination-1.2.7.js" />
     <Content Include="Content\js\plugins\pagination\jquery.pagination-1.2.7.min.js" />
@@ -800,7 +809,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="Content\css\fonts\mui.ttf" />
-    <Content Include="Content\js\common\sys.common.js" />
     <Content Include="Content\js\plugins\ckeditor\plugins\scayt\LICENSE.md" />
     <Content Include="Content\js\plugins\ckeditor\plugins\scayt\README.md" />
     <Content Include="Content\js\plugins\ckeditor\plugins\wsc\LICENSE.md" />
@@ -851,6 +859,18 @@
       <Project>{28b1f04e-7d2e-4ffa-abab-4ae63d8dbe0e}</Project>
       <Name>sys.Bll.EF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Builder\sys.CodeGenerator\sys.CodeGenerator.csproj">
+      <Project>{e3a055f6-0708-4a1b-87a4-597070d7725c}</Project>
+      <Name>sys.CodeGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cache\sys.Cache.Factory\sys.Cache.Factory.csproj">
+      <Project>{933e64f9-cca2-4ad5-a7b8-bb55c0c573d6}</Project>
+      <Name>sys.Cache.Factory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cache\sys.Cache.Redis\sys.Cache.Redis.csproj">
+      <Project>{12641608-cd9d-4cf2-be90-2feadd1b9333}</Project>
+      <Name>sys.Cache.Redis</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Dal\sys.Dal.Busines\sys.Dal.Busines.csproj">
       <Project>{389b3f24-ab05-483e-b98e-8785306c8631}</Project>
       <Name>sys.Dal.Busines</Name>
@@ -874,6 +894,10 @@
     <ProjectReference Include="..\..\Util\sys.Util.Log\sys.Util.Log.csproj">
       <Project>{b89df599-c050-4fe9-8257-8e19ad43c13c}</Project>
       <Name>sys.Util.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Util\sys.Util.Officce\sys.Util.Officce.csproj">
+      <Project>{1afcd932-d071-44f1-9863-45a8a098aa64}</Project>
+      <Name>sys.Util.Officce</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Util\sys.Util.WebControl\sys.Util.WebControl.csproj">
       <Project>{9522b26d-aae2-4665-a8d9-a7ac67280d3c}</Project>

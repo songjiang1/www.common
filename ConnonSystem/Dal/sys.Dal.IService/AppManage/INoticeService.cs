@@ -1,6 +1,7 @@
 ﻿using sys.Dal.Entity.AppManage;
 using sys.Util.WebControl;
 using System.Collections.Generic;
+using System.Data;
 
 namespace sys.Dal.IService.AppManage
 {
@@ -27,6 +28,13 @@ namespace sys.Dal.IService.AppManage
         /// <param name="keyValue">主键值</param>
         /// <returns></returns>
         NoticeEntity GetEntity(string keyValue);
+        /// <summary>
+        /// 获取数据 app段展示
+        /// </summary>
+        /// <param name="pagination"></param>
+        /// <param name="TotalCount"></param>
+        /// <returns></returns>
+        DataTable GetTable(Pagination pagination);
         #endregion
 
         #region 提交数据
@@ -42,6 +50,12 @@ namespace sys.Dal.IService.AppManage
         /// <param name="newsEntity">公告实体</param>
         /// <returns></returns>
         void SaveForm(string keyValue, NoticeEntity newsEntity);
+
+        /// <summary>
+        /// 更新浏览量
+        /// </summary>
+        /// <param name="keyValue"></param>
+        void PvPlusOne(string keyValue);
         #endregion
     }
 }

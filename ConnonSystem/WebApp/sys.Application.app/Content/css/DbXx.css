@@ -1,0 +1,301 @@
+.Dbhy {
+	width: 100%;
+	height: 700px;
+	margin-top: 44px;
+}
+
+.Dbhy .sousuo {
+	width: 100%;
+	height: 5%;
+	background-color: #a1bee2;
+	padding-left: 5%;
+	padding-top: 6px;
+}
+
+.sousuo .Ss {
+	float: left;
+	width: 70%;
+	height: 20px;
+	border-radius: 10px;
+	background: url(../images/sousuo.png) no-repeat;
+	padding-left: 20px;
+	font-size: 12px;
+	background-color: #FFF;
+	background-position: 6px 4px;
+}
+
+.Ss label {
+	float: right;
+	margin-right: 5%;
+}
+
+.sousuo a {
+	display: block;
+	float: right;
+	margin-right: 5%;
+}
+
+.Dbhy_content {
+	width: 100%;
+	height: 95%;
+}
+
+.Db_zhuanhuan {
+	width: 100%;
+	height: 8%;
+	padding-top: 12px;
+	background-color: #dee3fb;
+}
+
+.Db_zhuanhuan .qiehuan {
+	width: 90%;
+	height: 30px;
+	border-radius: 20px;
+	box-sizing: border-box;
+	border: 1px solid #6398da;
+	margin: 0px auto;
+	background-color: #FFF;
+}
+
+.qiehuan .qiehuan_left {
+	float: left;
+	width: 50%;
+	height: 28px;
+	border-radius: 20px;
+	text-align: center;
+	font-size: 14px;
+	line-height: 30px;
+	cursor: pointer;
+}
+
+.qiehuan .qiehuan_right {
+	float: right;
+	width: 50%;
+	height: 28px;
+	border-radius: 20px;
+	text-align: center;
+	font-size: 14px;
+	line-height: 30px;
+	cursor: pointer;
+}
+
+
+/*.qiehuan .qiehuan_right {
+			float: right;
+			width: 50%;
+			height: 28px;
+			background-color: #6398da;
+			color: #FFF;
+			border-radius: 20px;
+			text-align: center;
+			font-size: 14px;
+			line-height: 30px;
+			cursor: pointer;
+		}*/
+
+.Bj {
+	background-color: #6398da;
+	color: #FFF;
+	font-size: 18px;
+}
+
+.Db_xq {
+	width: 100%;
+	background-color: #FFF;
+}
+
+.Db_list {
+	margin-top: 20px;
+}
+
+.Lxr {
+	width: 100%;
+	height: 45px;
+	margin-top: 20px;
+}
+
+.Touxiang {
+	float: left;
+	width: 15%;
+	height: 45px;
+	border-radius: 50px;
+	margin-left: 5%;
+}
+
+.Touxiang img {
+	width: 100%;
+	height: 45px;
+	background-size: contain;
+}
+
+.Touxinag_Info {
+	float: right;
+	width: 80%;
+	height: 45px;
+	border-bottom: 1px solid black;
+}
+
+.Touxinag_Info b {
+	line-height: 45px;
+	margin-left: 5%;
+}
+
+.Touxinag_Info span {
+	float: right;
+	margin-right: 25%;
+	line-height: 45px;
+	color: #909090;
+}
+
+.shutiao {
+	position: fixed;
+	height: 100%;
+	width: 6%;
+	background-color: #dee3fb;
+	margin-left: 90%;
+	border-radius: 20px;
+	margin-top: 4px;
+}
+
+.shutiao .shutiao_Jt {
+	width: 30%;
+	height: 20px;
+	margin: 12px auto;
+	cursor: pointer;
+}
+
+.Yw {
+	text-align: center;
+	margin-top: -12px;
+}
+
+.Yw ul {
+	list-style: none;
+	padding: 0;
+}
+
+.Yw ul li {
+	width: 100%;
+	height: 18px;
+	cursor: pointer;
+}
+
+.bj_zc {
+	margin-top: 4px;
+	width: 100%;
+	height: 10px;
+	background-color: #dee3fb;
+}
+
+.lab {
+	display: block;
+	width: 20px;
+	height: 12px;
+	margin-left: 4%;
+	    line-height: 38px;
+}
+
+body {
+	/*滚动条将显示在body区域*/
+	overflow-y: scroll;
+	/*按需要显示*/
+	overflow-x: hidden;
+	/*始终不显示x方向的滚动条*/
+}
+
+/*代表信息*/
+.Db_Info{
+  		width:100%;
+  		height: auto;
+  		margin-top: 44px;
+  		
+  	}
+  	.Db_Info_top{
+  		position:relative;
+  		width:100%;
+  		height:100px;
+  		background-color:#6ec1f5;
+  	}
+  	.Db_Info_Img{
+  		    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+   
+    margin-left: 35%;
+    margin-top: 50px;
+}
+  	.Db_Info_Img img{
+  		width:100%;
+  		height: 100%;
+  		background-size: contain;
+  	}
+  	.jb_Info{
+  		width:100%;
+  		height:auto;
+  		margin-top:80px;
+  	}
+  	.jb_xq{
+  		width:80%;
+  		height:40px;
+  		line-height: 40px;
+  		font-size:14px;
+  		margin: auto;
+  		
+  	}
+  	.jb_xq label{
+  		float: left;
+  		display: block;
+  		width:50%;
+  		height:40px;
+  		
+  		
+  	}
+  	.jb_xq span{
+  		float: left;
+  		display: block;
+  		width:50%;
+  		height:40px;
+  		overflow: hidden;
+  		
+  	}
+  
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  	.Db_Info_Img{
+  		    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+   
+    margin-left:43%;
+    margin-top: 50px;
+}
+  	.jb_xq{
+  		width:80%;
+  		height:40px;
+  		line-height: 40px;
+  		font-size:14px;
+  		margin: auto;
+  		
+  	}
+  	.jb_xq label{
+  		    float: left;
+    display: block;
+    width: 50%;
+    height: 50px;
+    overflow: hidden;
+    /* text-align: center; */
+    font-size: 24px;
+  		
+  	}
+  	.jb_xq span{
+  		    float: left;
+    display: block;
+    width: 50%;
+    height: 50px;
+    overflow: hidden;
+    /* text-align: center; */
+    font-size: 24px;
+  		
+  	}
+  }

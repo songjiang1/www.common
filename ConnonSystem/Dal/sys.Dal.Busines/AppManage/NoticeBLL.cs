@@ -4,6 +4,7 @@ using sys.Dal.Service.AppManage;
 using sys.Util;
 using sys.Util.WebControl;
 using System;
+using System.Data;
 using System.Collections.Generic;
 
 namespace sys.Dal.Busines.AppManage
@@ -37,9 +38,19 @@ namespace sys.Dal.Busines.AppManage
         /// <returns></returns>
         public NoticeEntity GetEntity(string keyValue)
         {
-            NoticeEntity newsEntity = service.GetEntity(keyValue);
-            newsEntity.NewsContent = WebHelper.HtmlDecode(newsEntity.NewsContent);
-            return newsEntity;
+            NoticeEntity noticeEntity = service.GetEntity(keyValue);
+            noticeEntity.NewsContent = WebHelper.HtmlDecode(noticeEntity.NewsContent);
+            return noticeEntity;
+        }
+        /// <summary>
+        /// 获取数据 app段展示
+        /// </summary>
+        /// <param name="pagination"></param>
+        /// <param name="TotalCount"></param>
+        /// <returns></returns>
+        public DataTable GetEntity(Pagination pagination)
+        {
+            return service.GetTable(pagination);
         }
         #endregion
 
@@ -71,6 +82,21 @@ namespace sys.Dal.Busines.AppManage
             {
                 newsEntity.NewsContent = WebHelper.HtmlEncode(newsEntity.NewsContent);
                 service.SaveForm(keyValue, newsEntity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        /// <summary>
+        /// 更新浏览量
+        /// </summary>
+        /// <param name="keyValue"></param>
+        public void PvPlusOne(string keyValue)
+        {
+            try
+            {
+                service.PvPlusOne(keyValue);
             }
             catch (Exception)
             {

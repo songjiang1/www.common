@@ -96,7 +96,7 @@ namespace sys.Dal.Entity.AppManage
         /// <summary>
         /// 创建日期
         /// </summary>		
-        public DateTime? CreateDate { get; set; }
+        public DateTime?  CreateDate { get; set; }
         /// <summary>
         /// 创建用户主键
         /// </summary>		

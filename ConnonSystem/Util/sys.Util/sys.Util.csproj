@@ -71,6 +71,7 @@
     <Compile Include="Message\DataAccessException.cs" />
     <Compile Include="Message\ExceptionMessage.cs" />
     <Compile Include="Net.cs" />
+    <Compile Include="OperatType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\DESEncrypt.cs" />
     <Compile Include="Security\Md5Helper.cs" />
