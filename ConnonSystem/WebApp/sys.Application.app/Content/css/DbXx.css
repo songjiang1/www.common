@@ -133,8 +133,13 @@
 	width: 80%;
 	height: 45px;
 	border-bottom: 1px solid black;
-}
+	font-size: 16px;
+    line-height: 16px;
 
+}
+.Touxinag_Info a{
+	color:#000000;
+}
 .Touxinag_Info b {
 	line-height: 45px;
 	margin-left: 5%;
@@ -158,7 +163,7 @@
 }
 
 .shutiao .shutiao_Jt {
-	width: 30%;
+	width: 46%;
 	height: 20px;
 	margin: 12px auto;
 	cursor: pointer;
@@ -179,7 +184,10 @@
 	height: 18px;
 	cursor: pointer;
 }
-
+.Yw ul li:hover
+{
+	font-size: 24px;
+}
 .bj_zc {
 	margin-top: 4px;
 	width: 100%;
@@ -298,4 +306,96 @@ body {
     font-size: 24px;
   		
   	}
+  }
+/*图片*/
+	*{
+		margin: 0;
+		padding: 0;
+	}
+		.Db_Addrees{
+  		width:100%;
+  		height:900px;
+  		background-color:#dee3fb;
+  	}
+  	.Db_Addrees .Db_Addrees_left{
+  		float: left;
+  		width:30%;
+  		height:auto;
+  		
+  	}
+  	.Db_Addrees .Db_Address_right{
+  		float: left;
+  		width:70%;
+  		height:900px;
+  		background-color:#FFF;
+  		
+  	}
+  	
+  	.Db_Addrees_left ul li{
+  		box-sizing: border-box;
+  		list-style: none;
+  		width:100%;
+  		height:40px;
+  		
+  		line-height: 40px;
+  		text-align: center;
+  		cursor: pointer;
+  	}
+  	.Address_bj{
+  		font-weight: bold;
+  		background-color:#FFF;
+  	}
+  	.Address_right_SQ{
+  		width:100%;
+  		height: 100%;
+  	}
+  	.Db_Address_right ul li{
+  		font-size:14px;
+  		list-style: none;
+  		width:95%;
+  		margin-left:5%;
+  		height:30px;
+  		
+  		line-height: 30px;
+  		color: #c7c7c7;
+  	}
+  .Db_Img{
+  	
+  	display:inline-flex;
+  
+  	width:90%;
+  	height:auto;
+  	
+  	flex-wrap:wrap;
+  	display: -webkit-flex;
+  	-webkit-flex-wrap: wrap;
+    justify-content:flex-start;
+    -webkit-align-content: center;
+    align-content: center;
+    margin: auto;
+    
+  
+  }
+  .Db_Img_k{
+  	width: 30%;
+    height: 15%;
+    
+    margin:4px;
+    
+  }
+  .Db_Img_k span{
+  	display: block;
+  	width:100%;
+  	height:20px;
+  	text-align: center;
+  	line-height: 20px;
+  	cursor: pointer;
+  }
+   .Db_Img_k span a{
+   	 color:#000000;
+   }
+  .Db_Img_k img{
+  	width:100%;
+  	height: 100%;
+  	background-size: contain;
   }

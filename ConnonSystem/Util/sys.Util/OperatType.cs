@@ -30,6 +30,15 @@ namespace sys.Util
         /// <summary>
         /// PC端已读
         /// </summary>
-        PCRead = 4
+        PCRead = 4,
+        /// <summary>
+        /// 签到 参加
+        /// </summary>
+        SignIn = 5,
+        /// <summary>
+        /// 签到 参加
+        /// </summary>
+        NoSignIn = 6,
+        
     }
 }

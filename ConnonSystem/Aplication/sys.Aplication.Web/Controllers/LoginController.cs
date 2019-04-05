@@ -45,7 +45,8 @@ namespace sys.Application.Web.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult Index()
-        {
+        { 
+             
             return View();
         }
 

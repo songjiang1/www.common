@@ -56,8 +56,11 @@ namespace sys.Dal.Entity.AppManage
         /// 签到标识
         /// </summary>
         public bool SignInMark { get; set; }
-
-
+        /// <summary>
+        /// 签到备注
+        /// </summary>
+        public string SignInDescription { get; set; }
+        
         /// <summary>
         /// 创建日期
         /// </summary>		
@@ -84,7 +87,7 @@ namespace sys.Dal.Entity.AppManage
         public string ModifyUserName { get; set; }
 
 
-
+        
         #endregion
 
         #region 扩展操作

@@ -34,13 +34,28 @@ namespace sys.Dal.Service.AppManage
             return this.BaseRepository().IQueryable(expression).ToList();
         }
         /// <summary>
-        /// 分类实体
+        ///  获取实体
         /// </summary>
         /// <param name="keyValue">主键值</param>
         /// <returns></returns>
         public MessageReadEntity GetEntity(string keyValue)
         {
             return this.BaseRepository().FindEntity(keyValue);
+        }
+        /// <summary>
+        /// 获取实体
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        /// <param name="oid">关联主键id</param>
+        /// <param name="category">分类</param>
+        /// <returns></returns>
+        public MessageReadEntity GetEntity(string uid, string oid, string category)
+        {
+            MessageReadEntity messageReadEntity = new MessageReadEntity();
+            var expression = LinqExtensions.True<MessageReadEntity>();
+            expression = expression.And(t => t.UserId == uid && t.MessageId == oid && t.Category == category);
+            return this.BaseRepository().FindEntity(expression);
+           
         }
         /// <summary>
         /// 判断用户是否存在
@@ -120,8 +135,36 @@ namespace sys.Dal.Service.AppManage
             messageReadEntity.IsRead = true;
             if (operatType == OperatType.AppRead) { messageReadEntity.AppRead = true; }
             if (operatType == OperatType.IsLike) { messageReadEntity.IsLike = true; }
-            if (operatType == OperatType.PCRead) { messageReadEntity.PCRead = true; }
+            if (operatType == OperatType.PCRead) { messageReadEntity.PCRead = true; } 
+
             SaveForm(Uniqueid, messageReadEntity);
+        }
+
+        /// g更新操作
+        /// </summary>
+        /// <param name="uid">用户主键</param>
+        /// <param name="oid">关联主键</param>
+        /// <param name="category">类型</param>
+        /// <param name="operatType"></param>
+        public int SignInMark(string uid, string oid, string category, OperatType operatType, string SignInDescription)
+        {
+            MessageReadEntity messageReadEntity = new MessageReadEntity();
+            var expression = LinqExtensions.True<MessageReadEntity>();
+            expression = expression.And(t => t.UserId == uid && t.MessageId == oid && t.Category == category);
+            var message = this.BaseRepository().FindEntity(expression);
+            if (message != null)
+            {
+                messageReadEntity.Uniqueid = message.Uniqueid;
+                messageReadEntity.SignInDescription = SignInDescription;
+                if (operatType == OperatType.SignIn) { messageReadEntity.SignInMark = true; }
+                if (operatType == OperatType.NoSignIn) { messageReadEntity.SignInMark = false; }
+                this.BaseRepository().Update(messageReadEntity);
+                return 1;
+            }
+            else
+            {
+                return -1;
+            } 
         }
         #endregion
     }

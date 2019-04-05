@@ -48,9 +48,9 @@
                         return formatDate(cellvalue, 'yyyy-MM-dd hh:mm');
                     }
                 },
-                { label: '阅读次数', name: 'PV', index: 'PV', width: 100, align: 'center' },
+                { label: '阅读次数', name: 'PV', index: 'PV', width: 80, align: 'center' },
                 {
-                    label: "参会人员", name: "ObjectName", index: 'ObjectName',width: 200, align: "center", autowidth: false,
+                    label: "参会人员", name: "ObjectName", index: 'ObjectName',width: 100, align: "center", autowidth: false,
                     formatter: function (cellvalue, options, rowObject) { 
                         var html = '';
                         var title = '';
@@ -85,10 +85,23 @@
                             } else {
                                 html += ('<p title="' + title + '">' + content + '</p>');
                             }
-                        } 
-                       
+                        }  
                         return html;
                         
+                    }
+                },
+                {
+                    label: "操作", name: "MeetingId", index: "MeetingId", width: 100, align: "center",
+                    formatter: function (cellvalue, options, rowObject) { 
+                        var html = '';
+                        if (rowObject.SignQRCode == null || rowObject.SignQRCode == "") {
+                            html += ('<span Title=\"创建二维码\" class=\"  \" style=\"cursor: pointer;\"  onclick=\"btn_updateSignQRCode(\'' + rowObject.MeetingId + '\',0,this)\">创建</span>');
+                        } else {
+                            html += ('<span class=\"  \" style=\"cursor: pointer;\" ><a Title=\"查看二维码\"   target=\"_blank\" href=\"' + rowObject.SignQRCode + '\">查看</a></span> | ');
+                            html += ('<span   class=\"  \" style=\"cursor: pointer;\" ><a download=\"download\" Title=\"下载二维码\" target=\"_blank\" href=\"' + rowObject.SignQRCode + '\">下载</a></span> | ');
+                            html += ('<span Title=\"删除二维码\" class=\"  \" style=\"cursor: pointer;\" onclick=\"btn_updateSignQRCode(\'' + rowObject.MeetingId + '\',1,this)\">删除</span>');
+                        }
+                        return html;
                     }
                 }
             ],
@@ -162,7 +175,29 @@
             dialogMsg('请选择需要删除的会议！', 0);
         }
     }
-   
+    //二维码
+    function btn_updateSignQRCode(keyValue, state,$thiz) {
+        debugger;
+        if (keyValue == undefined) {
+            keyValue = $("#gridTable").jqGridRowValue("MeetingId");
+        }
+        var statename = "";
+        if (state == undefined) {
+            state = 0;
+        }
+        statename = state == 0 ? "您确定要【" + $($thiz).attr("Title") + "】？" : "您确定要【" + $($thiz).attr("Title") +"】？";
+        if (checkedRow(keyValue)) {
+            $.ConfirmAjax({
+                msg: statename,
+                url: "../../AppManage/Meeting/UpdateSignQRCode",
+                param: { keyValue: keyValue, state: state },
+                success: function (data) {
+                    $("#gridTable").trigger("reloadGrid");
+                }
+            })
+        }
+    }
+    
 </script>
 <div class="titlePanel">
     <div class="title-search">
@@ -183,8 +218,7 @@
             <a id="sys-add" class="btn btn-default" onclick="btn_add()"><i class="fa fa-plus"></i>&nbsp;新增</a>
             <a id="sys-edit" class="btn btn-default" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
             <a id="sys-delete" class="btn btn-default" onclick="btn_delete()"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
-        </div>
-        
+        </div> 
         <script>$('.toolbar').authorizeButton()</script>
     </div>
 </div>

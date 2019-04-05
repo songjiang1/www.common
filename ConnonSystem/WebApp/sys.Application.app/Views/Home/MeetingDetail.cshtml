@@ -1,0 +1,66 @@
+﻿
+@{
+    sys.Dal.Entity.AppManage.MeetingEntity entity = ViewBag.MeetingEntity;
+}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="/Content/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Content/css/home_page.css" />
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</a>
+        <h1 class="mui-title"></h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="/home/meeting">返回</a>
+        <h1 class="mui-title">未开会议</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
+    <div class="huiyi_info">
+        <div class="huiyi_top">
+            <ul>
+                <li><b>会议名称：</b><span style="color:@entity.FullHeadColor"n>@entity.FullHead</span></li>
+                <li><b>召开时间：</b><span>@(Convert.ToDateTime(entity.ConveneSTime).ToString("yyyy年MM月dd日 HH:mm"))-@(Convert.ToDateTime(entity.ConveneETime).ToString("yyyy年MM月dd日 HH:mm"))</span></li>
+                <li><b>会议地点：</b><span>@entity.MeetingAddress</span></li>
+                <li><b>参会人员：</b><span>@ViewBag.ObjName</span></li>
+            </ul>
+        </div>
+        <div class="huiyi_content">
+            <ul>
+                <li><b>会议内容</b></li>
+                <li>
+                    <span>
+                        @Html.Raw(HttpUtility.HtmlDecode(entity.MeetingContent))
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="huiyi_bottom">
+            <ul>
+                <li><b>会议备注</b></li>
+                <li><span>@entity.Description</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="hui_btn">
+        @if (ViewBag.EffectiveMark)
+        {
+            if (ViewBag.Qualification)
+            {
+                <div class="btn_yes"><a href="Cjhy.html">我参加本次会议</a></div>
+                <div class="btn_no"><a href="Quexi.html">我不参加本次会议</a></div>
+            }
+        }
+        else
+        {
+            <div class="btn_no"><a >已结束</a></div>
+        }
+
+    </div>
+</body>
+</html>

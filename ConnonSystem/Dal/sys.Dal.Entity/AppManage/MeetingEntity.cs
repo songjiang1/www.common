@@ -109,6 +109,11 @@ namespace sys.Dal.Entity.AppManage
         /// 封面图
         /// </summary>
         public string Cover { get; set; }
+
+        /// <summary>
+        ///二维码 签到
+        /// </summary>
+        public string SignQRCode { get; set; }
         
         #endregion
 

@@ -42,6 +42,21 @@ namespace sys.Dal.IService.AppManage
         /// <param name="newsEntity">会议实体</param>
         /// <returns></returns>
         void SaveForm(string keyValue, MeetingEntity meetingEntity);
+
+        /// <summary>
+        /// 更新浏览量
+        /// </summary>
+        /// <param name="keyValue"></param>
+        void PvPlusOne(string keyValue);
+
+        /// <summary>
+        /// 保持二维码
+        /// </summary>
+        /// <param name="keyValue"></param>
+        /// <param name="signQRCode">二维码路径</param>
+        void UpdateSignQRCode(string keyValue,string signQRCode);
+
+        
         #endregion
     }
 }

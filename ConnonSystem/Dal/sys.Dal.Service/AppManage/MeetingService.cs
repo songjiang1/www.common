@@ -30,12 +30,25 @@ namespace sys.Dal.Service.AppManage
         public IEnumerable<MeetingEntity> GetPageList(Pagination pagination, string queryJson)
         {
             var expression = LinqExtensions.True<MeetingEntity>();
+            var newTime = DateTime.Now;
             var queryParam = queryJson.ToJObject();
             if (!queryParam["FullHead"].IsEmpty())
             {
                 string FullHead = queryParam["FullHead"].ToString();
                 expression = expression.And(t => t.FullHead.Contains(FullHead));
-            }  
+            }
+            if (!queryParam["State"].IsEmpty())
+            {
+                if (queryParam["State"].ToString().Trim() == "0")
+                {
+                    expression = expression.And(t => t.ConveneETime >= newTime); 
+                }
+                else
+                {
+                    expression = expression.And(t => t.ConveneETime < newTime); 
+                }  
+            }
+            
             return this.BaseRepository().FindList(expression, pagination);
         }
         /// <summary>
@@ -124,7 +137,30 @@ namespace sys.Dal.Service.AppManage
             }
         }
 
-       
+        /// <summary>
+        /// 更新浏览量
+        /// </summary>
+        /// <param name="keyValue"></param>
+        public void PvPlusOne(string keyValue)
+        {
+            MeetingEntity noticeEntity = new MeetingEntity();
+            noticeEntity.MeetingId = keyValue;
+            noticeEntity.PV = this.BaseRepository().FindEntity(keyValue).PV + 1;
+            this.BaseRepository().Update(noticeEntity);
+        }
+
+        /// <summary>
+        /// 保持二维码
+        /// </summary>
+        /// <param name="keyValue"></param>
+        /// <param name="signQRCode">二维码路径</param>
+        public void UpdateSignQRCode(string keyValue,string signQRCode)
+        {
+            MeetingEntity noticeEntity = new MeetingEntity();
+            noticeEntity.MeetingId = keyValue;
+            noticeEntity.SignQRCode = signQRCode;
+            this.BaseRepository().Update(noticeEntity);
+        }
         #endregion
     }
 }

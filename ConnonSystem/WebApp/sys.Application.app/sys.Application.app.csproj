@@ -832,6 +832,8 @@
     <Content Include="Views\Regist\Audit.cshtml" />
     <Content Include="Views\Home\Notice.cshtml" />
     <Content Include="Views\Home\NoticeDetail.cshtml" />
+    <Content Include="Views\Home\Meeting.cshtml" />
+    <Content Include="Views\Home\MeetingDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

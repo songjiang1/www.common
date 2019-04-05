@@ -38,6 +38,18 @@ namespace sys.Dal.Busines.AppManage
         {
             return service.GetEntity(keyValue);
         }
+        /// <summary>
+        /// 获取实体
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        /// <param name="oid">关联主键id</param>
+        /// <param name="category">分类</param>
+        /// <returns></returns>
+        public MessageReadEntity GetEntity(string uid, string oid, string category)
+        {
+            return service.GetEntity(uid,oid,category);
+
+        }
 
         /// <summary>
         /// 判断用户是否存在
@@ -98,6 +110,25 @@ namespace sys.Dal.Busines.AppManage
             try
             {
                 service.SetForm(uid, oid, category, operatType);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 签到
+        /// </summary>
+        /// <param name="uid">用户主键</param>
+        /// <param name="oid">关联主键</param>
+        /// <param name="category">类型</param>
+        /// <param name="operatType"></param>
+        public int SignInMark(string uid, string oid, string category, OperatType operatType,string SignInDescription)
+        {
+            try
+            {
+              return  service.SignInMark(uid, oid, category, operatType, SignInDescription);
             }
             catch (Exception)
             {

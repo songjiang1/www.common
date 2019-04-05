@@ -1,0 +1,186 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>会议签到</title>
+    <link rel="stylesheet" href="/content/css/mui.min.css" />
+    <link rel="stylesheet" href="/content/css/home_page.css?v=@DateTime.Now.ToString("HHmmss")" />
+    <link href="~/Content/css/dropload.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="/content/js/jquery-2.1.0.js"></script>
+    <script src="~/Content/js/swiper.min.js"></script>
+    <script src="~/Content/js/dropload.min.js"></script>
+    <script src="~/Content/js/together.js"></script>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="Home_page.html">返回</a>
+        <h1 class="mui-title">会议签到</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
+
+    <div class="ch">
+        <div class="Hd">
+            <a href="#" data-state="0">会议签到</a>
+            <a href="#" data-state="1">已开会议</a>
+        </div>
+        <input type="hidden" id="page" value="0" />
+        <div class="sh">
+            <div class="info">
+                <div class="info_content">
+                    <ul id="info_contentul" class="info_contentul">
+                        @*<li>
+                            <a href="huiyi.html">
+                                <div class="hyqd_Img"><img src="images/1.jpg"></div>
+                                <div class="content">
+                                    <span>五常市第六届人大常委会第十四次...</span><b>未读</b>
+
+                                    <p>召开时间2018年10月28日</p>
+
+                                    <layer></layer>
+                                </div>
+                            </a>
+                        </li>*@ 
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        <div class="ewm">
+            <span><a href="Wkhy.html">扫二维码</a></span>
+        </div>
+    </div>
+</body>
+<script>
+    $(function () {
+        $(".info").show().siblings().hide();
+        $(".Hd a:even").addClass("Bj");
+        $(".Hd a").click(function () {
+            $("#page").val(0);
+            $('#info_contentul').empty();
+            var $as = $(this).index();
+            $(".Hd a:even").removeAttr("Bj"); 
+            $(this).parent().siblings().children().eq($as).show().siblings().hide();
+            $(this).addClass("Bj").siblings().removeClass("Bj");
+            GetBindList();
+        });
+        var time = new Date(); 
+        $(".info_content ul li layer").text(time.getHours() + ":" + time.getMinutes());
+
+    });
+</script>
+</html>
+<script src="~/Content/js/common/sys.dateFormat.js"></script>
+<script type="text/javascript">
+
+    var pageIndex;
+    //下拉手势
+    var dropload = $('#info_contentul').dropload({
+        domUp: {
+            domClass: 'dropload-up',
+            domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+            domUpdate: '<div class="dropload-update">↑释放更新</div>',
+            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+        },
+        domDown: {
+            domClass: 'dropload-down',
+            domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+            domUpdate: '<div class="dropload-update">↓释放加载</div>',
+            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+            domNoData: '<div class="dropload-noData">暂无数据</div>'
+        },
+        loadDownFn: function (me) {
+            GetBindList();
+        }
+    });
+    function GetBindList() {
+        pageIndex = parseInt($("#page").val()) + 1;
+        $("#page").val(pageIndex);
+        var queryJson = {
+            State: $(".Hd .Bj").attr("data-state"),
+        }
+        $.ajax({
+            async: false,
+            type: "post",
+            url: "/Home/GetMeetingJisonList",
+            data: {
+                pageIndex: pageIndex, 
+                queryJson: JSON.stringify(queryJson),
+            },
+            success: function (d) {
+
+                var obj = eval("(" + d + ")");
+                var data = "";
+                var readrows = "";
+                var newhtml5 = '';
+                if (obj.type == 1) {
+                    data = eval("(" + obj.message + ")");
+                    //if (obj.readrows != "" && data.readrows.length > 0) {
+                    //    readrows = obj.readrows;
+                    //}
+                    if (obj.message != "" &&data.rows.length>0) {
+                        newhtml5 = addHtmldata(data.rows);
+                        $('#info_contentul').append(newhtml5);
+                    }
+                }
+
+                // 为了测试，延迟1秒加载
+                //setTimeout(function () {
+
+                //    if (newhtml5 != "") {
+                //    }
+                //    me.resetload();
+                //}, 1000);
+            },
+            error: function (xhr, type) {
+                //alert('Ajax error!');
+                me.resetload();
+            }
+        });
+    }
+    function addHtmldata(data) {
+        var html = '';
+        var meetingState = $(".Hd .Bj").attr("data-state"); 
+        $.each(data, function (i, item) { 
+            html += '  <li><a style="display: block;" href="/Home/MeetingDetail?Id=' + item.Id + '&State=' + meetingState+'">';
+            if (item.Cover == null || item.Cover == "") {
+                html += '<div class="hyqd_Img"><img  src="@sys.Util.Config.GetValue("ImgDefault")"/></div>';
+            } else {
+                html += '<div class="hyqd_Img"><img  src="@sys.Util.Config.GetValue("ImgHost")' + item.Cover + '"/></div>';
+            }
+            html += '        <div class="content">';
+            html += '              <span  style="' + item.FullHeadColor + ';">' + item.FullHead + '</span>'
+            if (item.IsRead) {
+                html += '<b>已读</b>';
+            } else {
+                html +=  '<b>未读</b>';
+            }
+
+            html +=    htmlDecode(item.Content);
+            html += '             <layer>' + dateFormat(item.CreateDate,"HH:mm")+'</layer>';
+            html += '              </div> </a> </li>';
+        });
+        return html;
+    }
+    
+
+    //Html解码获取Html实体
+    function htmlDecode(value) {
+        return $('<div/>').html(value).text();
+    }
+</script>
+<script type="text/javascript">
+    var preview = "";
+    $(function () {
+        GetBindList();
+        //Together.Index.init();
+    });
+</script>

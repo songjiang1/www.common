@@ -77,6 +77,39 @@ namespace sys.Dal.Busines.AppManage
                 throw;
             }
         }
+        /// <summary>
+        /// 更新浏览量 
+        /// </summary>
+        /// <param name="keyValue"></param>
+        public void PvPlusOne(string keyValue)
+        {
+            try
+            {
+                service.PvPlusOne(keyValue);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        /// <summary>
+        /// 保持二维码
+        /// </summary>
+        /// <param name="keyValue"></param>
+        /// <param name="signQRCode">二维码路径</param>
+        public void UpdateSignQRCode(string keyValue,string signQRCode)
+        {
+            try
+            {
+                service.UpdateSignQRCode(keyValue, signQRCode);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+      
         #endregion
     }
 }

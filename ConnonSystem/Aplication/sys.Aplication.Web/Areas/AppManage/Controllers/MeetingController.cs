@@ -4,6 +4,7 @@ using sys.Dal.Entity.AppManage;
 using sys.Util;
 using sys.Util.WebControl;
 using System.Web.Mvc;
+using System;
 
 namespace sys.Application.Web.Areas.AppManage.Controllers
 {
@@ -105,6 +106,34 @@ namespace sys.Application.Web.Areas.AppManage.Controllers
             meetingBLL.SaveForm(keyValue, meetingEntity);
             return Success("操作成功。");
         }
+
+        /// <summary>
+        /// 保存二维码
+        /// </summary>
+        /// <param name="keyValue">主键值</param>
+        /// <param name="meetingEntity">会议实体</param>
+        /// <returns></returns>
+        [HttpPost]
+        [AjaxOnly]
+        [ValidateInput(false)]
+        public ActionResult UpdateSignQRCode(string keyValue, int  state=0)
+        {
+            string imgurl = "";
+            if (state == 0)
+            {
+                string newday = DateTime.Now.ToString("yyyy-MM-dd");
+                string host = Request.Url.ToString();
+                host = host.Replace(Request.RawUrl,"");
+                string text = string.Format("{0}?key={1}", sys.Util.Config.GetValue("MeetingQRCodUrl"), keyValue);
+                string virtualPath = string.Format("~/Resource/QRCodFile/{0}/", newday);
+                string fullFileName = this.Server.MapPath(virtualPath);
+                string fileName = ZXingNetHelper.GenerateLogoQrCode(text, fullFileName);
+                imgurl = string.Format("{0}/Resource/QRCodFile/{1}/{2}", host, newday, fileName);
+            } 
+            meetingBLL.UpdateSignQRCode(keyValue, imgurl);
+            return Success("操作成功。");
+        }
+
         #endregion
     }
 }

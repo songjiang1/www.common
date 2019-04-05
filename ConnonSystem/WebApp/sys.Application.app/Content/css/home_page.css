@@ -3,7 +3,7 @@
 body{/*滚动条将显示在body区域*/
     overflow-y: scroll;/*按需要显示*/
     overflow-x: hidden;/*始终不显示x方向的滚动条*/
-  width: calc(100vw + 20px);/*设body宽为比视窗宽还要宽20像素，这样就可以把滚动条隐藏在视窗外*/*/
+ /* width: calc(100vw + 20px)*/;/*设body宽为比视窗宽还要宽20像素，这样就可以把滚动条隐藏在视窗外*/*/
 }
 
 
@@ -13,8 +13,23 @@ body{/*滚动条将显示在body区域*/
 	list-style: none;
 	text-decoration: none;
 }
-
-
+/*图片横屏*/
+ 	.BG{
+ 		margin-top: 44px;
+ 	}
+ 	.BG img{
+ 		width:100%;
+ 		height: 100%;
+ 		background-size: contain;
+ 	}
+	@media screen and (orientation: portrait) {
+			/* 竖屏 */
+		}
+		
+		@media screen and (orientation: landscape) {
+			/* 横屏 */
+			
+		}
 
 
 .Lb {
@@ -30,7 +45,7 @@ body{/*滚动条将显示在body区域*/
 .Lb_Img {
 	width: 90%;
 	height: 200px;
-	    margin: 10px 2%;;
+	    margin: 10px 5%;;
 }
 textarea {
     margin-top: 5px;
@@ -219,7 +234,7 @@ textarea {
 .Pt_img {
 	width: 45%;
 	height: 120px;
-	margin: 10px 4px;
+	margin: 10px 10px;
 	border: 1px solid #6398da;
 	border-radius: 10px;
 }
@@ -304,11 +319,9 @@ textarea {
 
 /*登录*/
 
-* {
-	margin: 0;
-	padding: 0;
+ul li a {
+	color:black;
 }
-
 .Inter_Img {
 	width: 100%;
 	height: auto;
@@ -402,7 +415,7 @@ textarea {
 /*录入信息*/
 
 	.Info {
-	width: 95%;
+	width:100%;
 	height: 1000px;
 	margin:44px 0px;
 }
@@ -437,6 +450,7 @@ textarea {
 	border-radius: 3px;
 	outline: 0;
 	background-color: #fff;
+	font-size: 14px;
 }
 
 .Info_it:nth-child(3) input {
@@ -501,6 +515,7 @@ textarea {
     /* float: right; */
     line-height: 44px;
     margin-left: 2%;
+    font-size: 14px;
 }
 
 .Info_btn {
@@ -529,19 +544,25 @@ textarea {
 	padding: 0;
 	list-style: none;
 }
-
-label {
-	float: left;
-	display: block;
-	width: 60px;
-	height: 60px;
-	background-color: #6398da;
-	line-height: 60px;
-	text-align: center;
-	color: #FFF;
-	font-size: 14px;
-	border-radius: 20px;
+ .hyqd_Img {
+	    float: left;
+    display: block;
+    width:60px;
+    height:60px;
+    background-color: #6398da;
+    line-height:60px;
+    text-align: center;
+    color: #FFF;
+    border-radius: 10px;
+    margin-left: 5%;
 }
+ .hyqd_Img img{
+ 	width:100%;
+ 	height: 100%;
+ 	background-size: contain;
+ 	border-radius: 10px;
+ }
+
 
 .Xiaoxi {
 	width: 100%;
@@ -624,11 +645,12 @@ label {
 }
 }
 @media only screen and (max-width:414px) {
-	.Sh { 
+	.Sh {
+	
 	    position: relative;
     width: 100%;
     height:692px;
-    /*background: url(../images/Sh_bj.jpg);*/
+    background: url(../images/Sh_bj.jpg);
     background-repeat: no-repeat;
     background-size: contain;
     background-color: #fafbff;
@@ -685,7 +707,7 @@ label {
     height: 30px;
     border: 1px solid #6398da;
     border-radius: 15px;
-    margin: 58px 2% 0px;
+    margin: 58px 5% 0px;
     line-height: 30px;
 }
 
@@ -769,7 +791,7 @@ label {
     font-size: 14px;
     font-weight: bold;
 }
-.info_content ul li label {
+.info_content ul li  .hyqd_Img {
 	    float: left;
     display: block;
     width: 70px;
@@ -781,6 +803,13 @@ label {
     border-radius: 10px;
     margin-left: 5%;
 }
+ .hyqd_Img img{
+ 	width:100%;
+ 	height: 100%;
+ 	background-size: contain;
+ 	border-radius: 10px;
+ }
+
 
 .content b {
     float: right;
@@ -841,7 +870,7 @@ label {
     font-size: 14px;
     font-weight: bold;
 }
-.info_content ul li label {
+.info_content ul li .hyqd_Img {
 	    float: left;
     display: block;
     width: 70px;
@@ -853,6 +882,12 @@ label {
     border-radius: 10px;
     margin-left: 5%;
 }
+ .hyqd_Img img{
+ 	width:100%;
+ 	height: 100%;
+ 	background-size: contain;
+ 	border-radius: 10px;
+ }
 
 .content b {
 	float: right;
@@ -1023,19 +1058,24 @@ label {
 	list-style: none;
 }
 
-label {
-	float: left;
-	display: block;
-	width: 60px;
-	height: 60px;
-	background-color: #6398da;
-	line-height: 60px;
-	text-align: center;
-	color: #FFF;
-	font-size: 14px;
-	border-radius:10px;
-	
+.hyqd_Img {
+	    float: left;
+    display: block;
+    width: 70px;
+    height: 70px;
+    background-color: #6398da;
+    line-height: 70px;
+    text-align: center;
+    color: #FFF;
+    border-radius: 10px;
+    margin-left: 5%;
 }
+ .hyqd_Img img{
+ 	width:100%;
+ 	height: 100%;
+ 	background-size: contain;
+ 	border-radius: 10px;
+ }
 
 .Xiaoxi {
 	width:90%;
@@ -1094,7 +1134,7 @@ label {
 	border-radius: 5px;
 	background-color: #f9fafe;
 	
-	    margin: 56px 2.5%;
+	    margin: 56px 5%;
 }
 
 .huiyi_top {
@@ -1205,12 +1245,13 @@ label {
 	border: 1px solid #bfbfbf;
 	border-radius: 10px;
 	padding: 10px;
-	    margin: 30px 2.5%;
+	    margin: 30px 5%;
+	 background-color: #f9fdff;
 }
 
 .hy_txt ul li img {
-	width:100px;
-	height: 100px;
+	    width:70px;
+    height: 70px;
 	display: block;
 	margin:26px auto;
 }
@@ -1271,11 +1312,13 @@ label {
 	height: auto;
 }
 
+
+
 .Qx_title {
 	width: 90%;
 	height: 30%;
 	border: 1px solid #bfbfbf;
-	    margin: 20px 2%;
+	    margin: 20px 5%;
 	border-radius: 10px;
 	background-color: #f9fdff;
 }
@@ -1295,7 +1338,7 @@ label {
 	width: 90%;
 	height:36%;
 	border: 1px solid #bfbfbf;
-	    margin: 20px 2%;
+	    margin: 20px 5%;
 	border-radius: 10px;
 	background-color: #f9fafe;
 }
@@ -1334,7 +1377,7 @@ label {
 	padding-top: 56px;
 	width: 100%;
 	    height:736px;
-	 background: rgba(100, 123, 234, 0.2);
+	
 }
 
 .Cjhy .hy_txt {
@@ -1343,10 +1386,13 @@ label {
 	border: 1px solid #bfbfbf;
 	border-radius: 10px;
 	padding: 10px;
-	    margin: 30px 2.5%;
+	    margin: 30px 5%;
+	 background-color: #f9fdff;
 }
 
 .hy_txt ul li img {
+	    width: 70px;
+    height: 70px;
 	display: block;
 	margin: 34px auto;
 }
@@ -1413,7 +1459,7 @@ label {
 	width: 90%;
 	height: 30%;
 	border: 1px solid #bfbfbf;
-	    margin: 20px 2%;
+	    margin: 20px 5%;
 	border-radius: 10px;
 	background-color: #f9fdff;
 }
@@ -1433,7 +1479,7 @@ label {
 	width: 90%;
 	height:36%;
 	border: 1px solid #bfbfbf;
-	    margin: 20px 2%;
+	    margin: 20px 5%;
 	border-radius: 10px;
 	background-color: #f9fafe;
 }
@@ -1467,9 +1513,7 @@ label {
 
 }
 @media only screen and (min-width:768px) and (max-width:1024px) {
-	body{
-		 background: rgba(100, 123, 234, 0.2);
-	}
+	
 	.Cjhy {
 	    padding-top: 56px;
     width: 100%;
@@ -1484,7 +1528,8 @@ label {
 	border: 1px solid #bfbfbf;
 	border-radius: 10px;
 	padding: 10px;
-	    margin: 30px 2.5%;
+	    margin: 30px 5%;
+	background-color: #f9fdff;
 }
 
 .hy_txt ul li img {
@@ -1566,7 +1611,7 @@ label {
 	width: 90%;
 	height: 30%;
 	border: 1px solid #bfbfbf;
-	    margin: 20px 2%;
+	    margin: 20px 5%;
 	border-radius: 10px;
 	background-color: #f9fdff;
 }
@@ -1586,7 +1631,7 @@ label {
 	width: 90%;
 	height:36%;
 	border: 1px solid #bfbfbf;
-	    margin: 20px 2%;
+	    margin: 20px 5%;
 	border-radius: 10px;
 	background-color: #f9fafe;
 }
@@ -1781,7 +1826,7 @@ label {
 	width: 90%;
 	height: 532px;
 	border: 1px solid #bcbcbc;
-	    margin: 100px 2.5%;
+	    margin: 100px 5%;
 	border-radius: 10px;
 	background-color: #f9fdff;
 }
@@ -1802,8 +1847,8 @@ label {
 }
 
 .hyqdcg_icon img {
-	    width: 100px;
-    height: 100px;
+	    width:70px;
+    height: 70px;
 	display: block;
 	margin:12px auto;
 	margin-top: 100px;
@@ -1949,7 +1994,7 @@ label {
    			.Ykhy_kuang{
    		width:90%;
    		height:100%;
-   		margin:60px 2.5%;
+   		margin:60px 5%;
    		box-sizing: border-box;
    		border:1px solid #bfbfbf;
    		border-radius: 5px;
@@ -2022,7 +2067,7 @@ label {
    		.Ykhy_kuang{
    		width:90%;
    		height:100%;
-   		margin:60px 2.5%;
+   		margin:60px 5%;
    		box-sizing: border-box;
    		border:1px solid #bfbfbf;
    		border-radius: 5px;
@@ -2102,7 +2147,7 @@ label {
    		.Ykhy_kuang{
    		width:90%;
    		height:100%;
-   		margin:60px 2.5%;
+   		margin:60px 5%;
    		box-sizing: border-box;
    		border:1px solid #bfbfbf;
    		border-radius: 5px;

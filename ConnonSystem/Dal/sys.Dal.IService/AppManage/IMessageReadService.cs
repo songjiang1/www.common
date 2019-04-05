@@ -28,6 +28,15 @@ namespace sys.Dal.IService.AppManage
         MessageReadEntity GetEntity(string keyValue);
 
         /// <summary>
+        /// 获取实体
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        /// <param name="oid">关联主键id</param>
+        /// <param name="category">分类</param>
+        /// <returns></returns>
+        MessageReadEntity GetEntity(string uid, string oid, string category);
+
+        /// <summary>
         /// 判断用户是否存在
         /// </summary>   ExistUser
         /// <param name="messageId">关联主键</param>
@@ -58,6 +67,15 @@ namespace sys.Dal.IService.AppManage
         /// <param name="category">类型</param>
         /// <param name="operatType"></param>
        void SetForm(string uid, string oid, string category, OperatType operatType);
+        /// <summary>
+        /// 签到
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="oid"></param>
+        /// <param name="category"></param>
+        /// <param name="operatType"></param>
+        /// <returns></returns>
+        int SignInMark(string uid, string oid, string category, OperatType operatType,string SignInDescription);
         #endregion
     }
 }
