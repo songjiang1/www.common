@@ -299,5 +299,52 @@ namespace sys.Util
         }
 
         #endregion
+
+        #region MyRegion 判断字符是不是汉字
+        /// <summary>
+        /// 用 正则表达式 判断字符是不是汉字
+        /// </summary>
+        /// <param name="text">待判断字符或字符串</param>
+        /// <returns>真：是汉字；假：不是</returns>
+        public static bool CheckStringChineseReg(string text)
+        { 
+                return System.Text.RegularExpressions.Regex.IsMatch(text, @"[\u4e00-\u9fbb]"); 
+        }
+
+        /// <summary>
+        /// 用 UNICODE 编码范围判断字符是不是汉字
+        /// </summary>
+        /// <param name="text">待判断字符或字符串</param>
+        /// <returns>真：是汉字；假：不是</returns>
+        public static bool CheckStringChineseUn(string text)
+        {
+            bool res = false;
+            foreach (char t in text)
+            {
+                if (t >= 0x4e00 && t <= 0x9fbb)
+                {
+                    res = true;
+                    break;
+                }
+            }
+            return res;
+        }
+        /// <summary>
+        /// 用 ASCII 码范围判断字符是不是汉字
+        /// </summary>
+        /// <param name="text">待判断字符或字符串</param>
+        /// <returns>真：是汉字；假：不是</returns>
+        public static bool CheckStringChinese(string text)
+        {
+            bool res = false;
+            foreach (char t in text)
+            {
+                if ((int)t > 127)
+                    res = true;
+            }
+            return res;
+        }
+        #endregion
+
     }
 }

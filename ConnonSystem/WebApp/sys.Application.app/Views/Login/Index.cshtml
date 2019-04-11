@@ -74,7 +74,7 @@
         <ul>
             <li><input id="username" name="username" type="text" placeholder="您的手机号"></li>
             <li><input id="password" name="password" type="password" placeholder="登录密码"></li>
-            <li><a href="#">忘记密码？</a></li>
+            <li><a href="/regist/ForgetPwd">忘记密码？</a></li>
             <li><div class="logo_btn" id="btnlogin">登录</div>
             <div class="Zhuce_btn" onclick='window.location.href="/Regist/"'>注册</div></li>
         </ul>
@@ -140,7 +140,7 @@
             dataType: "json",
             success: function (data) {
                 if (data.type == 1) { 
-                    window.location.href = "/home/";
+                    window.location.href = "/home/index";
                 } else {
                     if (data.message.length >= 30) {
                         dialogAlert(data.message, 0);

@@ -57,6 +57,12 @@ namespace sys.Dal.Entity.AppManage
         /// </summary>
         public bool SignInMark { get; set; }
         /// <summary>
+        /// 确认参会标识
+        /// </summary>
+        public bool AttendExpo { get; set; }
+
+        
+        /// <summary>
         /// 签到备注
         /// </summary>
         public string SignInDescription { get; set; }
@@ -77,6 +83,11 @@ namespace sys.Dal.Entity.AppManage
         /// 修改日期
         /// </summary>		
         public DateTime? ModifyDate { get; set; }
+        /// <summary>
+        /// 签到日期
+        /// </summary>		
+        public DateTime? SignInDate { get; set; }
+        
         /// <summary>
         /// 修改用户主键
         /// </summary>		

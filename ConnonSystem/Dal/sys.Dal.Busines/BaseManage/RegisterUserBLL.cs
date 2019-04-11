@@ -40,6 +40,14 @@ namespace sys.Dal.Busines.BaseManage
             return service.GetTable();
         }
         /// <summary>
+        /// 用户首字母
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetInitials()
+        {
+            return service.GetInitials();
+        }
+        /// <summary>
         /// 用户列表
         /// </summary>
         /// <returns></returns>
@@ -134,6 +142,19 @@ namespace sys.Dal.Busines.BaseManage
         {
             try
             {
+                if(string.IsNullOrWhiteSpace(userEntity.SimpleSpelling))
+                {
+                    if (Str.CheckStringChineseReg(userEntity.RealName))
+                    {
+                        userEntity.SimpleSpelling = Str.PinYin(userEntity.RealName).ToUpper();
+                        userEntity.Initials = userEntity.SimpleSpelling.Substring(0,1);
+                    }
+                    else
+                    {
+                        userEntity.SimpleSpelling = userEntity.RealName.ToUpper();
+                        userEntity.Initials = userEntity.SimpleSpelling.Substring(0, 1);
+                    }
+                } 
                 keyValue = service.SaveForm(keyValue, userEntity);
                 CacheFactory.Cache().RemoveCache(cacheKey);
                 //UpdateIMUserList(keyValue, true, userEntity);
@@ -159,6 +180,24 @@ namespace sys.Dal.Busines.BaseManage
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        /// <summary>
+        /// 忘记密码
+        /// </summary>
+        /// <param name="keyValue">主键值</param>
+        /// <param name="Password">新密码（MD5 小写）</param>
+        public int  ForgetPassword(string Mobile, string Password)
+        {
+            try
+            {
+                CacheFactory.Cache().RemoveCache(cacheKey);
+               return   service.ForgetPassword(Mobile, Password);
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
         /// <summary>

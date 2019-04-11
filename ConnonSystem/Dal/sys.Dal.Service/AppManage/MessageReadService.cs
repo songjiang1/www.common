@@ -29,7 +29,7 @@ namespace sys.Dal.Service.AppManage
             var expression = LinqExtensions.True<MessageReadEntity>();
             if (!string.IsNullOrWhiteSpace(UserId))
             {
-                expression.And(t => t.UserId == UserId);
+                expression= expression.And(t => t.UserId == UserId);
             }
             return this.BaseRepository().IQueryable(expression).ToList();
         }
@@ -114,19 +114,18 @@ namespace sys.Dal.Service.AppManage
         /// <param name="operatType"></param>
         public void SetForm(string uid, string oid, string category, OperatType operatType)
         {
-            string Uniqueid = "";
-            MessageReadEntity messageReadEntity = new MessageReadEntity();
+            //string Uniqueid = "";
+            //MessageReadEntity messageReadEntity = new MessageReadEntity();
             var expression = LinqExtensions.True<MessageReadEntity>();
             expression = expression.And(t => t.UserId == uid && t.MessageId == oid && t.Category == category);
-            var message= this.BaseRepository().FindEntity(expression);
-            if (message != null)
-            {
-                Uniqueid = message.Uniqueid;
-                messageReadEntity.ModifyDate = DateTime.Now;
-                messageReadEntity.Uniqueid = Uniqueid;
+            var messageReadEntity = this.BaseRepository().FindEntity(expression);
+            if (messageReadEntity != null)
+            { 
+                messageReadEntity.ModifyDate = DateTime.Now; 
             }
             else
-            { 
+            {
+                messageReadEntity= new MessageReadEntity(); 
                 messageReadEntity.CreateDate = DateTime.Now;
                 messageReadEntity.MessageId = oid;
                 messageReadEntity.UserId = uid;
@@ -137,7 +136,7 @@ namespace sys.Dal.Service.AppManage
             if (operatType == OperatType.IsLike) { messageReadEntity.IsLike = true; }
             if (operatType == OperatType.PCRead) { messageReadEntity.PCRead = true; } 
 
-            SaveForm(Uniqueid, messageReadEntity);
+            SaveForm(messageReadEntity.Uniqueid, messageReadEntity);
         }
 
         /// g更新操作
@@ -148,17 +147,30 @@ namespace sys.Dal.Service.AppManage
         /// <param name="operatType"></param>
         public int SignInMark(string uid, string oid, string category, OperatType operatType, string SignInDescription)
         {
-            MessageReadEntity messageReadEntity = new MessageReadEntity();
+            //MessageReadEntity messageReadEntity = new MessageReadEntity();
             var expression = LinqExtensions.True<MessageReadEntity>();
             expression = expression.And(t => t.UserId == uid && t.MessageId == oid && t.Category == category);
-            var message = this.BaseRepository().FindEntity(expression);
-            if (message != null)
+            var messageReadEntity = this.BaseRepository().FindEntity(expression);
+            if (messageReadEntity != null)
             {
-                messageReadEntity.Uniqueid = message.Uniqueid;
+                messageReadEntity.Uniqueid = messageReadEntity.Uniqueid;
                 messageReadEntity.SignInDescription = SignInDescription;
-                if (operatType == OperatType.SignIn) { messageReadEntity.SignInMark = true; }
-                if (operatType == OperatType.NoSignIn) { messageReadEntity.SignInMark = false; }
-                this.BaseRepository().Update(messageReadEntity);
+                if (operatType == OperatType.AttendExpo) {
+
+                    messageReadEntity.AttendExpo = true;
+                }
+                if (operatType == OperatType.NoAttendExpo) {
+                    messageReadEntity.SignInMark = false;
+                }
+                if (operatType == OperatType.SignIn) {
+                    if (messageReadEntity.SignInMark == false)
+                    {
+                        messageReadEntity.SignInMark = true; messageReadEntity.SignInDate = DateTime.Now;
+                    }
+                }
+
+                messageReadEntity.Modify(messageReadEntity.Uniqueid);
+                this.BaseRepository().Update(messageReadEntity); 
                 return 1;
             }
             else

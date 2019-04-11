@@ -1,0 +1,185 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="/content/css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/content/css/home_page.css" />
+    <script type="text/javascript" src="/content/js/jquery-2.1.0.js"></script>
+    <script src="~/Content/js/swiper.min.js"></script>
+    <link href="~/Content/css/layer.css" rel="stylesheet" />
+
+
+    <script src="~/Content/js/plugins/jquery.md5.js"></script>
+    <script src="~/Content/js/plugins/layer/layer.js"></script>
+    <script src="~/Content/js/common/sys.common.js"></script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</a>
+        <h1 class="mui-title">忘记密码</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
+    <div class="Inter_Img">
+        <img src="/content/images/zc.png">
+    </div>
+    <div class="Inter_logo">
+        <div class="Zc_it">
+            <input id="Mobile" type="text" placeholder="输入手机号">
+            <butten id="SendVerify" onclick="SendVerify()"><span id="time">发送验证码</span> </butten>
+        </div>
+        <div class="Zc_it"><input  id="Verify" type="text" placeholder="输入验证码"></div>
+        <div class="Zc_it"><input id="Password" type="password" placeholder="重新设置新密码"></div>
+        <div class="Zc_it"><input id="repPassword" type="password" placeholder="再次输入新密码"></div>
+        <div class="Zc_btn"><a  onclick="btn_save()">提交</a></div>
+    </div>
+</body>
+</html>
+<script>
+    var t = 60;
+    function SendVerify() {
+        // 判断手机号码
+        if ($.trim($('#Mobile').val()).length == 0) {
+          return  alerts("请输入手机号");
+        } else {
+            if (isPhoneNo($.trim($('#Mobile').val()) == false)) {
+                return  alerts("手机号码不正确"); 
+            }
+        }
+        document.getElementById("SendVerify").disabled = true;
+        t = setInterval("test()", 1000); 
+        $.ajax({
+            url: "/Regist/SendVerify",
+            data: { "Mobile": $("#Mobile").val() },
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+            }
+        });
+    }
+    function test() {
+        var btn = document.getElementById("SendVerify").disabled = true;
+        var time = document.getElementById("time");
+
+        if (time.innerHTML == "发送验证码")
+            $("#time").html(60);
+        if (time.innerHTML == 0) {
+            $("#time").html("发送验证码");
+            document.getElementById("SendVerify").disabled = false;
+            clearInterval(t);
+        } else {
+            time.innerHTML = time.innerHTML - 1;
+        }
+    }
+    function isPhoneNo(phone) {
+        var pattern = /^1[34578]\d{9}$/;
+        return pattern.test(phone);
+    }
+    function btn_save() {
+        // 判断手机号码
+        var Mobile = $('#Mobile').val();
+        var Verify = $('#Verify').val();
+        var Password = $('#Password').val();
+        var repPassword = $('#repPassword').val();
+        if ($.trim(Mobile).length == 0) {
+            return alerts("请填写手机号");
+        } else {
+            if (isPhoneNo($.trim(Mobile) == false)) {
+                return alerts("手机号码不正确");
+            }
+        }
+        if ($.trim(Verify).length == 0) {
+            return alerts("请填写验证码");
+        }
+        if ($.trim(Password).length == 0) {
+            return alerts("请填写新密码");
+        }
+        if ($.trim(Password).length <6) {
+            return alerts("新密码不能低于6位字母或数组组合");
+        }
+        if ($.trim(repPassword).length == 0) {
+            return alerts("请填写确认密码");
+        }
+        if ($.md5($.trim(Password)) != $.md5($.trim(repPassword)))
+        {
+            return alerts("两次密码不一致");
+        }
+        $.ajax({
+            url: "/Regist/ForgetPassword",
+            data: { "Mobile": Mobile, "Verify": Verify, Password: $.md5($.trim(Password)) },
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data.type == 1) {
+                    var html = '';
+                    var Mobile = $('#Mobile').val(); 
+                    var Password = $('#Password').val();
+                    if (Password >3) {
+                        debugger;
+                        //要替换为*号的内容
+                        var tmp  = Password.substring(3);
+                        //将其替换
+                        Password = Password.substring(0, 3)+Password.replace(tmp, '***');
+                    } 
+                    html += '<html><body> <header class="mui-bar mui-bar-nav"> <a href="/Login/" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</a> <h1 class="mui-title">密码重置成功</h1> <div class="mui-icon mui-icon-more mui-pull-right"></div></header>';
+                    html += ('<div class="Mmcz">  <div class="Mmcz_content"> <p>您的密码已经重置</p>');
+                    html += ('<p>手机号:<span>' + Mobile+'</span></p>');
+                    html += ('<p>密码:<span class="showPassword">' + Password +'</span><img onclick="showPassword()" src="images/yincang.png"></p>');
+                    html += ('<p>请妥善安全保护您的登录账号与密码</p>'); 
+                    html += ('</div >  </div ></body> </html>');
+                    var pageii = layer.open({
+                        type: 1
+                        , content: html
+                        , anim: 'up'
+                        , style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;'
+                    });     
+                    
+                } else {
+                    alerts(data.message);
+
+                }
+            }
+        });
+    }
+
+    function laa() {
+        var html = '';
+        var Mobile = $('#Mobile').val();
+        var Password = $('#Password').val();
+        if (Password > 3) {
+            debugger;
+            //要替换为*号的内容
+            //var tmp = Password.substring(3);
+            //将其替换
+           var Password = (Password.substring(0, 3) +  '***');
+        }
+        html += '<html><body> <header class="mui-bar mui-bar-nav"> <a href="/Login/" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</a> <h1 class="mui-title">密码重置成功</h1> <div class="mui-icon mui-icon-more mui-pull-right"></div></header>';
+        html += ('<div class="Mmcz">  <div class="Mmcz_content"> <p>您的密码已经重置</p>');
+        html += ('<p>手机号:<span>' + Mobile + '</span></p>');
+        html += ('<p>密码:<span class="showPassword">' + Password + '</span><img ontouchstart="showPassword(0)" ontouchend="showPassword(1)"  src="/content/images/yincang.png"></p>');
+        html += ('<p>请妥善安全保护您的登录账号与密码</p>');
+        html += ('</div >  </div ></body> </html>');
+        var pageii = layer.open({
+            type: 1
+            , content: html
+            , anim: 'up'
+             , style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;'
+        });     
+    }
+    function showPassword(t) {
+        var Password = $('#Password').val();
+        if (t == 0) {
+            $(".showPassword").text(Password);
+        }
+        if (t == 1) {
+            $(".showPassword").text((Password.substring(0, 3) + '***'));
+        }
+    }
+</script>

@@ -32,13 +32,18 @@ namespace sys.Util
         /// </summary>
         PCRead = 4,
         /// <summary>
-        /// 签到 参加
+        /// 签到 
         /// </summary>
         SignIn = 5,
         /// <summary>
-        /// 签到 参加
+        /// 确认 参加
         /// </summary>
-        NoSignIn = 6,
-        
+        AttendExpo = 6,
+
+        /// <summary>
+        /// 确认 不参加
+        /// </summary>
+        NoAttendExpo = 7, 
+
     }
 }

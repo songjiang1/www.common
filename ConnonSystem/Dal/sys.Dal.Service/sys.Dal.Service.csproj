@@ -66,6 +66,7 @@
     <Compile Include="BaseManage\studentService.cs" />
     <Compile Include="BaseManage\UserGroupService.cs" />
     <Compile Include="BaseManage\UserService.cs" />
+    <Compile Include="AccessTokenService.cs" />
     <Compile Include="NotifyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicInfoManage\EmailCategoryService.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="SystemManage\ExcelExportService.cs" />
     <Compile Include="SystemManage\ExcelImportService.cs" />
     <Compile Include="SystemManage\LogService.cs" />
+    <Compile Include="TVShowManage\CollectionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Aplication\sys.Aplication.Code\sys.Aplication.Code.csproj">

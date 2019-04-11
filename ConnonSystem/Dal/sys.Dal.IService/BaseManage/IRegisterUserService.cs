@@ -21,6 +21,11 @@ namespace sys.Dal.IService.BaseManage
         /// <returns></returns>
         DataTable GetTable();
         /// <summary>
+        /// 用户首字母
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetInitials();
+        /// <summary>
         /// 用户列表
         /// </summary>
         /// <returns></returns>
@@ -97,7 +102,14 @@ namespace sys.Dal.IService.BaseManage
         /// <param name="keyValue">主键值</param>
         /// <param name="Password">新密码（MD5 小写）</param>
         void RevisePassword(string keyValue, string Password);
-
+        /// <summary>
+        /// 忘记密码
+        /// </summary>
+        /// <param name="Mobile"></param>
+        /// <param name="Verify"></param>
+        /// <param name="Password"></param>
+        /// <returns></returns>
+        int ForgetPassword(string Mobile, string Password);
         /// <summary>
         /// 审核
         /// </summary>

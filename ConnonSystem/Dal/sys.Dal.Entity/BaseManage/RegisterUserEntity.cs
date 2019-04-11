@@ -55,6 +55,11 @@ namespace sys.Dal.Entity.BaseManage
         /// </summary>		
         public string SimpleSpelling { get; set; }
         /// <summary>
+        /// 首字母
+        /// </summary>	
+        public string Initials { get; set; }
+        
+        /// <summary>
         /// 性别
         /// </summary>		
         public int? Gender { get; set; }

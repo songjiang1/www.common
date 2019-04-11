@@ -1,0 +1,173 @@
+﻿
+@{
+    sys.Dal.Entity.TVShowManage.CollectionEntity entity = ViewBag.CollectionEntity;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="/Content/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Content/css/home_page.css" />
+    <link href="~/Content/css/layer.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery-2.1.0.js"></script>
+    <script src="~/Content/js/plugins/layer/layer.js"></script>
+    <script src="~/Content/js/common/sys.common.js"></script>
+</head>
+<body>
+
+
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="Yajy.html">返回</a>
+        <h1 class="mui-title">议案建议</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
+    <div class="Yajy_cn">
+        <div class="Jy_tanchuan" id="tc">
+            <div class="Jy_tanchuan_rt" id="close">X</div>
+            <div class="Jy_tanchuan_Img"><img src="images/Gth.png"></div>
+            <div class="Jy_tanchuan_txt">您已对该议案建议点赞</div>
+        </div>
+        <div class="Jy_tanchuan_one" id="sc">
+            <div class="tanchuan_one_rt" id="cls">X</div>
+            <div class="tanchuan_ont_txt">
+                <div class="Tc_biaoti">@entity.Title</div>
+
+                <div class="Tc_tjr">提建议人 &nbsp;<span>@entity.CreateUserName</span></div>
+                <div class="Tc_cg">点赞提交成功</div>
+            </div>
+            <div class="tanchuan_one_Img"><img src="images/cg.png"></div>
+
+        </div>
+        <div class="Yajy_cn_top">
+            <div class="yc_header">
+                <div class="header_lt">
+                    <span>@entity.Title</span><br />
+                    <small>提建议人  <label>@entity.CreateUserName</label></small>
+                </div>
+                <div class="header_rt">
+
+                    <div class="lj_liulang">累计浏览<span>@entity.PV</span></div>
+                    <div class="dzrs">点赞人数<span>@entity.LikeCount</span></div>
+                </div>
+            </div>
+            <div class="yc_footer">
+                <div clas="yc_title"><b>内容</b></div>
+                <div class="footer_con"> 
+                    @Html.Raw(HttpUtility.HtmlDecode(entity.Content))
+                   
+                </div>
+            </div>
+        </div>
+        <div class="Yajy_jy">
+            <div class="Jy_tabs"><span>建议</span></div>
+            <div class="Jy_con">
+                @Html.Raw(HttpUtility.HtmlDecode(entity.Content1))
+            </div>
+        </div>
+        <div class="Blqk">
+            <div class="Blqk_tab"><span>办理情况</span></div>
+            <div class="cl"></div>
+            <div class="Blqk_con">
+                @Html.Raw(HttpUtility.HtmlDecode(entity.Content2))
+            </div>
+            <div class="cl"></div>
+            <div class="Blqk_Img"></div>
+        </div>
+        <div class="cl"></div>
+        <div class="Dianzan">
+            <div class="Qdz_tab"><span>请为该议案建议点赞</span></div>
+            <div class="ks_dz">
+                <span>您的每一次点赞都很重要哟</span>
+                <div class="cl"></div>
+                <div class="dz_img">
+                    <ul>
+                        <li><img src="images/dzred.png"></li>
+                        <li><img src="images/dzred.png"></li>
+                        <li><img src="images/dzred.png"></li>
+                        <li><img src="images/dz.png"></li>
+                        <li><img src="images/dz.png"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="Gz">
+            <ul>
+                <li><b>点赞评分规则如下</b></li>
+                <li>
+                    <span>不&nbsp;&nbsp;满&nbsp;意</span>
+                    <img src="images/dz.png">
+                    <img src="images/dz.png">
+                    <img src="images/dz.png">
+                    <img src="images/dz.png">
+                    <img src="images/dz.png">
+                </li>
+                <li>
+                    <span>基本满意</span>
+                    <img src="images/dzred.png">
+                    <img src="images/dzred.png">
+                    <img src="images/dz.png">
+                    <img src="images/dz.png">
+                    <img src="images/dz.png">
+
+                </li>
+                <li>
+                    <span>满&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;意</span>
+                    <img src="images/dzred.png">
+                    <img src="images/dzred.png">
+                    <img src="images/dzred.png">
+                    <img src="images/dz.png">
+                    <img src="images/dz.png">
+
+                </li>
+                <li>
+                    <span>比较满意</span>
+                    <img src="images/dzred.png">
+                    <img src="images/dzred.png">
+                    <img src="images/dzred.png">
+                    <img src="images/dzred.png">
+                    <img src="images/dz.png">
+
+                </li>
+                <li>
+                    <span>非常满意</span>
+                    <img src="images/dzred.png">
+                    <img src="images/dzred.png">
+                    <img src="images/dzred.png">
+                    <img src="images/dzred.png">
+                    <img src="images/dzred.png">
+                </li>
+            </ul>
+        </div>
+        <div class="Jy_btn" id="btn_st">提交</div>
+
+    </div>
+
+</body>
+
+</html>
+<script>
+    var tc = document.getElementById("tc");
+    var sc = document.getElementById("sc");
+    var i = 0;
+    document.getElementById("btn_st").onclick = function () {
+        i++;
+        if (i == 1) {
+            sc.style.display = "block";
+        } else {
+            tc.style.display = "block";
+        }
+
+
+    }
+    document.getElementById("close").onclick = function () {
+        tc.style.display = "none";
+        sc.style.display = "none";
+    }
+    document.getElementById("cls").onclick = function () {
+
+        sc.style.display = "none";
+    }
+</script>

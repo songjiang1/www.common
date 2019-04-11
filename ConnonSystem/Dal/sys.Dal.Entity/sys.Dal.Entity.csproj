@@ -63,6 +63,7 @@
     <Compile Include="BaseManage\studentEntity.cs" />
     <Compile Include="BaseManage\UserEntity.cs" />
     <Compile Include="BaseManage\UserRelationEntity.cs" />
+    <Compile Include="AccessTokenEntity.cs" />
     <Compile Include="NotifyEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicInfoManage\EmailAddresseeEntity.cs" />
@@ -86,6 +87,8 @@
     <Compile Include="SystemManage\ExcelImportFiledEntity.cs" />
     <Compile Include="SystemManage\LogEntity.cs" />
     <Compile Include="SystemManage\ViewModel\DataItemModel.cs" />
+    <Compile Include="TVShowManage\CollectionEntity.cs" />
+    <Compile Include="TVShowManage\MenuEntity.cs" />
     <Compile Include="UserInfoModel.cs" />
     <Compile Include="WeChatInfo.cs" />
   </ItemGroup>

@@ -9,6 +9,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link href="/Content/css/mui.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/Content/css/home_page.css" />
+    <link href="~/Content/css/layer.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery-2.1.0.js"></script>
+    <script src="~/Content/js/plugins/layer/layer.js"></script>
+    <script src="~/Content/js/common/sys.common.js"></script>
 </head>
 <body>
     <header class="mui-bar mui-bar-nav">
@@ -23,8 +27,8 @@
     </header>
     <div class="huiyi_info">
         <div class="huiyi_top">
-            <ul>
-                <li><b>会议名称：</b><span style="color:@entity.FullHeadColor"n>@entity.FullHead</span></li>
+            <ul class="huiyi_top_ul">
+                <li><b>会议名称：</b><span style="color:@entity.FullHeadColor" n>@entity.FullHead</span></li>
                 <li><b>召开时间：</b><span>@(Convert.ToDateTime(entity.ConveneSTime).ToString("yyyy年MM月dd日 HH:mm"))-@(Convert.ToDateTime(entity.ConveneETime).ToString("yyyy年MM月dd日 HH:mm"))</span></li>
                 <li><b>会议地点：</b><span>@entity.MeetingAddress</span></li>
                 <li><b>参会人员：</b><span>@ViewBag.ObjName</span></li>
@@ -52,15 +56,184 @@
         {
             if (ViewBag.Qualification)
             {
-                <div class="btn_yes"><a href="Cjhy.html">我参加本次会议</a></div>
-                <div class="btn_no"><a href="Quexi.html">我不参加本次会议</a></div>
+                if (ViewBag.AttendExpo)
+                {
+                    <div class="btn_yes">已确认参加本次会议</div>
+                }
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(ViewBag.SignInDescription))
+                    {
+                    <div class="btn_yes">已确认不参加本次会议</div>
+                    }
+                    else
+                    {
+                        <div class="btn_yes"><a onclick="AttendExpo()">我参加本次会议</a></div>
+                        <div class="btn_no"><a onclick="NoAttendExpo()">我不参加本次会议</a></div>
+                    }
+
+                }
+
             }
         }
         else
         {
-            <div class="btn_no"><a >已结束</a></div>
+            <div class="btn_no"><a>已结束</a></div>
         }
 
     </div>
+
+
+    <div id="" style="display:none;">
+        <div class="Quexi">
+            <div class="Qx_title">
+                <ul>
+                    <li><b>会议名称：</b><span style="color:@entity.FullHeadColor" n>@entity.FullHead</span></li>
+                    <li><b>召开时间：</b><span>@(Convert.ToDateTime(entity.ConveneSTime).ToString("yyyy年MM月dd日 HH:mm"))-@(Convert.ToDateTime(entity.ConveneETime).ToString("yyyy年MM月dd日 HH:mm"))</span></li>
+                    <li><b>会议地点：</b><span>@entity.MeetingAddress</span></li>
+                    <li><b>参会人员：</b><span>@ViewBag.ObjName</span></li>
+                </ul>
+            </div>
+            <div class="Qx_ly">
+                <span>缺席理由（不超过50字）</span>
+                <hr />
+                <textarea class="Description"   rows="4" cols="20" maxlength="50" placeholder="缺席理由（不超过50字）"></textarea>
+            </div>
+
+            <div class="Qx_Tj"><a href="#" onclick="btn_NoAttendExpo()">确认提交</a></div>
+        </div>
+    </div>
 </body>
 </html>
+<script>
+    function AttendExpo() {
+        var Id = QueryString("Id");
+        if (Id == null || Id == "") {
+            return alerts("参数错误");
+        }
+
+        $.ajax({
+            async: false,
+            type: "post",
+            url: "/Home/UpdateAttendExpo",
+            data: {
+                Id: Id,
+                State: 1,
+                SignInDescription: ""
+            },
+            success: function (d) {
+
+                debugger;
+                var obj = eval("(" + d + ")");
+                var data = "";
+                if (obj.type == 1) {
+                    var html = '';
+                    html += '<ul><li><img style="width: 20px;" width: 20px; src="/Content/images/Oks.png"><span>您已成功确认参加本次会议</span></li>';
+                    html += ('<li>' + $(".huiyi_top_ul li").eq(0).html() + '</li>');
+                    html += ('<li>' + $(".huiyi_top_ul li").eq(1).html() + '</li>');
+                    html += ('<li>' + $(".huiyi_top_ul li").eq(2).html() + '</li>');
+                    html += ('<li><span>届时请于会议当日提前40分钟到会场并扫二维码签到</span></li>');
+                    html += ('<li><div class="tm" ><layer id="time">3</layer> <span>返回到页面</span></div > </li >');
+                    html += ('</ul >');
+                    $(".hui_btn").html('<div class="btn_yes">已确认参加本次会议</div>');
+                    layer.open({
+                        content: html
+                        // , style: 'background-color:#09C1FF; color:#fff; border:none;' //自定风格
+                        , time: 3
+                    });
+                    setInterval("Time()", 1000);
+
+                }
+
+            },
+            error: function (xhr, type) {
+            }
+        });
+    }
+    function NoAttendExpo() { 
+        layer.open({
+            type: 1,
+            anim: 'up',
+            content: $(".Quexi").html(),
+            //style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;'
+        }); 
+         
+    }
+    function btn_NoAttendExpo() {
+        var validate = true;
+        var Id = QueryString("Id"); 
+        var Description = $(".Description").eq(1).val();
+        if (Id == null || Id == "") {
+            validate = false;
+             alerts("参数错误");
+        }
+        if (Description == null || Description == "") {
+            validate = false; 
+            $(".Qx_ly").css("border-color","red");  
+        } else {
+            $(".Qx_ly").css("border-color", "#bfbfbf");  
+        }
+        if (validate) {
+            $.ajax({
+                async: false,
+                type: "post",
+                url: "/Home/UpdateAttendExpo",
+                data: {
+                    Id: Id,
+                    State: 0,
+                    SignInDescription: Description
+                },
+                success: function (d) {
+                    debugger;
+                    var obj = eval("(" + d + ")");
+                    var data = "";
+                    if (obj.type == 1) {
+                        var html = '<div class="Cjhy">   <div class="hy_txt">   <a href="Quexi.html" class="tg"><img src="/content/images/tiaoguo.png">跳过</a> ';
+                        html += '<ul> <li><img src="/content/images/Oks.png"><span>您已成功确认不参加本次会议</span></li>';
+                        html += ('<li>' + $(".huiyi_top_ul li").eq(0).html() + '</li>');
+                        html += ('<li>' + $(".huiyi_top_ul li").eq(1).html() + '</li>');
+                        html += ('<li>' + $(".huiyi_top_ul li").eq(2).html() + '</li>');
+                        html += (' <li><span>您的提交已经通过</span></li>');
+                        html += ('<li><div class="tm" ><layer id="time1">3</layer> <span>返回到页面</span></div > </li >');
+                        html += ('</ul ></div> </div>');
+                        layer.closeAll();  
+                        $(".hui_btn").html('<div class="btn_yes">已确认不参加本次会议</div>');
+                        layer.open({
+                            type: 1,
+                            anim: 'up',
+                            content: html, 
+                            // , style: 'background-color:#09C1FF; color:#fff; border:none;' //自定风格
+                           time: 3
+                        });
+                        
+
+                    }
+
+                },
+                error: function (xhr, type) {
+                }
+            });
+        }
+      
+    }
+
+    
+</script>
+<script type="text/javascript">
+    function Time() {
+        var time = $("#time");
+        if (time.text == 0) {
+            $(".hui_btn").html('<div class="btn_yes">已确认参加本次会议</div>');
+        } else {
+            time.innerHTML = time.innerHTML - 1;
+        }
+    }
+    function Time1() {
+        var time = $("#time1");
+        if (time.text == 0) {
+            $(".hui_btn").html('<div class="btn_yes">已确认不参加本次会议</div>');
+        } else {
+            time.innerHTML = time.innerHTML - 1;
+        }
+    } 
+</script>

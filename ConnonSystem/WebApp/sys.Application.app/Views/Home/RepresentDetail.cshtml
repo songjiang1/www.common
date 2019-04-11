@@ -1,0 +1,71 @@
+﻿
+
+@{
+    sys.Dal.Entity.TVShowManage.CollectionEntity entity = ViewBag.CollectionEntity;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="/Content/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Content/css/DbXx.css" /> 
+    <link href="~/Content/css/layer.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery-2.1.0.js"></script>
+    <script src="~/Content/js/plugins/layer/layer.js"></script>
+    <script src="~/Content/js/common/sys.common.js"></script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" onclick="window.history.go(-1)">返回</span>
+        <h1 class="mui-title">代表信息</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
+    <div class="Db_Info">
+        <div class="Db_Info_top">
+            <div class="Db_Info_Img">
+                <img src="@entity.HeadIcon">
+            </div>
+
+        </div>
+        <div class="jb_Info">
+            <div class="jb_xq">
+                <label>姓名</label><span>@entity.Title</span>
+            </div>
+            <div class="jb_xq">
+                <label>性别</label><span>@(entity.Gender==1?"男":"女")</span>
+            </div>
+            <div class="jb_xq">
+                <label>籍贯</label><span> </span>
+            </div>
+            <div class="jb_xq">
+                <label>名族</label><span>@entity.Nation</span>
+            </div>
+            <div class="jb_xq">
+                <label>出生年月</label><span>@entity.Birthday</span>
+            </div>
+            <div class="jb_xq">
+                <label>党派</label><span>@entity.Party</span>
+            </div>
+            <div class="jb_xq">
+                <label>身份机构</label><span>@entity.Identity</span>
+            </div>
+            <div class="jb_xq">
+                <label>类别</label><span>@entity.Post</span>
+            </div>
+            <div class="jb_xq">
+                <label>工作单位</label><span>@entity.WorkUnit</span>
+            </div>
+            <div class="jb_xq">
+                <label>工作职务</label><span>@entity.Position</span>
+            </div>
+            <div class="jb_xq">
+                <label>联系电话</label><span>@entity.Mobile</span>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

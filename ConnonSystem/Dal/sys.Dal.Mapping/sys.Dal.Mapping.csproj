@@ -67,6 +67,7 @@
     <Compile Include="BaseManage\studentMap.cs" />
     <Compile Include="BaseManage\UserMap.cs" />
     <Compile Include="BaseManage\UserRelationMap.cs" />
+    <Compile Include="AccessTokenMap.cs" />
     <Compile Include="NotifyMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicInfoManage\EmailAddresseeMap.cs" />
@@ -87,6 +88,8 @@
     <Compile Include="SystemManage\ExcelImportFiledMap.cs" />
     <Compile Include="SystemManage\ExcelImportMap.cs" />
     <Compile Include="SystemManage\LogMap.cs" />
+    <Compile Include="TVShowManage\MenuMap.cs" />
+    <Compile Include="TVShowManage\CollectionMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sys.Dal.Entity\sys.Dal.Entity.csproj">

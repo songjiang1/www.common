@@ -57,8 +57,8 @@ namespace sys.Dal.Service
         {
             var expression = LinqExtensions.True<NotifyEntity>();
             expression = expression.And(t => t.Mobile == mobile);
-            expression = expression.And(t => t.Code == code);
-            expression = expression.And(t => t.Status ==true);
+            //expression = expression.And(t => t.Code == code);
+            //expression = expression.And(t => t.Status ==true);
             var NotifyData= this.BaseRepository().IQueryable(expression).OrderByDescending(t => t.CreateDate).FirstOrDefault();
             if (NotifyData == null)
             {

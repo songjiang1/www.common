@@ -4,6 +4,7 @@
     if (!data.newuser.CheckMobile) { }
 
 }
+ 
 //获取页面url中的传递参数
 var QueryString = function (queryStringName) {
     var result = location.search.match(new RegExp("[\?\&]" + queryStringName + "=([^\&]+)", "i"));

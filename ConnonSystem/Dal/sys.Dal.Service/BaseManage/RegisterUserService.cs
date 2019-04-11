@@ -36,12 +36,26 @@ namespace sys.Dal.Service.BaseManage
         public DataTable GetTable()
         {
             var strSql = new StringBuilder();
-            strSql.Append(@"SELECT  u.*,
-                                    d.FullName AS DepartmentName 
-                            FROM    Base_User u
-                                    LEFT JOIN Base_Department d ON d.DepartmentId = u.DepartmentId
-                            WHERE   1=1");
-            strSql.Append(" AND u.UserId <> 'System' AND u.EnabledMark = 1 AND u.DeleteMark=0");
+            strSql.Append(@"  SELECT  u.*,dt.ItemName  as PositionName
+                              FROM    b_register_user u  
+                              LEFT JOIN (SELECT   d.ItemName ,  d.ItemValue   
+                              FROM    Base_DataItemDetail d
+                              LEFT JOIN Base_DataItem i ON i.ItemId = d.ItemId
+                              WHERE   i.ItemCode='PositionCategory' and d.EnabledMark = 1  AND d.DeleteMark = 0 )dt ON dt.ItemValue = u.Position 
+                            WHERE    u.UserId <> 'System' AND u.EnabledMark = 1 AND u.DeleteMark=0 ");
+            return this.BaseRepository().FindTable(strSql.ToString());
+        }
+        /// <summary>
+        /// 用户首字母
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetInitials()
+        {
+            var strSql = new StringBuilder();
+            strSql.Append(@"   SELECT  u.Initials,IFNULL(COUNT(1),0) as InitialsCount
+                               FROM    b_register_user u  
+                               WHERE    u.UserId <> 'System' AND u.EnabledMark = 1 AND u.DeleteMark=1
+                               GROUP BY u.Initials "); 
             return this.BaseRepository().FindTable(strSql.ToString());
         }
         /// <summary>
@@ -255,9 +269,8 @@ namespace sys.Dal.Service.BaseManage
             try
             {
                 #region 基本信息
-                var expression = LinqExtensions.True<RegisterUserEntity>();
-                expression = expression.And(t => t.Account == userEntity.Account);
-                expression = expression.Or(t => t.Mobile == userEntity.Mobile); 
+                var expression = LinqExtensions.True<RegisterUserEntity>(); 
+                expression = expression.And(t => t.Mobile == userEntity.Mobile); 
                 var vityUserInfo = this.BaseRepository().FindEntity(expression);
                 if (vityUserInfo != null)
                 {
@@ -366,6 +379,26 @@ namespace sys.Dal.Service.BaseManage
             userEntity.Secretkey = Md5Helper.MD5(CommonHelper.CreateNo(), 16).ToLower();
             userEntity.Password = Md5Helper.MD5(DESEncrypt.Encrypt(Password, userEntity.Secretkey).ToLower(), 32).ToLower();
             this.BaseRepository().Update(userEntity);
+        }
+        /// <summary>
+        /// 忘记密码
+        /// </summary>
+        /// <param name="Mobile"></param>
+        /// <param name="Verify"></param>
+        /// <param name="Password"></param>
+        /// <returns></returns>
+        public int ForgetPassword(string Mobile,  string Password)
+        {
+            var expression = LinqExtensions.True<RegisterUserEntity>();
+            expression = expression.And(t => t.Mobile == Mobile);
+            var vityUserInfo = this.BaseRepository().FindEntity(expression);
+            if (vityUserInfo != null)
+            {
+                vityUserInfo.Secretkey = Md5Helper.MD5(CommonHelper.CreateNo(), 16).ToLower();
+                vityUserInfo.Password = Md5Helper.MD5(DESEncrypt.Encrypt(Password, vityUserInfo.Secretkey).ToLower(), 32).ToLower();
+                return this.BaseRepository().Update(vityUserInfo);
+            }
+            return -1;
         }
         /// <summary>
         /// 审核

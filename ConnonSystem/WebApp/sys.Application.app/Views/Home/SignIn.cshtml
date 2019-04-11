@@ -1,0 +1,85 @@
+﻿
+@{
+    sys.Dal.Entity.AppManage.MeetingEntity entity = ViewBag.MeetingEntity;
+}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="/Content/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Content/css/home_page.css" />
+    <link href="~/Content/css/layer.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery-2.1.0.js"></script>
+    <script src="~/Content/js/plugins/layer/layer.js"></script>
+    <script src="~/Content/js/common/sys.common.js"></script>
+</head>
+<body>
+
+    <div class="hyqdcg" style="display:none;"> <div class="hyqdcg_info">  
+        <div class="info_txt">
+                <p><b>会议名称：</b><span style="color:@entity.FullHeadColor" n>@entity.FullHead</span></p>
+                <p><b>召开时间：</b><span>@(Convert.ToDateTime(entity.ConveneSTime).ToString("yyyy年MM月dd日 HH:mm"))-@(Convert.ToDateTime(entity.ConveneETime).ToString("yyyy年MM月dd日 HH:mm"))</span></p>
+                <p><b>会议地点：</b><span>@entity.MeetingAddress</span></p>
+                <p><b>参会人员：</b><span>@ViewBag.ObjName</span></p>
+            </div>
+            <div class="hyqdcg_icon">
+                <a href="#"><img src="images/Oks.png"> </a>
+                <span>您于2018年10月26日</span>
+                <span>上午8:39分</span>
+                <span>签到成功</span>
+            </div>
+        </div>
+    </div>
+        
+     
+</body>
+</html>
+<script>
+    $(function () {
+        AttendExpo();
+        function AttendExpo() {
+            var Id = QueryString("Id");
+            if (Id == null || Id == "") {
+                return alerts("参数错误");
+            }
+            $.ajax({
+                async: false,
+                type: "post",
+                url: "/Home/UpdateSignInMark",
+                data: {
+                    Id: Id,
+                },
+                success: function (d) {
+
+                    debugger;
+                    var obj = eval("(" + d + ")");
+                    var data = "";
+                    if (obj.type == 1) {
+                        var html = '<div class="hyqdcg"> <div class="hyqdcg_info">  ';
+                        html += $(".info_txt").html();;
+                        html += ('<div class="hyqdcg_icon"> <a href="#"><img src="/content/images/Oks.png"> </a>'); 
+                        html += ('<span>您于' + obj.message.split(' ')[0] +'</span>');
+                        html += ('<span>' + obj.message.split(' ')[1] + '</span>');
+                        html += ('<span>签到成功</span>'); 
+                        html += ('</div></div>'); 
+                        layer.open({
+                            type: 1,
+                            anim: 'up',
+                            content: html, 
+                            // , style: 'background-color:#09C1FF; color:#fff; border:none;' //自定风格
+                            //time: 3
+                        }); 
+
+                    }
+
+                },
+                error: function (xhr, type) {
+                }
+            });
+        }
+    }); 
+    
+</script>
+ 
+ 

@@ -1,5 +1,5 @@
-﻿ 
-<!DOCTYPE html> 
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,106 +8,106 @@
 
     <link rel="stylesheet" href="/content/css/mui.min.css" />
     <link rel="stylesheet" type="text/css" href="/content/css/home_page.css" />
-</head>  
-<body style="background-color:#f9fdff;" >
-		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</a>
-			<h1 class="mui-title">首页</h1>
-			<div class="mui-icon mui-icon-more mui-pull-right"></div>
-		</header>
-		
-		<div class="Lb" id="Lb">
-			<div class="Lb_Img">
-				<i><img src="images/1.jpg"></i>
-				<i><img src="images/2.jpg"></i>
-				<i><img src="images/3.jpg"></i>
-				<i><img src="images/Inter.jpg"></i>
-				<i><img src="images/3.jpg"></i>
-			</div>
-			<ul class="xiaoyuandian">
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-			</ul>
-		</div>
-		<div class="Hp_fn">
-			<div class="fn_icon">
-				<span><a href="/home/notice">通知公告</a></span>
-			</div>
-			<div class="fn_icon">
-				<span><a href="/home/meeting">会议签到</a></span>
-			</div>
-			<div class="fn_icon">
-				<span>代表会议</span>
-			</div>
-			<div class="fn_icon"><span>议案建议</span></div>
-			<div class="fn_icon"><span>问卷调查</span></div>
-			<div class="fn_icon"><span>数据大观</span></div>
-		</div>
-		<div class="Pingtai">
-			<div class="Pingtai_top"><span>掌上平台</span></div>
-			<div class="Pingtai_Img">
-				<div class="Pt_img"><img src="images/1.jpg"><span>五常人大</span></div>
-				<div class="Pt_img"><img src="images/2.jpg"><span>乡镇人大</span></div>
+</head>
+<body style="background-color:#f9fdff;">
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</a>
+        <h1 class="mui-title">首页</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
 
-			</div>
-		</div>
+    <div class="Lb" id="Lb">
+        <div class="Lb_Img">
+            <i><img src="/Content/images/1.jpg"></i>
+            <i><img src="/Content/images/2.jpg"></i>
+            <i><img src="/Content/images/3.jpg"></i>
+            <i><img src="/Content/images/Inter.jpg"></i>
+            <i><img src="/Content/images/3.jpg"></i>
+        </div>
+        <ul class="xiaoyuandian">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="Hp_fn">
+        <div class="fn_icon">
+            <span><a href="/home/notice">通知公告</a></span>
+        </div>
+        <div class="fn_icon">
+            <span><a href="/home/meeting">会议签到</a></span>
+        </div>
+        <div class="fn_icon">
+            <span><a href="/home/Represent">代表会议</a></span>
+        </div>
+        <div class="fn_icon"><span>议案建议</span></div>
+        <div class="fn_icon"><span>问卷调查</span></div>
+        <div class="fn_icon"><span>数据大观</span></div>
+    </div>
+    <div class="Pingtai">
+        <div class="Pingtai_top"><span>掌上平台</span></div>
+        <div class="Pingtai_Img">
+            <div class="Pt_img"><img src="/Content/images/1.jpg"><span>五常人大</span></div>
+            <div class="Pt_img"><img src="/Content/images/2.jpg"><span>乡镇人大</span></div>
 
-		<div class="footer">
-			<ul>
-				<li><img src="images/home.png"><a href="#">首页</a></li>
-				<li><img src="images/da.png"><a href="#">履职档案</a></li>
-				<li><img src="images/hudong.png"><a href="#">双联活动</a></li>
-				<li><img src="images/liuyan.png"><a href="#">留言回音</a></li>
-				<li><img src="images/wode.png"><a href="#">我的</a></li>
-			</ul>
-		</div>
+        </div>
+    </div>
 
-	</body>
-	<script type="text/javascript">
-		var imgobj = document.getElementsByTagName("i");
+    <div class="footer">
+        <ul>
+            <li><img src="/Content/images/home.png"><a href="#">首页</a></li>
+            <li><img src="/Content/images/da.png"><a href="#">履职档案</a></li>
+            <li><img src="/Content/images/hudong.png"><a href="#">双联活动</a></li>
+            <li><img src="/Content/images/liuyan.png"><a href="#">留言回音</a></li>
+            <li><img src="/Content/images/wode.png"><a href="#">我的</a></li>
+        </ul>
+    </div>
 
-		var lis = document.getElementsByTagName("li");
-		var Lb = document.getElementById("Lb");
+</body>
+<script type="text/javascript">
+    var imgobj = document.getElementsByTagName("i");
 
-		var j = -1,
-			t;
-		imgshow();
-		//轮播
-		function imgshow() {
-			j++;
-			if (j > imgobj.length - 1) {
-				j = 0;
-			}
-			for (var i = 0; i < imgobj.length; i++) {
-				imgobj[i].style.display = "none";
-				lis[i].style.backgroundColor = "#FFF";
-			}
-			imgobj[j].style.display = "block";
-			lis[j].style.backgroundColor = "blue";
-		}
-		t = setInterval("imgshow()", 1000);
-		Lb.onmouseover = function() { //鼠标移入停止计时
-			clearInterval(t);
-		}
-		Lb.onmouseout = function() { //鼠标移出开始计时
-			t = setInterval("imgshow()", 1000);
+    var lis = document.getElementsByTagName("li");
+    var Lb = document.getElementById("Lb");
+
+    var j = -1,
+        t;
+    imgshow();
+    //轮播
+    function imgshow() {
+        j++;
+        if (j > imgobj.length - 1) {
+            j = 0;
         }
+        for (var i = 0; i < imgobj.length; i++) {
+            imgobj[i].style.display = "none";
+            lis[i].style.backgroundColor = "#FFF";
+        }
+        imgobj[j].style.display = "block";
+        lis[j].style.backgroundColor = "blue";
+    }
+    t = setInterval("imgshow()", 3000);
+    Lb.onmouseover = function () { //鼠标移入停止计时
+        clearInterval(t);
+    }
+    Lb.onmouseout = function () { //鼠标移出开始计时
+        t = setInterval("imgshow()", 3000);
+    }
 
-		//循环遍历小圆点
-		for (var i = 0; i < lis.length; i++) {
-			lis[i].index = i;
-			lis[i].onclick = function() {
-				for (var l = 0; l < imgobj.length; l++) {
-					imgobj[l].style.display = "none";
-					lis[l].style.backgroundColor = "#FFF";
-				}
-				j = this.index;
-				imgobj[j].style.display = "block";
-				lis[j].style.backgroundColor = "blue";
-			}
-		}
-	</script>
+    //循环遍历小圆点
+    for (var i = 0; i < lis.length; i++) {
+        lis[i].index = i;
+        lis[i].onclick = function () {
+            for (var l = 0; l < imgobj.length; l++) {
+                imgobj[l].style.display = "none";
+                lis[l].style.backgroundColor = "#FFF";
+            }
+            j = this.index;
+            imgobj[j].style.display = "block";
+            lis[j].style.backgroundColor = "blue";
+        }
+    }
+</script>
 </html>

@@ -43,8 +43,12 @@ namespace sys.Application.app.Controllers
             ViewBag.userEntity = userEntity;
             return View(userEntity);
         }
+        public ActionResult ForgetPwd()
+        {
+            return View();
+        }
 
-
+        
 
 
         /// <summary>
@@ -129,5 +133,27 @@ namespace sys.Application.app.Controllers
 
         }
 
+        [HttpPost] 
+        [AjaxOnly] 
+        public ActionResult ForgetPassword(string Mobile, string Verify, string Password)
+        {
+            try
+            {
+                if (notifyBLL.CheckNotify(Mobile, Verify))
+                {
+                    if (registerUserBLL.ForgetPassword(Mobile, Password) == 1) {
+                        return Content(new AjaxResult { type = ResultType.success, message = "密码修改成功，请牢记新密码。" }.ToJson());
+                    }
+                    return Content(new AjaxResult { type = ResultType.error, message = "手机号未注册" }.ToJson());
+                }
+                return Content(new AjaxResult { type = ResultType.error, message = "验证码错误" }.ToJson());
+            }
+            catch (Exception ex)
+            { 
+                return Content(new AjaxResult { type = ResultType.error, message = ex.Message }.ToJson());
+            }
+           
+            
+        }
     }
 }

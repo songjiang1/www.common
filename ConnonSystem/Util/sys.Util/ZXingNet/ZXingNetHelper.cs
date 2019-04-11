@@ -88,6 +88,7 @@ namespace sys.Util
 
             Bitmap map = writer.Write(text); 
             map.Save(filename, ImageFormat.Png);
+            map.Dispose();
             return string.Format("{0}_{1}.png", NowTime, rNumStr);
         }
         #endregion
@@ -97,12 +98,13 @@ namespace sys.Util
         /// 读取失败，返回空字符串
         /// </summary>
         /// <param name="filename">指定二维码图片位置</param>
-        public static string Read1(string filename)
+        public static string ReadQrCode(string filename)
         {
             BarcodeReader reader = new BarcodeReader();
             reader.Options.CharacterSet = "UTF-8";
             Bitmap map = new Bitmap(filename);
             Result result = reader.Decode(map);
+            map.Dispose();
             return result == null ? "" : result.Text;
         }
         #endregion
@@ -162,6 +164,8 @@ namespace sys.Util
             string filename = string.Format("{0}{1}_{2}.png", virtualPath, NowTime, rNumStr); 
             //保存成图片
             bmpimg.Save(filename, ImageFormat.Png);
+            map.Dispose();
+            bmpimg.Dispose();
             return string.Format("{0}_{1}.png", NowTime, rNumStr);
         }
         #endregion

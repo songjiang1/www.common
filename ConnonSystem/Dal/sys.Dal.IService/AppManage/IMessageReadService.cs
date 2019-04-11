@@ -75,7 +75,7 @@ namespace sys.Dal.IService.AppManage
         /// <param name="category"></param>
         /// <param name="operatType"></param>
         /// <returns></returns>
-        int SignInMark(string uid, string oid, string category, OperatType operatType,string SignInDescription);
+        int SignInMark(string uid, string oid, string category, OperatType operatType,string SignInDescription); 
         #endregion
     }
 }
