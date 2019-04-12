@@ -96,6 +96,24 @@ namespace sys.Dal.Service.AppManage
 
         #region 提交数据
         /// <summary>
+        /// +1操作
+        /// </summary>
+        /// <param name="keyValue"></param>
+        public void PlusOne(string keyValue,OperatType operatType)
+        {
+            SurveyBaseEntity surveyBaseEntity = this.BaseRepository().FindEntity(keyValue);
+            surveyBaseEntity.Id = keyValue;
+            if (operatType == OperatType.PV)
+            { 
+                surveyBaseEntity.PV = surveyBaseEntity.PV + 1;
+            }
+            if (operatType == OperatType.JoinCount)
+            {
+                surveyBaseEntity.JoinCount = surveyBaseEntity.JoinCount + 1;
+            }
+            this.BaseRepository().Update(surveyBaseEntity);
+        }
+        /// <summary>
         /// 删除功能
         /// </summary>
         /// <param name="keyValue">主键</param>

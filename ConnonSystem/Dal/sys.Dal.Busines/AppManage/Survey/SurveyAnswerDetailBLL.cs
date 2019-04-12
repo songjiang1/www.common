@@ -29,11 +29,11 @@ namespace sys.Dal.Busines.AppManage
         /// <summary>
         /// 按钮列表
         /// </summary>
-        /// <param name="moduleId">功能Id</param>
+        /// <param name="Id">Id</param>
         /// <returns></returns>
-        public List<SurveyAnswerDetailEntity> GetList(string moduleId)
+        public List<SurveyAnswerDetailEntity> GetList(string Id)
         {
-            return service.GetList(moduleId);
+            return service.GetList(Id);
         }
         /// <summary>
         /// 按钮实体

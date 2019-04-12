@@ -21,9 +21,9 @@ namespace sys.Dal.IService.AppManage
         /// <summary>
         /// 按钮列表
         /// </summary>
-        /// <param name="moduleId">功能Id</param>
+        /// <param name="Id">功能Id</param>
         /// <returns></returns>
-        List<SurveyAnswerDetailEntity> GetList(string moduleId);
+        List<SurveyAnswerDetailEntity> GetList(string Id);
         /// <summary>
         /// 按钮实体
         /// </summary>

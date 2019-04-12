@@ -34,7 +34,7 @@ namespace sys.Dal.Service.AppManage
         public List<SurveyOptionsEntity> GetList(string Id)
         {
             var expression = LinqExtensions.True<SurveyOptionsEntity>();
-            expression = expression.And(t => t.QuestionId.Equals(Id));
+            expression = expression.And(t => t.SurveyId.Equals(Id));
             return this.BaseRepository().IQueryable(expression).OrderBy(t => t.SortCode).ToList();
         }
         /// <summary>

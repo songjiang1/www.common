@@ -127,20 +127,33 @@ namespace sys.Dal.Service.TVShowManage
 
             var expression = LinqExtensions.True<CollectionEntity>();
             var queryParam = queryJson.ToJObject();  
-            //查询条件
-            if (!queryParam["condition"].IsEmpty() && !queryParam["keyword"].IsEmpty())
+            //查询条件 ;
+            if (!queryParam["ParentId"].IsEmpty())
             {
-                string condition = queryParam["condition"].ToString();
-                string keyord = queryParam["keyword"].ToString();
-                switch (condition)
-                { 
-                    case "Mobile":          //手机
-                        expression = expression.And(t => t.Mobile.Contains(keyord));
-                        break;
-                    default:
-                        break;
-                }
+                string ParentId = queryParam["ParentId"].ToString();
+                expression = expression.And(t => t.ParentId == ParentId);
             }
+            if (!queryParam["TVShowMenuId"].IsEmpty())
+            {
+                string TVShowMenuId = queryParam["TVShowMenuId"].ToString();
+                expression = expression.And(t => t.TVShowMenuId == TVShowMenuId);
+            }
+            if (!queryParam["OrganizeId"].IsEmpty())
+            {
+                string OrganizeId = queryParam["OrganizeId"].ToString();
+                expression = expression.And(t => t.OrganizeId== OrganizeId);
+            }
+            if (!queryParam["Title"].IsEmpty())
+            {
+                string Title = queryParam["Title"].ToString();
+                expression = expression.And(t => t.Title.Contains(Title));
+            }
+            if (!queryParam["UserId"].IsEmpty())
+            {
+                string CreateUserId = queryParam["UserId"].ToString();
+                expression = expression.And(t => t.CreateUserId== CreateUserId);
+            }
+            
             return this.BaseRepository().FindList(expression,  pagination); 
         }
         /// <summary>

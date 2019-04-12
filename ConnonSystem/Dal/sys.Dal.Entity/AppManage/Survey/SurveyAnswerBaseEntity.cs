@@ -39,14 +39,34 @@ namespace sys.Dal.Entity.AppManage
         /// 修改时间
         /// </summary>		
         public DateTime? ModifyDate { get; set; }
-        
-      
-       
-        
+
+
+
+
         #endregion
 
         #region 扩展操作
-         
+        /// <summary>
+        /// 新增调用
+        /// </summary>
+        public override void Create()
+        {
+            this.Id = Guid.NewGuid().ToString();
+            this.CreateDate = DateTime.Now;
+            this.UserId = OperatorProvider.Provider.Current().UserId;
+            this.UserName = OperatorProvider.Provider.Current().UserName; 
+        }
+        /// <summary>
+        /// 编辑调用
+        /// </summary>
+        /// <param name="keyValue"></param>
+        public override void Modify(string keyValue)
+        {
+            this.Id = keyValue;
+            this.ModifyDate = DateTime.Now;
+            this.UserId = OperatorProvider.Provider.Current().UserId;
+            this.UserName = OperatorProvider.Provider.Current().UserName;
+        }
         #endregion
     }
 }

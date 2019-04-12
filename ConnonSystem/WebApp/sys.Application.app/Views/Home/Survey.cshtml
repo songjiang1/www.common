@@ -1,0 +1,160 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="~/Content/css/mui.min.css" />
+    <link rel="stylesheet" href="~/Content/css/DbXx.css" />
+
+    <script src="~/Content/js/jquery-2.1.0.js"></script>
+    <script src="/Content/js/mui.min.js"></script>
+
+    <link href="~/Content/css/layer.css" rel="stylesheet" />
+    <script src="~/Content/js/plugins/layer/layer.js"></script>
+    <script src="~/Content/js/common/sys.common.js"></script>
+
+    <link href="~/Content/css/dropload.css" rel="stylesheet" />
+    <script src="~/Content/js/swiper.min.js"></script>
+    <script src="~/Content/js/dropload.min.js"></script>
+    <script src="~/Content/js/together.js"></script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</a>
+        <h1 class="mui-title">问卷调查</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+
+    </header>
+    <div class="Wjdc">
+        <input type="hidden" id="page" value="0" />
+        <div class="Wjdc_top">
+            <div class="sousuo">
+                <div class="Ss">
+                    <input id="Title" name="Title" type="text" placeholder="输入代表名字">
+                    <label><img src="images/quxiao.png"> </label>
+                </div>
+                <a href="#">Cancel</a>
+            </div>
+        </div>
+        <div class="Wjdz_Qk">
+             
+             
+            @*<div class="Wjdz_fn">
+                <a href="Wjdc_Dt.html">
+                    <div class="Wjdz_fn_left">
+                        <span>五常市人大关于24乡镇以及乡镇管辖社区开展四日调查</span><br />
+                        <span>发起时间：2019.12.01 12.00</span><br />
+                        <span>截止时间：2019.12.01 12.00</span>
+                    </div>
+                    <div class="Wjdz_fn_right">
+                        <div class="Wjdz_rt_read">已完成</div>
+                        <div class="Wjdz_rt_count"><span>已参加人数</span>&nbsp;&nbsp;<label>120</label></div>
+                    </div>
+                </a>
+            </div>*@
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var preview = "";
+    $(function () {
+        GetBindList(); 
+    });
+</script>
+<script type="text/javascript">
+
+    var pageIndex;
+    //下拉手势
+    var dropload = $('#info_contentul').dropload({
+        domUp: {
+            domClass: 'dropload-up',
+            domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+            domUpdate: '<div class="dropload-update">↑释放更新</div>',
+            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+        },
+        domDown: {
+            domClass: 'dropload-down',
+            domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+            domUpdate: '<div class="dropload-update">↓释放加载</div>',
+            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+            domNoData: '<div class="dropload-noData">暂无数据</div>'
+        },
+        loadDownFn: function (me) {
+            GetBindList();
+        }
+    });
+    function GetBindList() {
+        pageIndex = parseInt($("#page").val()) + 1;
+        $("#page").val(pageIndex);
+        var queryJson = {
+            Title: $("#Title").val(), 
+        }
+        $.ajax({
+            async: false,
+            type: "post",
+            url: "/Home/GetSurveyPageList",
+            data: {
+                pageIndex: pageIndex,
+                sidx:"SortCode",
+                sord: "ASC",
+                queryJson: JSON.stringify(queryJson),
+            },
+            success: function (d) {
+
+                var obj = eval("(" + d + ")");
+                var data = "";
+                var newhtml5 = '';
+                if (obj.type == 1) {
+                    data = eval("(" + obj.message + ")");
+                    if (data != null && data.length>0) {
+                        newhtml5 = addHtmldata(data);
+                        $('.Wjdz_Qk').append(newhtml5);
+                    }
+                }
+            },
+            error: function (xhr, type) { 
+                me.resetload();
+            }
+        });
+    }
+    function addHtmldata(data) {
+        var html = '';
+        $.each(data, function (i, item) {
+              
+            html += '<div class="Wjdz_fn">'; 
+            if (item.State == 2) {
+                html += (' <a href="/home/LookSurvey?Id=' + item.Id + '&State=' + item.State + '">');
+            } else {
+                html += (' <a href="/home/SurveyDetail?Id=' + item.Id + '&State=' + item.State + '">');
+            }
+            html += '    <div class="Wjdz_fn_left">';
+            html += ('    <span style="color:' + item.TitleColor + ';">' + item.Title +'</span><br />');
+            html += '    <span>发起时间：' + item.OperateSDate+'</span><br />';
+            html += '     <span>截止时间：' + item.OperateEDate +'</span></div>';
+            html += ' <div class="Wjdz_fn_right">';
+             /// 只是用于查询返回状态标识；0未读，1已读未完成，2已读已完成
+            if (item.State == 1) {
+                html += '  <div class="Wjdz_rt_read">已读未完成</div>';
+            }
+            if (item.State == 2) {
+                html += '  <div class="Wjdz_rt_read">已读已完成</div>';
+            }
+            else {
+                html += '  <div class="Wjdz_rt_read">未读</div>';
+            }
+
+            html += ('  <div class="Wjdz_rt_count"><span>已参加人数</span>&nbsp;&nbsp;<label>' + item.JoinCount+'</label></div>');
+            html += ' </div>  </a>  </div>';
+        });
+        return html;
+    }
+   
+</script>

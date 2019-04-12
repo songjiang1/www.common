@@ -43,7 +43,21 @@ namespace sys.Util
         /// <summary>
         /// 确认 不参加
         /// </summary>
-        NoAttendExpo = 7, 
+        NoAttendExpo = 7,
+
+        /// <summary>
+        /// 执行提交操作
+        /// </summary>
+        Submit=8,
+
+        /// <summary>
+        /// 打分
+        /// </summary>
+        Score = 9,
+        /// <summary>
+        /// 参与人数
+        /// </summary>
+        JoinCount = 10,
 
     }
 }

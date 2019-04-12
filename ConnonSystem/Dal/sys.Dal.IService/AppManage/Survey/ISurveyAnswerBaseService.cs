@@ -41,7 +41,7 @@ namespace sys.Dal.IService.AppManage
         /// <param name="surveyAnswerBaseEntity">功能实体</param>
         /// <param name="surveyAnswerDetailListJson">答案列表</param> 
         /// <returns></returns> 
-        void SaveForm(string keyValue, SurveyAnswerBaseEntity surveyAnswerBaseEntity, List<SurveyAnswerDetailEntity> surveyAnswerDetailEntity);
+        string SaveForm(string keyValue, SurveyAnswerBaseEntity surveyAnswerBaseEntity, List<SurveyAnswerDetailEntity> surveyAnswerDetailEntity);
         #endregion
     }
 }

@@ -69,7 +69,7 @@ namespace sys.Dal.Service.AppManage
         /// <param name="surveyAnswerBaseEntity">功能实体</param>
         /// <param name="surveyAnswerDetailListJson">答案列表</param> 
         /// <returns></returns> 
-        public void SaveForm(string keyValue, SurveyAnswerBaseEntity surveyAnswerBaseEntity, List<SurveyAnswerDetailEntity> surveyAnswerDetailEntity)
+        public string SaveForm(string keyValue, SurveyAnswerBaseEntity surveyAnswerBaseEntity, List<SurveyAnswerDetailEntity> surveyAnswerDetailEntity)
         {
             IRepository db = new RepositoryFactory().BaseRepository().BeginTrans();
             try
@@ -82,15 +82,23 @@ namespace sys.Dal.Service.AppManage
                 else
                 {
                     surveyAnswerBaseEntity.Create();
+                    keyValue = surveyAnswerBaseEntity.Id;
                     db.Insert(surveyAnswerBaseEntity);
                 }
                 db.Delete<SurveyAnswerDetailEntity>(t => t.AnswersBaseId.Equals(keyValue));
+                DateTime nowTime = DateTime.Now;
+                for (int i = 0; i < surveyAnswerDetailEntity.Count; i++)
+                {
+                    surveyAnswerDetailEntity[i].AnswersBaseId = keyValue;
+                    surveyAnswerDetailEntity[i].CreateDate = nowTime;
+                }
                 if (surveyAnswerDetailEntity != null)
                 {
                     db.Insert(surveyAnswerDetailEntity);
                 }
                 
                 db.Commit();
+               return  keyValue;
             }
             catch (Exception)
             {

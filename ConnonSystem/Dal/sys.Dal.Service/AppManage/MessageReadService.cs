@@ -112,7 +112,7 @@ namespace sys.Dal.Service.AppManage
         /// <param name="oid">关联主键</param>
         /// <param name="category">类型</param>
         /// <param name="operatType"></param>
-        public void SetForm(string uid, string oid, string category, OperatType operatType)
+        public void SetForm(string uid, string oid, string category, OperatType operatType,string key="0")
         {
             //string Uniqueid = "";
             //MessageReadEntity messageReadEntity = new MessageReadEntity();
@@ -133,8 +133,10 @@ namespace sys.Dal.Service.AppManage
             }
             messageReadEntity.IsRead = true;
             if (operatType == OperatType.AppRead) { messageReadEntity.AppRead = true; }
-            if (operatType == OperatType.IsLike) { messageReadEntity.IsLike = true; }
-            if (operatType == OperatType.PCRead) { messageReadEntity.PCRead = true; } 
+            if (operatType == OperatType.IsLike) { messageReadEntity.IsLike = true; messageReadEntity.LikeDate = DateTime.Now; messageReadEntity.AppRead = true; }
+            if (operatType == OperatType.PCRead) { messageReadEntity.PCRead = true; }
+            if (operatType == OperatType.Score) { messageReadEntity.Score = int.Parse(key); messageReadEntity.ScoreDate= DateTime.Now; messageReadEntity.AppRead = true; }
+            if (operatType == OperatType.Submit) { messageReadEntity.SubmitMark = true; messageReadEntity.SubmitDate = DateTime.Now; messageReadEntity.AppRead = true; } 
 
             SaveForm(messageReadEntity.Uniqueid, messageReadEntity);
         }

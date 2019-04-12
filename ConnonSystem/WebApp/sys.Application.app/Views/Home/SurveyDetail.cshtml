@@ -1,0 +1,247 @@
+﻿
+@{
+    Layout = null;
+
+    sys.Application.app.Models.SurveyBase entity = ViewBag.SurveyBase;
+    string StateText = "";
+    /// 只是用于查询返回状态标识；0未读，1已读未完成，2已读已完成
+    if (Request["State"] == null)
+    {
+        StateText = "已读未完成";
+    }
+    if (Request["State"] == "1")
+    {
+        StateText = "已读未完成";
+    }
+    else if (Request["State"] == "2")
+    {
+        StateText = "已读已完成";
+    }
+    else
+    {
+        StateText = "已读未完成";
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="~/Content/css/mui.min.css" />
+    <link rel="stylesheet" href="~/Content/css/DbXx.css" />
+    <script src="~/Content/js/mui.min.js"></script>
+
+
+    <script src="~/Content/js/jquery-2.1.0.js"></script>  
+    <link href="~/Content/css/layer.css" rel="stylesheet" />
+    <script src="~/Content/js/plugins/layer/layer.js"></script>
+    <script src="~/Content/js/common/sys.common.js"></script> 
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="window.hsitory.back()">返回</a>
+        <h1 class="mui-title">问卷调查</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+
+    </header>
+    <form ></form>
+    <div class="Wjdc">
+        <div class="Wjdc_Tc" id="show">
+            <div class="close" id="close">X</div>
+            <div class="Tc_txt">
+                <img src="images/cg.png">
+                <span>提交成功</span><br />
+                <span>感谢您对本次问卷调查的支持与配合</span>
+            </div>
+        </div>
+        <div class="Wjdc_dt">
+            <input id="SurveyId" name="SurveyId" type="hidden" value="@entity.Id" />
+            <div class="Wjdz_Qk">
+                <div class="Wjdz_fn">
+                    <div class="Wjdz_fn_left">
+                        <span style="color:@entity.TitleColor">@entity.Title</span><br />
+                        <span>发起时间：@entity.OperateSDate</span><br />
+                        <span>截止时间：@entity.OperateEDate</span>
+                    </div>
+
+                    <div class="Wjdz_fn_right">
+                        <div class="Wjdz_rt_read">@(ViewBag.stateText)</div>
+                        <div class="Wjdz_rt_count"><span>已参加人数</span>&nbsp;&nbsp;<label>@entity.JoinCount</label></div>
+                    </div>
+                </div>
+
+            </div>
+            @{ foreach (var item in entity.SurveyQuestionList)
+                {
+                    if (item.Category == "1")//单选
+                    {
+                        <div class="Ks_dt questionlist" data-questionId="@item.QuestionId" data-category="1">
+                            <ul>
+                                <li class="questiontitle">@(entity.SurveyQuestionList.IndexOf(item) + 1)、@item.Title（单选）</li>
+                                @{
+                                    foreach (var option in item.SurveyOptionsList)
+                                    {
+                                        <li class="optionlist" data-optionid="@option.OptionId" data-questionid="@option.QuestionId">
+                                            <input  data-optionid="@option.OptionId" data-questionid="@option.QuestionId" type="checkbox" class="Checkbox" name="Option_@(entity.SurveyQuestionList.IndexOf(item) + 1)">
+                                            <label for="check1"></label><span>@option.Content</span>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    }
+                    else if (item.Category == "2")//多选
+                    {
+                        <div class="Ks_dt questionlist" data-questionId="@item.QuestionId" data-category="2">
+                            <ul>
+                                <li class="questiontitle">@(entity.SurveyQuestionList.IndexOf(item) + 1)、@item.Title（多选）</li>
+                                @{
+                                    foreach (var option in item.SurveyOptionsList)
+                                    {
+                                        <li class="optionlist" data-optionid="@option.OptionId" data-questionid="@option.QuestionId">
+                                            <input  data-optionid="@option.OptionId" data-questionid="@option.QuestionId" type="checkbox" class="Checkbox" name="Option_@(entity.SurveyQuestionList.IndexOf(item) + 1)_@(item.SurveyOptionsList.IndexOf(option) + 1)">
+                                            <label for="check1"></label><span>@option.Content</span>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+
+                    }
+                    else if (item.Category == "7")//描述
+                    {
+                        <div class="Wt_txt questionlist"  data-questionId="@item.QuestionId" data-category="7"> 
+                            <span class="questiontitle">@(entity.SurveyQuestionList.IndexOf(item) + 1)、@item.Title（描述）</span>
+                            <textarea id="textarea_@(entity.SurveyQuestionList.IndexOf(item) + 1)" cols="0" rows="5"   placeholder="请输入答案...."></textarea> 
+                        </div>
+
+                    } 
+
+                }
+
+            }
+
+           <div class="sub_mit" id="submit" onclick="submitSave()">提交</div> 
+        </div>
+
+    </div>
+
+</body>
+</html>
+<script>
+    
+    document.getElementById("close").onclick = function () {
+        document.getElementById("show").style.display = "none";
+    } 
+</script>
+<script>
+
+    //checkbox模拟单选框
+    $(':checkbox[type="checkbox"]').each(function () {
+        $(this).click(function () {
+            if ($(this).prop('checked')) {
+                $(':checkbox[type="checkbox"][name=' + $(this).attr("name") + ']').removeAttr('checked');
+                $(this).prop('checked', 'checked');
+            }
+        });
+    }); 
+
+    //验证
+    function Verification() {
+        var verif = false;
+        $(".questionlist").each(function (index) {
+            verif = false;
+            var category = $(this).attr("data-category");
+            if (category == 1 || category == 2) {
+                var select = $(this).find(".optionlist input:checkbox:checked");
+                if (select == undefined || select.length < 1) {
+                    var msg = $(this).find(".questiontitle").text()+"未选";
+                    forMsg(msg,3);
+                    verif = false;
+                    return false;
+                }
+            }
+            if (category == 7) {
+                var value = $(this).find("textarea").val();
+                if (value == undefined || value.trim() == "") {
+                    var msg = $(this).find(".questiontitle").text() + "未填";
+                    forMsg(msg, 3);
+                    verif = false; return false;
+                }
+            } 
+            verif = true;
+        })
+        return verif;
+    }
+    //提示
+    function forMsg(msg, time) {
+        time = time == undefined ? 2 : time;
+        layer.open({
+            content: msg
+            , time: time
+            , skin: 'msg'
+        });
+    }
+    function newGuid() {
+        var guid = "";
+        for (var i = 1; i <= 32; i++) {
+            var n = Math.floor(Math.random() * 16.0).toString(16);
+            guid += n;
+            if ((i == 8) || (i == 12) || (i == 16) || (i == 20))
+                guid += "-";
+        }
+        return guid;
+    }
+    function submitSave() {
+        var answerBase = {};
+        answerBase.SurveyId = $("#SurveyId").val();
+        var  answerDetailItems = []; 
+        if (Verification()) {
+            $(".questionlist").each(function (index) {
+                $answerBase = $(this);
+                //var questionid = $(this).attr("data-questionid");
+                var category = $(this).attr("data-category"); 
+                if (category == 1 || category == 2) {
+                    //var select = $(this).find(".optionlist input:checkbox:checked");  
+                    $(this).find(".optionlist input:checkbox:checked").each(function (index) {
+                        var answerDetail = {};
+                        answerDetail.AnswersDetailId = newGuid();
+                        answerDetail.QuestionId = $(this).attr("data-questionid");
+                        answerDetail.OptionId = $(this).attr("data-optionid");
+                        answerDetailItems.push(answerDetail)
+                    })
+
+                }
+                if (category == 7) {
+                    var value = $(this).find("textarea").val();
+                    var answerDetail = {};
+                    answerDetail.AnswersDetailId = newGuid();
+                    answerDetail.QuestionId = $(this).attr("data-questionid");
+                    answerDetail.Content = value;
+                    answerDetailItems.push(answerDetail)
+                }
+                
+            })
+            $.ajax({
+                url: "/Home/SaveForm",
+                data: { keyValue: $("#SurveyId").val(), SurveyAnswerBaseEntity: answerBase, surveyAnswerDetailListJson: JSON.stringify(answerDetailItems) },
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    forMsg(data.message);
+                    if (data.type == 1) {
+                        document.getElementById("show").style.display = "block";
+                    } else {
+                        forMsg(data.message);
+
+                    }
+                }
+            });
+
+        }
+        
+    } 
+</script>

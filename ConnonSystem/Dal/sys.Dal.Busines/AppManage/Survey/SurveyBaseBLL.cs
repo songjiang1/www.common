@@ -52,10 +52,25 @@ namespace sys.Dal.Busines.AppManage
         {
             return service.GetEntity(keyValue);
         }
+        /// <summary>
+        /// +1操作 
+        /// </summary>
+        /// <param name="keyValue"></param>
+        public void PlusOne(string keyValue, OperatType operatType)
+        {
+            try
+            {
+                service.PlusOne(keyValue, operatType);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region 验证数据
-        
+
         /// <summary>
         /// 问卷名称不能重复
         /// </summary>

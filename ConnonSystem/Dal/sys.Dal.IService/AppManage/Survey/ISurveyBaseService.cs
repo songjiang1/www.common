@@ -1,5 +1,6 @@
 ﻿
 using sys.Dal.Entity.AppManage;
+using sys.Util;
 using sys.Util.WebControl;
 using System.Collections.Generic;
 
@@ -47,6 +48,13 @@ namespace sys.Dal.IService.AppManage
         #endregion
 
         #region 提交数据
+
+        /// <summary>
+        /// +1操作
+        /// </summary>
+        /// <param name="keyValue"></param>
+        void PlusOne(string keyValue, OperatType operatType);
+
         /// <summary>
         /// 删除功能
         /// </summary>

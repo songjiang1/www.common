@@ -41,6 +41,18 @@ namespace sys.Dal.Entity.AppManage
         /// </summary>		
         public bool IsLike { get; set; }
         /// <summary>
+        /// 收藏时间
+        /// </summary>
+        public DateTime? LikeDate { get; set; }
+        /// <summary>
+        /// 评分
+        /// </summary>
+        public int? Score { get; set; }
+        /// <summary>
+        /// 评分时间
+        /// </summary>
+        public DateTime? ScoreDate { get; set; }
+        /// <summary>
         /// 分类  1：会议，2:公告
         /// </summary>		
         public string Category { get; set; }
@@ -60,7 +72,12 @@ namespace sys.Dal.Entity.AppManage
         /// 确认参会标识
         /// </summary>
         public bool AttendExpo { get; set; }
-
+        /// <summary>
+        /// 执行提交操作
+        /// </summary>
+        public bool SubmitMark { get; set; }
+        /// 执行提交操作 时间
+        public DateTime? SubmitDate { get; set; }
         
         /// <summary>
         /// 签到备注

@@ -41,6 +41,7 @@
 
     </header>
     <div class="Dbhy">
+        <input type="hidden" id="page" value="0" />
         <a name="top"></a>
         <div class="sousuo">
             <div class="Ss"><input type="text" placeholder="输入代表名字"><label><img src="images/quxiao.png"> </label></div>
@@ -53,33 +54,8 @@
                 <div class="Ya_btn_right">所属乡镇</div>
             </div>
             <div class="Ya_content">
-                <div class="Ya_content_lt">
-                    <div class="content_lt">
-                        <div class="content_lt_IMg"><img src="images/2.jpg"></div>
-                        <div class="content_lt_txt">
-                            <a href="Yajy_cn.html">
-                                <div class="lt_top"><span>议案建议标题名称0001</span></div>
-                                <div class="lt_center"><span>提建议人</span>&nbsp;&nbsp;<span>张三</span></div>
-                                <div class="lt_buttom"><span>累计浏览:</span><label>172</label>&nbsp;&nbsp;<span>点赞人数:</span><label>172</label></div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="content_lt">
-                        <div class="content_lt_IMg"><img src="images/2.jpg"></div>
-                        <div class="content_lt_txt">
-                            <div class="lt_top"><span>议案建议标题名称0001</span></div>
-                            <div class="lt_center"><span>提建议人</span>&nbsp;&nbsp;<span>张三</span></div>
-                            <div class="lt_buttom"><span>累计浏览:</span><label>172</label>&nbsp;&nbsp;<span>点赞人数:</span><label>172</label></div>
-                        </div>
-                    </div>
-                    <div class="content_lt">
-                        <div class="content_lt_IMg"><img src="images/2.jpg"></div>
-                        <div class="content_lt_txt">
-                            <div class="lt_top"><span>议案建议标题名称0001</span></div>
-                            <div class="lt_center"><span>提建议人</span>&nbsp;&nbsp;<span>张三</span></div>
-                            <div class="lt_buttom"><span>累计浏览:</span><label>172</label>&nbsp;&nbsp;<span>点赞人数:</span><label>172</label></div>
-                        </div>
-                    </div>
+                <div class="Ya_content_lt" id="Ya_content_lt">
+                   
                 </div>
                 <div class="Ya_content_ct">
 
@@ -306,8 +282,8 @@
                             </div>
                         </div>
                     </div>
-                    <script src="js/mui.min.js"></script>
-                    <script src="js/mui.indexedlist.js"></script>
+                    <script src="~/Content/js/mui.min.js"></script>
+                    <script src="~/Content/js/mui.indexedlist.js"></script>
                     <script type="text/javascript" charset="utf-8">
                         mui.init();
                         mui.ready(function () {
@@ -324,71 +300,22 @@
 
                 </div>
                 <!--<div class="Tjyr_Img"><img src="images/Txs.png"></div>
-                                <div class="Tjyr_phone">张华海<label>人大代表</label></div>-->
+                            <div class="Tjyr_phone">张华海<label>人大代表</label></div>-->
                 <div class="Ya_content_rt">
 
-                    <div class="Db_Addrees_left">
-                        <ul>
-                            <li>五常市人大</li>
-                            <li>五常镇</li>
-                            <li>牛家满族镇</li>
-                            <li>拉林满族镇</li>
-                            <li>兴隆乡</li>
-                            <li>营城子满族乡</li>
-                            <li>八家子乡</li>
-                            <li>背荫河镇</li>
-                            <li>民乐朝鲜族乡</li>
-                            <li>安家镇</li>
-                            <li>常堡乡</li>
-                            <li>二河乡</li>
-                            <li>卫国乡</li>
-                            <li>志广乡</li>
-                            <li>名意乡</li>
-                            <li>杜家镇</li>
-                            <li>常中乡</li>
-                            <li>新盛乡</li>
+                    <div class="Db_Addrees_left" id="Db_Addrees_left">
+                        <ul class="Db_Addrees_leftul">
+                             <li>x</li>
                         </ul>
                     </div>
                     <div class="Db_Address_right">
 
                         <div class="Address_right_SQ">
-                            <ul>
-                                <li>五常镇</li>
-                                <li>崇仁-社区</li>
-                                <li>远景村</li>
+                            <ul class="Address_right_SQUL">
+                                <li>x</li> 
                             </ul>
                         </div>
-                        <div class="Address_right_SQ">
-                            <ul>
-                                <li>五常镇2</li>
-                                <li>崇仁-社区2</li>
-                                <li>远景村2</li>
-                            </ul>
-                        </div>
-                        <div class="Address_right_SQ">
-                            <ul>
-                                <li>五常镇3</li>
-                                <li>崇仁-社区3</li>
-                                <li>远景村3</li>
-                            </ul>
-                        </div>
-                        <div class="Address_right_SQ">
-                            <ul>
-                                <li>五常镇4</li>
-                                <li>崇仁-社区4</li>
-                                <li>远景村4</li>
-                            </ul>
-                        </div>
-                        <div class="Address_right_SQ">
-                            <ul>
-                                <li>五常镇5</li>
-                                <li>崇仁-社区5</li>
-                                <li>远景村5</li>
-                                <li>远景村5</li>
-                                <li>远景村5</li>
-                                <li>远景村5</li>
-                            </ul>
-                        </div>
+                        
                     </div>
 
                 </div>
@@ -422,4 +349,221 @@
 
 
 </script>
+
+
 </html>
+<link href="~/Content/css/dropload.css" rel="stylesheet" /> 
+<script src="~/Content/js/swiper.min.js"></script>
+<script src="~/Content/js/dropload.min.js"></script>
+<script src="~/Content/js/together.js"></script>
+<script type="text/javascript">
+    var preview = "";
+    $(function () {
+        GetBindList();
+        GetOrganizeListJson()
+    });
+</script>
+<script type="text/javascript">
+
+    var pageIndex;
+    //下拉手势
+    var dropload = $('#info_contentul').dropload({
+        domUp: {
+            domClass: 'dropload-up',
+            domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+            domUpdate: '<div class="dropload-update">↑释放更新</div>',
+            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+        },
+        domDown: {
+            domClass: 'dropload-down',
+            domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+            domUpdate: '<div class="dropload-update">↓释放加载</div>',
+            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+            domNoData: '<div class="dropload-noData">暂无数据</div>'
+        },
+        loadDownFn: function (me) {
+            GetBindList();
+        }
+    });
+    function GetBindList() {
+        pageIndex = parseInt($("#page").val()) + 1;
+        $("#page").val(pageIndex);
+        var queryJson = {
+            ParentId: "",
+            TVShowMenuId: "YiAn",
+            OrganizeId: "",
+            Title: "",
+            UserId: "",
+        }
+        $.ajax({
+            async: false,
+            type: "post",
+            url: "/Home/GetCollectionPageList",
+            data: {
+                pageIndex: pageIndex,
+                sidx:"ReleaseTime",
+                sord: "DESC",
+                queryJson: JSON.stringify(queryJson),
+            },
+            success: function (d) {
+
+                var obj = eval("(" + d + ")");
+                var data = ""; 
+                var newhtml5 = '';
+                if (obj.type == 1) {
+                    data = eval("(" + obj.message + ")");
+                    if (data != null && data.length>0) {
+                        newhtml5 = addHtmldata(data);
+                        $('#Ya_content_lt').append(newhtml5);
+                    }
+                } 
+            },
+            error: function (xhr, type) { 
+                me.resetload();
+            }
+        });
+    }
+    function addHtmldata(data) {
+        var html = '';
+        $.each(data, function (i, item) {
+            html += ' <div class="content_lt">';
+            if (item.headicon == null || item.headicon == "") {
+                html += '<div class="content_lt_IMg"><img src="@sys.Util.Config.GetValue("ImgDefault")"></div>';
+            } else {
+                html += '<div class="content_lt_IMg"><img src="@sys.Util.Config.GetValue("ImgHost")' + item.Cover + '"></div>';
+            }
+            html += '        <div class="content_lt_txt"> <a href="/home/ProposalDetail?Id=' + item.Id+'">';
+            html += '     <div class="lt_top"><span style="' + item.TitleColor + ';">' + item.Title + '</span></div> ';
+            html += '<div class="lt_center"><span>提建议人</span>&nbsp;&nbsp;<span>' + item.CreateUserName + '</span></div>';
+            html += ('<div class="lt_buttom"><span>累计浏览:</span><label>' + item.PV + '</label>&nbsp;&nbsp;<span>点赞人数:</span><label>' + (item.LikeCount == null ? 0 : LikeCount) +'</label></div>');
+            html += '</a>  </div>  </div>';
+        });
+        return html;
+    }
+    //Html编码获取Html转义实体
+    function htmlEncode() {
+        var htmlstr = editor1.html();
+        $("#Content").val($('<div/>').text(htmlstr).html());
+    }
+
+    //Html解码获取Html实体
+    function htmlDecode(value) {
+        return $('<div/>').html(value).text();
+    }
+</script>
+
+<script>
+    //按乡镇
+    function GetOrganizeListJson() { 
+        $.ajax({
+            //async: false,
+            type: "post",
+            url: "/Organize/GetListJson",
+            data: {
+                OrganizeId: "",
+                ParentId: "0",
+            },
+            success: function (d) {
+                var obj = eval("(" + d + ")");
+                var data = "";
+                var html = '';
+                if (obj.type == 1) {
+                    data = eval("(" + obj.message + ")");
+                    console.log(data);
+                    if (data != null && data != "" && data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            html += ("<li onclick=\"GetOrganize(\'" + data[i].OrganizeId + "\',this)\">" + data[i].FullName + "</li>");
+                        }
+
+                    }
+                }
+                $(".Db_Addrees_leftul").html(html);
+                setTimeout(function () {
+                    $(".Db_Addrees_leftul li").eq(0).click();
+                }, 100)
+            },
+            error: function (xhr, type) {
+            }
+        });
+    }
+
+    function GetOrganize(ParentId, thiz) {
+        $(thiz).addClass("Address_bj").siblings().removeClass("Address_bj");
+        var PId = ParentId;
+        $.ajax({
+            //async: false,
+            type: "post",
+            url: "/Organize/GetTreeListJson",
+            data: {
+                ParentId: ParentId,
+            },
+            success: function (d, ParentId) {
+                var obj = eval("(" + d + ")");
+                var data = "";
+                var html = '';
+                if (obj.type == 1) {
+                    data = eval("(" + obj.message + ")");
+                    if (data != null && data != "" && data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            var ifo = eval("(" + data[i].entityJson + ")");
+                            if (!data[i].hasChildren) {
+                                html += ("<li onclick=\"GeRspresentAddressList(\'" + data[i].id + "\')\">" + ifo.FullName + "</li>");
+                            }
+                            else if (data[i].hasChildren && ifo.ParentId == PId) {
+                                html += ("<li onclick=\"GetOrganize(\'" + data[i].id + "\',this)\">" + ifo.FullName + "</li>");
+                            } else {
+                                html += ("<li onclick=\"GeRspresentAddressList(\'" + data[i].id + "\')\">" + ifo.FullName + "</li>");
+                            }
+
+                        }
+
+                    }
+
+                }
+                $(".Address_right_SQUL").html(html);
+            },
+            error: function (xhr, type) {
+            }
+        });
+    }
+
+    function GeRspresentAddressList(OrganizeId, thiz) {
+        $(".Db_xq").hide().siblings().show();
+        OrganizeId = OrganizeId == undefined ? "" : OrganizeId;
+        $.ajax({
+            //async: false,
+            type: "get",
+            url: "/Home/GeRspresentAddressList",
+            data: {
+                ParentId: "",
+                TVShowMenuId: "YiAn",
+                OrganizeId: OrganizeId,
+                Title: "",
+                UserId: "",
+            },
+            success: function (d) {
+                var obj = eval("(" + d + ")");
+                var data = "";
+                var html = '';
+                if (obj.type == 1) {
+                    data = eval("(" + obj.message + ")");
+                    if (data != "" && data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            html += ('<div class="Db_Img_k">');
+                            html += ('<img src="' + data[i].headicon + '"/>');
+                            html += ("<span><a href=\"/Home/ProposalDetail?Id=" + data[i].id + "\">" + data[i].title + "</a></span>");
+                            html += (' </div>');
+                        }
+                    }
+                    else {
+                        html += ('暂无数据');
+                    }
+                }
+                $(".Db_Img").html(html);
+            },
+            error: function (xhr, type) {
+            }
+        });
+    }
+
+</script>

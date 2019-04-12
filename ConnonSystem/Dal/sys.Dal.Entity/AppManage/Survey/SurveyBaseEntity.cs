@@ -51,7 +51,18 @@ namespace sys.Dal.Entity.AppManage
         /// 参与人员数量
         /// </summary>		
         public int? JoinCount { get; set; }
-        
+        /// <summary>
+        /// 浏览量数量
+        /// </summary>		
+        public int? PV { get; set; }
+        /// <summary>
+        /// 标志 是否截止
+        /// </summary>
+        public int? Flag { get; set; }
+        /// <summary>
+        /// 只是用于查询返回状态标识；0未读，1已读未完成，2已读已完成
+        /// </summary>
+        public int? State { get; set; }
         /// <summary>
         /// 排序码
         /// </summary>		

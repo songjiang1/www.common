@@ -818,6 +818,7 @@
     <Compile Include="App_Start\SwaggerNet.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DataItemController.cs" />
+    <Compile Include="Controllers\TVCollectionController.cs" />
     <Compile Include="Controllers\OrganizeController.cs" />
     <Compile Include="Controllers\PersonCenterController.cs" />
     <Compile Include="Controllers\RegistController.cs" />
@@ -831,6 +832,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SurveyBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -868,6 +870,9 @@
     <Content Include="Views\Home\RepresentDetail.cshtml" />
     <Content Include="Views\Home\Proposal.cshtml" />
     <Content Include="Views\Home\ProposalDetail.cshtml" />
+    <Content Include="Views\Home\Survey.cshtml" />
+    <Content Include="Views\Home\SurveyDetail.cshtml" />
+    <Content Include="Views\Home\LookSurvey.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -883,7 +888,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Views\DataItem\" />
   </ItemGroup>
   <ItemGroup>

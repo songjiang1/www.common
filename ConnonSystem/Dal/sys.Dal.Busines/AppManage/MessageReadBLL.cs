@@ -105,11 +105,11 @@ namespace sys.Dal.Busines.AppManage
         /// <param name="oid">关联主键</param>
         /// <param name="category">类型</param>
         /// <param name="operatType"></param>
-        public void SetForm(string uid,string oid,string category, OperatType operatType)
+        public void SetForm(string uid,string oid,string category, OperatType operatType, string key = "0")
         {
             try
             {
-                service.SetForm(uid, oid, category, operatType);
+                service.SetForm(uid, oid, category, operatType,key);
             }
             catch (Exception)
             {

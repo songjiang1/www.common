@@ -14,6 +14,8 @@ using System.Text;
 using System.IO;
 using sys.Util.WeChatSDK;
 using sys.Dal.Entity.TVShowManage;
+using sys.Application.app.Models;
+using sys.Dal.Entity.AppManage;
 
 namespace sys.Application.app.Controllers
 {
@@ -24,8 +26,16 @@ namespace sys.Application.app.Controllers
         private MessageReadBLL messageReadBLL = new MessageReadBLL();
         private CollectionBLL collectionBll = new CollectionBLL();
         private MeetingBLL meetingBLL = new MeetingBLL();
-        private string noticeCategory = "2";//分类：会议是1，公告是2
-        private string meetingCategory = "1";//分类：会议是1，公告是2
+        private SurveyBaseBLL surveyBaseBLL = new SurveyBaseBLL();
+        private SurveyQuestionBLL surveyQuestionBLL = new SurveyQuestionBLL();
+        private SurveyOptionsBLL surveyOptionsBLL = new SurveyOptionsBLL();
+        private SurveyAnswerBaseBLL surveyAnswerBaseBLL = new SurveyAnswerBaseBLL();
+        private SurveyAnswerDetailBLL surveyAnswerDetailBLL = new SurveyAnswerDetailBLL();
+
+
+        private string meetingCategory = "1";//分类：会议是1，公告是2,3是问卷调查
+        private string noticeCategory = "2";//分类：会议是1，公告是2,3是问卷调查
+        private string surveyCategory = "3";//分类：会议是1，公告是2,3是问卷调查
         //[NeedOAuth]
         // GET: Home
         #region MyRegion 视图
@@ -139,7 +149,172 @@ namespace sys.Application.app.Controllers
             ViewBag.CollectionEntity = collectionEntity;
             return View();
         }
+
+
         #endregion
+        #region MyRegion 问卷调查
+        public ActionResult Survey()
+        {
+            return View();
+        }
+        public void GetSurveyInfo(string Id) {
+            //浏览量+1
+            surveyBaseBLL.PlusOne(Id, OperatType.PV);
+            string stateText = "";
+            var readrows = messageReadBLL.GetList(OperatorProvider.Provider.Current().UserId).Where(t => t.Category == surveyCategory && t.MessageId.Equals(Id)).FirstOrDefault(); ;
+            if (readrows == null)
+            {  stateText = "未读";  }
+            else if (readrows.AppRead && readrows.SubmitMark)
+            {  stateText = "已读已完成";   }
+            else if (readrows.AppRead && !readrows.SubmitMark)
+            { stateText = "已读未完成";  }
+            else
+            {   stateText = "已读未完成";   }
+            SurveyBaseEntity surveyBaseEntity = new SurveyBaseEntity();
+            List<SurveyQuestionEntity> surveyQuestionEntity = new List<SurveyQuestionEntity>();
+            List<SurveyOptionsEntity> surveyOptionsEntity = new List<SurveyOptionsEntity>();
+
+            //答案选项
+            SurveyAnswerBaseEntity surveyAnswerBaseEntity = new SurveyAnswerBaseEntity();
+            List<SurveyAnswerDetailEntity> surveyAnswerDetailEntity = new List<SurveyAnswerDetailEntity>();
+
+            SurveyBase surveyInfo = new SurveyBase();
+            surveyBaseEntity = surveyBaseBLL.GetEntity(Id);
+            surveyQuestionEntity = surveyQuestionBLL.GetList(Id);//.OrderBy(t => t.SortCode).ToList();
+            surveyOptionsEntity = surveyOptionsBLL.GetList(Id);
+            //答案选项
+            surveyAnswerBaseEntity = surveyAnswerBaseBLL.GetList().Where(t => t.UserId == OperatorProvider.Provider.Current().UserId && t.SurveyId == Id).FirstOrDefault();
+            if (surveyAnswerBaseEntity != null && !string.IsNullOrWhiteSpace(surveyAnswerBaseEntity.Id))
+            {
+                surveyAnswerDetailEntity = surveyAnswerDetailBLL.GetList(surveyAnswerBaseEntity.Id);
+            }
+
+            //赋值
+            surveyInfo.Id = surveyBaseEntity.Id;
+            surveyInfo.Category = surveyBaseEntity.Category;
+            surveyInfo.CreateDate = surveyBaseEntity.CreateDate;
+
+            surveyInfo.Title = surveyBaseEntity.Title;
+            surveyInfo.TitleColor = surveyBaseEntity.TitleColor;
+            surveyInfo.OperateSDate = surveyBaseEntity.OperateSDate;
+            surveyInfo.OperateEDate = surveyBaseEntity.OperateEDate;
+            surveyInfo.JoinCount = surveyBaseEntity.JoinCount;
+            surveyInfo.PV = surveyBaseEntity.PV;
+            surveyInfo.SurveyQuestionList = new List<SurveyQuestion>();
+            for (int i = 0; i < surveyQuestionEntity.Count; i++)
+            {
+                SurveyQuestion surveyQuestion = new SurveyQuestion();
+                surveyQuestion.QuestionId = surveyQuestionEntity[i].QuestionId;
+                surveyQuestion.Category = surveyQuestionEntity[i].Category;
+                surveyQuestion.Title = surveyQuestionEntity[i].Title;
+                surveyQuestion.CreateDate = surveyQuestionEntity[i].CreateDate;
+                surveyQuestion.Score = surveyQuestionEntity[i].Score;
+                surveyQuestion.SortCode = surveyQuestionEntity[i].SortCode;
+                surveyQuestion.SurveyId = surveyQuestionEntity[i].SurveyId;
+                if (surveyQuestion.Category == "7")
+                {
+                    surveyQuestion.Content = surveyAnswerDetailEntity.Where(t => t.QuestionId == surveyQuestion.QuestionId).FirstOrDefault().Content;
+                }
+                surveyQuestion.SurveyOptionsList = new List<SurveyOptions>();
+                var surveyOptionsList = surveyOptionsEntity.Where(t => t.QuestionId == surveyQuestionEntity[i].QuestionId).ToList();
+                if (surveyOptionsList.Count > 0)
+                {
+                    for (int k = 0; k < surveyOptionsList.Count; k++)
+                    {
+                        SurveyOptions surveyOptions = new SurveyOptions();
+                        surveyOptions.OptionId = surveyOptionsList[k].OptionId;
+                        surveyOptions.SurveyId = surveyOptionsList[k].SurveyId;
+                        surveyOptions.QuestionId = surveyOptionsList[k].QuestionId;
+                        surveyOptions.SortCode = surveyOptionsList[k].SortCode;
+                        surveyOptions.Content = surveyOptionsList[k].Content;
+                        surveyOptions.CreateDate = surveyOptionsList[k].CreateDate;
+                        surveyOptions.Category = surveyOptionsList[k].Category;
+                        surveyOptions.IsAnswer = false;
+                        if (surveyQuestion.Category == "1" || surveyQuestion.Category == "2")
+                        {
+                            surveyOptions.IsAnswer = surveyAnswerDetailEntity.Where(t => t.OptionId == surveyOptions.OptionId).ToList().Count > 0 ? true : false; ;
+                        }
+                        surveyQuestion.SurveyOptionsList.Add(surveyOptions);
+                    }
+                }
+                surveyInfo.SurveyQuestionList.Add(surveyQuestion);
+            }
+            ViewBag.stateText = stateText;
+            ViewBag.SurveyBase = surveyInfo;
+
+        }
+        public ActionResult SurveyDetail(string Id)
+        {
+           
+            messageReadBLL.SetForm(OperatorProvider.Provider.Current().UserId, Id, surveyCategory, OperatType.AppRead);
+            GetSurveyInfo(Id);
+
+            //SurveyBaseEntity surveyBaseEntity = new SurveyBaseEntity();
+            //List<SurveyQuestionEntity> surveyQuestionEntity = new List<SurveyQuestionEntity>();
+            //List<SurveyOptionsEntity> surveyOptionsEntity = new List<SurveyOptionsEntity>(); 
+            //SurveyBase surveyInfo = new SurveyBase();
+            //surveyBaseEntity = surveyBaseBLL.GetEntity(Id);
+            //surveyQuestionEntity = surveyQuestionBLL.GetList(Id);//.OrderBy(t => t.SortCode).ToList();
+            //surveyOptionsEntity = surveyOptionsBLL.GetList(Id);
+            ////赋值
+            //surveyInfo.Id = surveyBaseEntity.Id;
+            //surveyInfo.Category = surveyBaseEntity.Category;
+            //surveyInfo.CreateDate = surveyBaseEntity.CreateDate;
+
+            //surveyInfo.Title = surveyBaseEntity.Title;
+            //surveyInfo.TitleColor = surveyBaseEntity.TitleColor;
+            //surveyInfo.OperateSDate = surveyBaseEntity.OperateSDate;
+            //surveyInfo.OperateEDate = surveyBaseEntity.OperateEDate;
+            //surveyInfo.JoinCount = surveyBaseEntity.JoinCount;
+            //surveyInfo.PV = surveyBaseEntity.PV;
+            //surveyInfo.SurveyQuestionList = new List<SurveyQuestion>();
+            //for (int i = 0; i < surveyQuestionEntity.Count; i++)
+            //{
+
+
+            //    SurveyQuestion surveyQuestion = new SurveyQuestion();
+            //    surveyQuestion.QuestionId = surveyQuestionEntity[i].QuestionId;
+            //    surveyQuestion.Category = surveyQuestionEntity[i].Category;
+            //    surveyQuestion.Title = surveyQuestionEntity[i].Title;
+            //    surveyQuestion.CreateDate = surveyQuestionEntity[i].CreateDate;
+            //    surveyQuestion.Score = surveyQuestionEntity[i].Score;
+            //    surveyQuestion.SortCode = surveyQuestionEntity[i].SortCode;
+            //    surveyQuestion.SurveyId = surveyQuestionEntity[i].SurveyId;
+            //    surveyQuestion.SurveyOptionsList = new List<SurveyOptions>();
+            //    var surveyOptionsList = surveyOptionsEntity.Where(t => t.QuestionId == surveyQuestionEntity[i].QuestionId).ToList();
+            //    if (surveyOptionsList.Count > 0)
+            //    {
+            //        for (int k = 0; k < surveyOptionsList.Count; k++)
+            //        {
+            //            SurveyOptions surveyOptions = new SurveyOptions();
+            //            surveyOptions.OptionId = surveyOptionsList[k].OptionId;
+            //            surveyOptions.SurveyId = surveyOptionsList[k].SurveyId;
+            //            surveyOptions.QuestionId = surveyOptionsList[k].QuestionId;
+            //            surveyOptions.SortCode = surveyOptionsList[k].SortCode;
+            //            surveyOptions.Content = surveyOptionsList[k].Content;
+            //            surveyOptions.CreateDate = surveyOptionsList[k].CreateDate;
+            //            surveyOptions.Category = surveyOptionsList[k].Category;
+            //            surveyQuestion.SurveyOptionsList.Add(surveyOptions);
+            //        }
+            //    } 
+            //    surveyInfo.SurveyQuestionList.Add(surveyQuestion);
+            //}
+            //ViewBag.SurveyBase = surveyInfo;
+            return View();
+        }
+
+        public ActionResult LookSurvey(string Id)
+        {
+            //浏览量+1
+            //surveyBaseBLL.PlusOne(Id, OperatType.PV); 
+
+
+            GetSurveyInfo(Id);
+            return View();
+        }
+
+        #endregion
+
 
         #endregion
 
@@ -221,7 +396,7 @@ namespace sys.Application.app.Controllers
                 if (data[i].ConveneSTime > nowTime) { meetingState = 0; }
                 if (data[i].ConveneSTime <= nowTime && data[i].ConveneETime > nowTime) { meetingState = 2; }
                 if (data[i].ConveneETime <= nowTime) { meetingState = 1; }
-                if (readrows.Where(t => t.MessageId.Contains(data[i].MeetingId)).ToList().Count > 0)
+                if (readrows.Where(t => t.MessageId.Equals(data[i].MeetingId)).ToList().Count > 0)
                 {
                     isread = true;
                 }
@@ -297,6 +472,73 @@ namespace sys.Application.app.Controllers
             var dtrows = collectionBll.GetTable(collectionEntity , OrderBy); 
             return Success(dtrows.ToJson());
         }
+
+        /// <summary>
+        /// 获取TV数据 下拉数据
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="sidx">排序字段</param>
+        /// <param name="sord">升降序 DESC,CREATEDate Desc</param>
+        /// <param name="queryJson"></param>
+        /// <returns></returns>
+        public ActionResult GetCollectionPageList(string pageIndex, string sidx, string sord, string queryJson)
+        {
+            Pagination pagination = new Pagination();
+            pagination.page = string.IsNullOrEmpty(pageIndex) ? 1 : Convert.ToInt32(pageIndex);
+            pagination.rows = 10;
+            pagination.sidx = sidx;
+            pagination.sord = sord;
+            var data = collectionBll.GetPageList(pagination, queryJson).ToList(); 
+            return Success(data.ToJson());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="sidx"></param>
+        /// <param name="sord"></param>
+        /// <param name="queryJson"></param>
+        /// <returns></returns>
+        public ActionResult GetSurveyPageList(string pageIndex, string sidx, string sord, string queryJson)
+        {
+            Pagination pagination = new Pagination();
+            pagination.page = string.IsNullOrEmpty(pageIndex) ? 1 : Convert.ToInt32(pageIndex);
+            pagination.rows = 10;
+            pagination.sidx = sidx;
+            pagination.sord = sord;
+            var data = surveyBaseBLL.GetPageList(pagination, queryJson).ToList();
+            DateTime nowTime = DateTime.Now;
+            var isred = messageReadBLL.GetList(OperatorProvider.Provider.Current().UserId);
+            var readrows = isred.Where(t => t.Category == surveyCategory);
+            foreach (var item in data)
+            {
+                int state = 0; //0未读，1已读未完成，2已读已完成
+                if (item.OperateSDate > nowTime) { item.Flag = 0; }
+                if (item.OperateSDate <= nowTime && item.OperateEDate > nowTime) { item.Flag = 2; }
+                if (item.OperateEDate <= nowTime) { item.Flag = 1; }
+                var readrows_s = readrows.Where(t => t.MessageId.Equals(item.Id)).FirstOrDefault();
+                if (readrows_s==null)
+                {
+                    state = 0;
+                }
+               else if (readrows_s.AppRead && readrows_s.SubmitMark)
+                {
+                    state = 2;
+                }
+                else if(readrows_s.AppRead && !readrows_s.SubmitMark)
+                {
+                    state = 1;
+                }
+                else
+                {
+                    state = 0;
+                }
+                item.State = state;
+            }
+            return Success(data.ToJson());
+        }
+
 
         #endregion
 
@@ -395,11 +637,19 @@ namespace sys.Application.app.Controllers
 
 
         }
+        public ActionResult SaveForm(string keyValue, SurveyAnswerBaseEntity surveyAnswerBaseEntity, string surveyAnswerDetailListJson)
+        {
+            surveyBaseBLL.PlusOne(keyValue, OperatType.JoinCount);
+            string key= surveyAnswerBaseBLL.SaveForm("", surveyAnswerBaseEntity, surveyAnswerDetailListJson); 
+            messageReadBLL.SetForm(OperatorProvider.Provider.Current().UserId, keyValue, surveyCategory, OperatType.Submit);
+            return Success("提交成功");
+        }
 
+        //提交问卷
         #endregion
 
 
-        
+
 
     }
     #region MyRegion 返回类公共实体

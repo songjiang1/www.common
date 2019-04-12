@@ -66,7 +66,7 @@ namespace sys.Dal.IService.AppManage
         /// <param name="oid">关联主键</param>
         /// <param name="category">类型</param>
         /// <param name="operatType"></param>
-       void SetForm(string uid, string oid, string category, OperatType operatType);
+       void SetForm(string uid, string oid, string category, OperatType operatType, string key = "0");
         /// <summary>
         /// 签到
         /// </summary>

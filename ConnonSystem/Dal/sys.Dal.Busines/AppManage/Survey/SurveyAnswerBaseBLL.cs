@@ -69,14 +69,14 @@ namespace sys.Dal.Busines.AppManage
         /// <param name="surveyAnswerBaseEntity">功能实体</param>
         /// <param name="surveyAnswerDetailListJson">答案列表</param> 
         /// <returns></returns>
-        public void SaveForm(string keyValue, SurveyAnswerBaseEntity surveyAnswerBaseEntity, string surveyAnswerDetailListJson)
+        public string SaveForm(string keyValue, SurveyAnswerBaseEntity surveyAnswerBaseEntity, string surveyAnswerDetailListJson)
         {
             try
             {
                 var surveyAnswerDetailList = surveyAnswerDetailListJson.ToList<SurveyAnswerDetailEntity>(); 
-                service.SaveForm(keyValue, surveyAnswerBaseEntity, surveyAnswerDetailList);
+                return service.SaveForm(keyValue, surveyAnswerBaseEntity, surveyAnswerDetailList);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
