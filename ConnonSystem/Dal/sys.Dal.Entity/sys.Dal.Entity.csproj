@@ -45,6 +45,11 @@
     <Compile Include="AppManage\MessageReadEntity.cs" />
     <Compile Include="AppManage\MeetingEntity.cs" />
     <Compile Include="AppManage\NoticeEntity.cs" />
+    <Compile Include="AppManage\Survey\SurveyAnswerBaseEntity.cs" />
+    <Compile Include="AppManage\Survey\SurveyAnswerDetailEntity.cs" />
+    <Compile Include="AppManage\Survey\SurveyOptionsEntity.cs" />
+    <Compile Include="AppManage\Survey\SurveyQuestionEntity.cs" />
+    <Compile Include="AppManage\Survey\SurveyBaseEntity.cs" />
     <Compile Include="AuthorizeManage\AuthorizeDataEntity.cs" />
     <Compile Include="AuthorizeManage\AuthorizeEntity.cs" />
     <Compile Include="AuthorizeManage\FilterIPEntity.cs" />

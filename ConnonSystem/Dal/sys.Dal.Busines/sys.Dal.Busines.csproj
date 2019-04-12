@@ -45,6 +45,11 @@
     <Compile Include="AppManage\MessageReadBLL.cs" />
     <Compile Include="AppManage\MeetingBLL.cs" />
     <Compile Include="AppManage\NoticeBLL.cs" />
+    <Compile Include="AppManage\Survey\SurveyAnswerDetailBLL.cs" />
+    <Compile Include="AppManage\Survey\SurveyOptionsBLL.cs" />
+    <Compile Include="AppManage\Survey\SurveyAnswerBaseBLL.cs" />
+    <Compile Include="AppManage\Survey\SurveyBaseBLL.cs" />
+    <Compile Include="AppManage\Survey\SurveyQuestionBLL.cs" />
     <Compile Include="AuthorizeManage\AuthorizeBLL.cs" />
     <Compile Include="AuthorizeManage\FilterIPBLL.cs" />
     <Compile Include="AuthorizeManage\FilterTimeBLL.cs" />

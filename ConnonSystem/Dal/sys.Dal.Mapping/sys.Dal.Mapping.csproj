@@ -51,6 +51,11 @@
     <Compile Include="AppManage\MessageReadMap.cs" />
     <Compile Include="AppManage\MeetingMap.cs" />
     <Compile Include="AppManage\NoticeMap.cs" />
+    <Compile Include="AppManage\Survey\SurveyAnswerDetailMap.cs" />
+    <Compile Include="AppManage\Survey\SurveyAnswerBaseMap.cs" />
+    <Compile Include="AppManage\Survey\SurveyOptionsMap.cs" />
+    <Compile Include="AppManage\Survey\SurveyQuestionMap.cs" />
+    <Compile Include="AppManage\Survey\SurveyBaseMap.cs" />
     <Compile Include="AuthorizeManage\AuthorizeDataMap.cs" />
     <Compile Include="AuthorizeManage\AuthorizeMap.cs" />
     <Compile Include="AuthorizeManage\FilterIPMap.cs" />

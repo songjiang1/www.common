@@ -44,6 +44,11 @@
     <Compile Include="AppManage\IMessageReadService.cs" />
     <Compile Include="AppManage\IMeetingService.cs" />
     <Compile Include="AppManage\INoticeService.cs" />
+    <Compile Include="AppManage\Survey\ISurveyOptionsService.cs" />
+    <Compile Include="AppManage\Survey\ISurveyQuestionService.cs" />
+    <Compile Include="AppManage\Survey\ISurveyAnswerDetailService.cs" />
+    <Compile Include="AppManage\Survey\ISurveyAnswerBaseService.cs" />
+    <Compile Include="AppManage\Survey\ISurveyBaseService.cs" />
     <Compile Include="AuthorizeManage\IAuthorizeService.cs" />
     <Compile Include="AuthorizeManage\IAuthorizeService.T.cs" />
     <Compile Include="AuthorizeManage\IFilterIPService.cs" />
