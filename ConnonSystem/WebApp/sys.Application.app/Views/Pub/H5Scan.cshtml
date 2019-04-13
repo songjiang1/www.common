@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>扫描二维码</title>
+    <link rel="stylesheet" href="~/Content/h5scan/css/styles.css">
+    <link rel="stylesheet" href="~/Content/h5scan/css/example.css"> 
+</head>
+<body>
+    <div class="wrapper">
+        <section>
+            <section id="container" class="container">
+                <h3>请注意，需要授权摄像头</h3>
+                <div class="controls">
+                    <button type="button" class="icon-barcode button scan">开始扫描</button>
+
+                </div>
+                <div class="overlay overlay--inline">
+                    <div class="overlay__content">
+                        <div class="overlay__close">X</div>
+                        <ul class="results"></ul>
+                        <video id="v"></video>
+                        <canvas id='qr-canvas'></canvas>
+                    </div>
+                </div>
+            </section>
+            <ul class="results"></ul>
+        </section>
+    </div>
+
+    <!--<script src="https://cdn.bootcss.com/quagga/1.0.0-beta.2/quagga.min.js"></script>--> 
+
+    <script src="~/Content/h5scan/js/plugs/quaggaJS/quagga.js"></script>
+    <script src="~/Content/h5scan/js/plugs/qrcode/llqrcode.js"></script>
+    <script src="~/Content/h5scan/js/main.js"></script>
+
+</body>
+</html>

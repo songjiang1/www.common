@@ -57,7 +57,7 @@ namespace sys.Dal.Entity.TVShowManage
         /// <summary>
         /// 生日
         /// </summary>		
-        public DateTime? Birthday { get; set; }
+        public string Birthday { get; set; }
         /// <summary>
         /// 手机
         /// </summary>		
@@ -154,8 +154,8 @@ namespace sys.Dal.Entity.TVShowManage
         /// <summary>
         /// 党派
         /// </summary>
-        public string Party { get; set; } 
-       
+        public string Party { get; set; }
+
         
         /// <summary>
         /// 岗位
@@ -170,6 +170,10 @@ namespace sys.Dal.Entity.TVShowManage
         /// 工作单位
         /// </summary>
         public string WorkUnit { get; set; }
+        /// <summary>
+        /// 参加工作时间
+        /// </summary>
+        public string JoinInDate { get; set; }
         /// <summary>
         /// 地址
         /// </summary>
@@ -221,7 +225,14 @@ namespace sys.Dal.Entity.TVShowManage
         /// </summary>
 
         public string RepresentName { get; set; }
-
+        /// <summary>
+        /// 代表小组
+        /// </summary> 
+        public string RepresentGroupId { get; set; }
+        /// <summary>
+        /// 代表小组
+        /// </summary> 
+        public string RepresentGroupName { get; set; }
         /// <summary>
         /// 所属类别
         /// </summary>		
@@ -234,6 +245,16 @@ namespace sys.Dal.Entity.TVShowManage
         /// 标题颜色
         /// </summary>		
         public string TitleColor { get; set; }
+        /// <summary>
+        /// 归属月份
+        /// </summary>
+         public string BelongToMonth { get; set; }
+        /// <summary>
+        /// 学历
+        /// </summary>
+        public string Education { get; set; }
+        
+
         #endregion
 
 

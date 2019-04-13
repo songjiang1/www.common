@@ -801,6 +801,13 @@
     <Content Include="Content\js\utils\sys.js" />
     <Content Include="Content\js\utils\sysEx.js" />
     <Content Include="Global.asax" />
+    <Content Include="Content\h5scan\css\example.css" />
+    <Content Include="Content\h5scan\css\styles.css" />
+    <Content Include="Content\h5scan\index.html" />
+    <Content Include="Content\h5scan\js\main.js" />
+    <Content Include="Content\h5scan\js\plugs\qrcode\llqrcode.js" />
+    <Content Include="Content\h5scan\js\plugs\quaggaJS\prism.js" />
+    <Content Include="Content\h5scan\js\plugs\quaggaJS\quagga.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -818,6 +825,7 @@
     <Compile Include="App_Start\SwaggerNet.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DataItemController.cs" />
+    <Compile Include="Controllers\PubController.cs" />
     <Compile Include="Controllers\TVCollectionController.cs" />
     <Compile Include="Controllers\OrganizeController.cs" />
     <Compile Include="Controllers\PersonCenterController.cs" />
@@ -864,7 +872,7 @@
     <Content Include="Views\Home\Meeting.cshtml" />
     <Content Include="Views\Home\MeetingDetail.cshtml" />
     <Content Include="Views\Home\SignIn.cshtml" />
-    <Content Include="Views\Home\H5Scan.cshtml" />
+    <Content Include="Views\Pub\H5Scan.cshtml" />
     <Content Include="Views\Regist\ForgetPwd.cshtml" />
     <Content Include="Views\Home\Represent.cshtml" />
     <Content Include="Views\Home\RepresentDetail.cshtml" />
@@ -873,6 +881,10 @@
     <Content Include="Views\Home\Survey.cshtml" />
     <Content Include="Views\Home\SurveyDetail.cshtml" />
     <Content Include="Views\Home\LookSurvey.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\Pub\MuiScan.cshtml" />
+    <Content Include="Views\Pub\WhtScan.cshtml" />
+    <Content Include="Views\Pub\PCScan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

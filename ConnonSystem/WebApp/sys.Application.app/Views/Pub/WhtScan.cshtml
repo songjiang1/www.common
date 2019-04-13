@@ -129,7 +129,7 @@
                 var base64Data = imgData;//.substr(22); //在前端截取22位之后的字符串作为图像数据
                 //开始异步上
                 $.post("/Home/QrCode", { "Img": base64Data }, function (result) {
-                    debugger;
+                    
                     printHtml("解析结果：" + result.data);
                     if (result.status == "success" && result.data != "") {
                         printHtml("解析结果成功！");

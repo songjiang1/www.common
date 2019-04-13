@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一维码和二维码集成</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/example.css">
+</head>
+<body>
+<div class="wrapper">
+    <section>
+        <section id="container" class="container">
+            <h3>请注意，需要安装摄像头，预览时并允许访问，否则会出错</h3>
+            <div class="controls">
+                <button type="button" class="icon-barcode button scan">开始扫描</button>
+
+            </div>
+            <div class="overlay overlay--inline">
+                <div class="overlay__content">
+                    <div class="overlay__close">X</div>
+                    <ul class="results"></ul>
+                    <video id="v" ></video>
+                    <canvas id='qr-canvas'></canvas>
+                </div>
+            </div>
+        </section>
+        <ul class="results"></ul>
+    </section>
+</div>
+
+<!--<script src="https://cdn.bootcss.com/quagga/1.0.0-beta.2/quagga.min.js"></script>-->
+<script src="js/plugs/quaggaJS/quagga.js"></script>
+<script src="js/plugs/qrcode/llqrcode.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
