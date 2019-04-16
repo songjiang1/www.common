@@ -1,0 +1,332 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="~/Content/css/mui.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/Content/css/DbXx.css?v=1.1.1" />
+    <style>
+        .List_new_txt {
+            padding: 10px;
+            height: 100px;
+            float: left;
+            width: 50%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    </style>
+    <script type="text/javascript" src="~/Content/js/jquery-2.1.0.js"></script>
+
+</head>
+<body>
+    <input type="hidden" id="page" value="0" />
+    <header class="mui-bar mui-bar-nav">
+        <a class=" mui-icon mui-icon-left-nav mui-pull-left" href="/Collection/MessageReply">返回</a>
+        <h1 class="mui-title">五常市人大网络管理平台</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
+    <div class="Inter_Com">
+        <div class="sousuo">
+            <div class="Ss"><input type="text" placeholder="输入代表名字" id="txt"><label><img src="~/Content/images/quxiao.png" id="Qk"> </label></div>
+            <a href="#">Cancel</a>
+        </div>
+        <div class="Com_con">
+            <div class="Com_con_tabs">
+                <div class="Tabs_lt">最新发布</div>
+                <div class="Tabs_rt">位置区域<div class="Close_x">X</div></div>
+            </div>
+            <div class="Com_con_List">
+                <div class="List_new">
+                    <div class="Address_Wz">当前位置：<span></span></div>
+                    <div class="List_new_menudiv">
+
+                    </div>
+                    @*<div class="List_new_menu">
+                            <div class="List_new_Img">
+                                <img src="~/Content/images/1.jpg">
+                            </div>
+                            <div class="List_new_txt">
+                                <ul>
+                                    <li><b>留言堂回音室标题</b></li>
+                                    <li>选民/代表名称</li>
+                                    <li>提出时间:2019.02.02</li>
+                                    <li><img src="~/Content/images/Yj.png"><label>175</label><img src="~/Content/images/ddz.png"><label>117</label></li>
+                                </ul>
+                            </div>
+                        </div>*@
+
+                </div>
+                <div class="List_address">
+
+                    <div class="Db_Addrees_left" style="border-right: 1px solid gray;">
+                        <ul class="Db_Addrees_leftul"></ul>
+                    </div>
+                    <div class="Db_Address_right">
+                        <div class="Address_right_SQ">
+                            <ul class="Address_right_SQUL"></ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+    document.getElementById("Qk").onclick = function () {
+        document.getElementById("txt").value = "";
+
+    }
+    $(".Address_Wz").css("display", "none");
+    $(".Com_con_List div").eq(0).show().siblings().hide();
+    $(".Com_con_tabs div:nth-child(1)").addClass("Zt").siblings().removeClass("Zt");
+    $(function () {
+        $(".Com_con_tabs div").click(function () {
+
+            var $divs = $(this).index();
+            $(this).addClass("Zt").siblings().removeClass("Zt");
+
+            if ($divs == 0) {
+                $(".Address_Wz").css("display", "none");
+                $(".Tabs_rt").removeClass("ft");
+            }
+            $(this).parent().siblings().children().eq($divs).show().siblings().hide();
+            if ($divs == 1) {
+
+                $(this).parent().parent().siblings().hide();
+                $(this).siblings().hide();
+                $(this).addClass("Qy_center");
+                $(this).find(".Close_x").css("display", "block");
+                $(this).find(".Close_x").click(function () {
+                    window.location.reload();
+                });
+            }
+
+        });
+
+
+        $(".Db_Address_right .Address_right_SQ").eq(0).show().siblings().hide();
+        $(".Db_Addrees_left ul li").eq(0).addClass("Int_com");
+        $(".Db_Addrees_left ul li").click(function () {
+
+            var $lis = $(this).index();
+            $(".Db_Img").hide().siblings().show();
+            $(this).parent().parent().siblings().children().eq($lis).show().siblings().hide();
+            $(this).addClass("Int_com").siblings().removeClass("Int_com");
+
+        });
+        $(".Address_right_SQ ul li").click(function () {
+            var $val = $(this).index();
+            //				alert($(this).text());
+            $(".Address_Wz").css("display", "block");
+            $(".Address_Wz span").html($(this).text());
+            $(".Close_x").css("display", "none");
+            $(".List_address").css("display", "none");
+            $(".Com_con_List div").eq(0).show().siblings().hide();
+            $(".Tabs_rt").removeClass("Qy_center Zt");
+            $(".Tabs_lt").css("display", "block");
+            $(".Tabs_rt").addClass("ft");
+            $(".List_new_txt").click(function () {
+                window.location.href = "NPc.html";
+            });
+
+        });
+
+    });
+
+
+</script>
+
+<link href="~/Content/css/dropload.css" rel="stylesheet" />
+<script src="~/Content/js/swiper.min.js"></script>
+<script src="~/Content/js/dropload.min.js"></script>
+<script src="~/Content/js/together.js"></script>
+<script src="~/Content/js/common/sys.dateFormat.js"></script>
+<script type="text/javascript">
+    var preview = "";
+    $(function () {
+        GetBindList();
+        GetOrganizeListJson()
+    });
+</script>
+<script type="text/javascript">
+
+    var pageIndex;
+    //下拉手势
+    var dropload = $('#info_contentul').dropload({
+        domUp: {
+            domClass: 'dropload-up',
+            domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+            domUpdate: '<div class="dropload-update">↑释放更新</div>',
+            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+        },
+        domDown: {
+            domClass: 'dropload-down',
+            domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+            domUpdate: '<div class="dropload-update">↓释放加载</div>',
+            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+            domNoData: '<div class="dropload-noData">暂无数据</div>'
+        },
+        loadDownFn: function (me) {
+            GetBindList();
+        }
+    });
+    function GetBindList(OrganizeId,$thiz) {
+
+        OrganizeId = OrganizeId == undefined ? "" : OrganizeId;
+        pageIndex = parseInt($("#page").val()) + 1;
+        $("#page").val(pageIndex);
+        var queryJson = {
+            ParentId: "",
+            TVShowMenuId: "XuanMingMingDan",
+            OrganizeId: OrganizeId,
+            Title: "",
+            UserId: "",
+        }
+        $.ajax({
+            async: false,
+            type: "post",
+            url: "/Home/GetCollectionPageList",
+            data: {
+                pageIndex: pageIndex,
+                sidx:"ReleaseTime",
+                sord: "DESC",
+                queryJson: JSON.stringify(queryJson),
+            },
+            success: function (d) {
+
+                var obj = eval("(" + d + ")");
+                var data = "";
+                var newhtml5 = '';
+                if (obj.type == 1) {
+                    data = eval("(" + obj.message + ")");
+                    if (data != null && data.length>0) {
+                        newhtml5 = addHtmldata(data);
+                        $('.List_new_menudiv').append(newhtml5);
+                    }
+                }
+            },
+            error: function (xhr, type) {
+            }
+        });
+    }
+    function addHtmldata(data) {
+        var html = '';
+        console.log(data)
+        $.each(data, function (i, item) {
+            html += '   <div class="List_new_menu">';
+            if (item.HeadIcon == null || item.HeadIcon == "") {
+                html += '  <div class="List_new_Img">    <img src="@sys.Util.Config.GetValue("ImgDefault")"></div>';
+            } else {
+                html += '  <div class="List_new_Img">    <img src="@sys.Util.Config.GetValue("ImgHost")' + item.Cover + '"></div>';
+            }
+            html += '      <div class="List_new_txt"> <a href="/Collection/MessageReplyDetail?Id=' + item.Id +'"> <ul>';
+            html += '    <li><b>' + item.Title + '</b></li> ';
+            html += ' <li>选民/代表名称</li>';
+            html += ' <li>提出时间:' + dateFormat(item.ReleaseTime,"yyyy.MM.dd") + '</li>';
+            html += ('<li><img src="/Content/images/Yj.png"><label>' + (item.PV == null ? 0 : itemPV) + '</label><img src="/Content/images/ddz.png"><label>' + (item.LikeCount == null ? 0 : item.LikeCount) +'</label></li>');
+            html += '</ul></a>  </div>  </div>';
+
+        });
+        return html;
+    }
+    //Html编码获取Html转义实体
+    function htmlEncode() {
+        var htmlstr = editor1.html();
+        $("#Content").val($('<div/>').text(htmlstr).html());
+    }
+
+    //Html解码获取Html实体
+    function htmlDecode(value) {
+        return $('<div/>').html(value).text();
+    }
+</script>
+
+<script>
+    //按乡镇
+    function GetOrganizeListJson() {
+        $.ajax({
+            //async: false,
+            type: "post",
+            url: "/Organize/GetListJson",
+            data: {
+                OrganizeId: "",
+                ParentId: "0",
+            },
+            success: function (d) {
+                var obj = eval("(" + d + ")");
+                var data = "";
+                var html = '';
+                if (obj.type == 1) {
+                    data = eval("(" + obj.message + ")");
+                    console.log(data);
+                    if (data != null && data != "" && data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            html += ("<li onclick=\"GetOrganize(\'" + data[i].OrganizeId + "\',this)\">" + data[i].FullName + "</li>");
+                        }
+
+                    }
+                }
+                $(".Db_Addrees_leftul").html(html);
+                setTimeout(function () {
+                    $(".Db_Addrees_leftul li").eq(0).click();
+                }, 100)
+            },
+            error: function (xhr, type) {
+            }
+        });
+    }
+
+    function GetOrganize(ParentId, thiz) {
+        $(thiz).addClass("Address_bj").siblings().removeClass("Address_bj");
+        var PId = ParentId;
+        $.ajax({
+            //async: false,
+            type: "post",
+            url: "/Organize/GetTreeListJson",
+            data: {
+                ParentId: ParentId,
+            },
+            success: function (d, ParentId) {
+                var obj = eval("(" + d + ")");
+                var data = "";
+                var html = '';
+                if (obj.type == 1) {
+                    data = eval("(" + obj.message + ")");
+                    if (data != null && data != "" && data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            var ifo = eval("(" + data[i].entityJson + ")");
+                            if (!data[i].hasChildren) {
+                                html += ("<li onclick=\" $(\"#page\").val(0);GetBindList(\'" + data[i].id + "\')\">" + ifo.FullName + "</li>");
+                            }
+                            else if (data[i].hasChildren && ifo.ParentId == PId) {
+                                html += ("<li onclick=\"GetOrganize(\'" + data[i].id + "\',this)\">" + ifo.FullName + "</li>");
+                            } else {
+                                html += ("<li onclick=\"$(\"#page\").val(0);GetBindList(\'" + data[i].id + "\')\">" + ifo.FullName + "</li>");
+                            }
+
+                        }
+
+                    }
+
+                }
+                $(".Address_right_SQUL").html(html);
+            },
+            error: function (xhr, type) {
+            }
+        });
+    }
+
+
+</script>

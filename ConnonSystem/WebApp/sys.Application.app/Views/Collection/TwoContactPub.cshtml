@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@*~/Content/*@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="~/Content/css/mui.min.css" />
+    <script type="text/javascript" src="~/Content/js/mui.min.js"></script> 
+    <link rel="stylesheet" href="~/Content/css/home_page.css" />  
+    <script type="text/javascript" src="~/Content/js/jquery-2.1.0.js"></script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <a class=" mui-icon mui-icon-left-nav mui-pull-left" href="LxBd.html">返回</a>
+        <h1 class="mui-title">快速发布</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
+    <div class="ksfb">
+        <div class="Ksfb_Select">
+            <h4>标题</h4>
+            <div class="Ks_op">
+                <div class="Ks_op_y"><span>2019年</span><img src="images/daosanjiao.png"></div>
+                <div class="ks_op_jd"><span>第一季度</span><img src="images/daosanjiao.png"></div>
+                <div class="ks_op_title"><span>双联系双报到</span></div>
+            </div>
+            <div class="Ks_Sr">
+                <textarea name="" rows="" cols="" maxlength="200">文字描述(不能超过200字)</textarea>
+            </div>
+            <div class="Ks_add_Img">
+                <div class="add_Ig">
+                    <span id="headImage">添加图片+</span>
+
+                </div>
+                <div class="add_Ig"><label id="Clear">-</label><img src="images/1.jpg"></div>
+
+                <div class="add_Ig"><span>最多四张</span></div>
+
+            </div>
+            <div class="ks_btn mui-btn mui-btn-primary">提交</div>
+            <div class="Ks_phone">
+                <ul>
+                    <li>拍照</li>
+                    <li>从相册中选取</li>
+                    <li>取消</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+<script>
+
+    mui(document.body).on('tap', '.mui-btn', function (e) {
+        mui(this).button('loading');//切换为loading状态
+        setTimeout(function () {
+            mui(this).button('reset');//切换为reset状态(即重置为原始的button)
+        }.bind(this), 2000);
+    });
+
+    $(function () {
+        $("#headImage").click(function () {
+            $(".Ks_phone").css("display", "block");
+        });
+        $(".Ks_phone ul li").click(function () {
+            alert($(this).text());
+            if ($(this).text() == "取消") {
+                $(".Ks_phone").css("display", "none");
+            }
+        });
+    });
+    mui('body').on('tap', 'a', function () { document.location.href = this.href; });
+</script>

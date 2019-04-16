@@ -44,6 +44,7 @@
     <Compile Include="AccountEntity.cs" />
     <Compile Include="AppManage\MessageReadEntity.cs" />
     <Compile Include="AppManage\MeetingEntity.cs" />
+    <Compile Include="AppManage\CommentEntity.cs" />
     <Compile Include="AppManage\NoticeEntity.cs" />
     <Compile Include="AppManage\Survey\SurveyAnswerBaseEntity.cs" />
     <Compile Include="AppManage\Survey\SurveyAnswerDetailEntity.cs" />

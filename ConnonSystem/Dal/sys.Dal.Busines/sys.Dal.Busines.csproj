@@ -44,6 +44,7 @@
     <Compile Include="AccountBLL.cs" />
     <Compile Include="AppManage\MessageReadBLL.cs" />
     <Compile Include="AppManage\MeetingBLL.cs" />
+    <Compile Include="AppManage\CommentBLL.cs" />
     <Compile Include="AppManage\NoticeBLL.cs" />
     <Compile Include="AppManage\Survey\SurveyAnswerDetailBLL.cs" />
     <Compile Include="AppManage\Survey\SurveyOptionsBLL.cs" />

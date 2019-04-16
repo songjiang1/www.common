@@ -57,6 +57,10 @@ namespace sys.Application.app.Controllers
                     operators.DepartmentId = userEntity.DepartmentId;
                     operators.IPAddress = Net.Ip;
                     operators.IPAddressName = IPLocation.GetLocation(Net.Ip);
+                    operators.HeadIcon = userEntity.HeadIcon;
+                    operators.Post = userEntity.Post;
+                    operators.Position = userEntity.Position;
+                    operators.WorkUnit = userEntity.WorkUnit;
                     //operators.ObjectId = new PermissionBLL().GetObjectStr(userEntity.UserId);
                     operators.LogTime = DateTime.Now;
                     operators.Token = DESEncrypt.Encrypt(Guid.NewGuid().ToString()); 

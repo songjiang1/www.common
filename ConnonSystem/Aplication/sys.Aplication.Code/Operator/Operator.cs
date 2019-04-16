@@ -73,6 +73,23 @@ namespace sys.Aplication.Code
         /// </summary>
         public string Token { get; set; }
         /// <summary>
+        /// 头像
+        /// </summary>
+        public string HeadIcon { get; set; }
+        /// <summary>
+        /// 岗位
+        /// </summary>
+        public string Post { get; set; }
+        /// <summary>
+        /// 职位/职务
+        /// </summary>
+        public string Position { get; set; }
+
+        /// <summary>
+        /// 工作单位
+        /// </summary>
+        public string WorkUnit { get; set; }
+        /// <summary>
         /// 用户数据权限
         /// </summary>
         public AuthorizeDataModel DataAuthorize { get; set; }

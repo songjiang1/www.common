@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AppManage\IMessageReadService.cs" />
     <Compile Include="AppManage\IMeetingService.cs" />
+    <Compile Include="AppManage\ICommentService.cs" />
     <Compile Include="AppManage\INoticeService.cs" />
     <Compile Include="AppManage\Survey\ISurveyOptionsService.cs" />
     <Compile Include="AppManage\Survey\ISurveyQuestionService.cs" />

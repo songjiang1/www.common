@@ -58,7 +58,6 @@ a:hover {
 	outline: 0
 }
 
-
 abbr[title] {
 	border-bottom: 1px dotted
 }
@@ -244,7 +243,10 @@ a:active {
 	-webkit-overflow-scrolling: touch
 }
 
-
+.mui-bar-nav~.mui-content {
+	padding-top: 44px;
+	
+}
 
 .mui-bar-nav~.mui-content.mui-scroll-wrapper .mui-scrollbar-vertical {
 	top: 44px
@@ -938,21 +940,32 @@ button,
 input[type=button],
 input[type=reset],
 input[type=submit] {
-	    -webkit-transition: all;
-    transition: all;
-    -webkit-transition-timing-function: linear;
-    transition-timing-function: linear;
-    -webkit-transition-duration: .2s;
-    transition-duration: .2s;
-    text-align: center;
-    vertical-align: top;
-    white-space: nowrap;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius:5px;
-  
-    background-color: #fff;
-    background-clip: padding-box;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42;
+	position: relative;
+	/*display: inline-block;*/
+	margin-bottom: 0;
+	/*padding: 6px 12px;*/
+	cursor: pointer;
+	-webkit-transition: all;
+	transition: all;
+	-webkit-transition-timing-function: linear;
+	transition-timing-function: linear;
+	-webkit-transition-duration: .2s;
+	transition-duration: .2s;
+	text-align: center;
+	vertical-align: top;
+	white-space: nowrap;
+	color: #333;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	background-color: #fff;
+	background-clip: padding-box
 }
 
 .mui-btn.mui-active:enabled,
@@ -1887,9 +1900,7 @@ input[type=submit]:enabled:active {
 	padding-left: 58px
 }
 
-.mui-table-view-cell.mui-active {
-	background-color: #eee
-}
+
 
 .mui-table-view-cell:last-child:after,
 .mui-table-view-cell:last-child:before {
@@ -2011,11 +2022,11 @@ input[type=submit]:enabled:active {
 	position: relative;
 	margin-top: -1px;
 	margin-left: 0;
-	padding-top: 6px;
-	padding-bottom: 6px;
+	/*padding-top: 6px;
+	padding-bottom: 6px;*/
 	padding-left: 15px;
 	color: #999;
-	background-color: #fafafa
+	background-color:rgba(222,227,252,0.2);
 }
 
 .mui-table-view-divider:after {
@@ -2727,7 +2738,7 @@ select:focus {
 }
 
 .mui-search input[type=search] {
-	padding-left: 30px
+	padding-left:8px
 }
 
 .mui-search .mui-placeholder {

@@ -46,6 +46,7 @@
     <Compile Include="AccountService.cs" />
     <Compile Include="AppManage\MessageReadService.cs" />
     <Compile Include="AppManage\MeetingService.cs" />
+    <Compile Include="AppManage\CommentService.cs" />
     <Compile Include="AppManage\NoticeService.cs" />
     <Compile Include="AppManage\Survey\SurveyAnswerDetailService.cs" />
     <Compile Include="AppManage\Survey\SurveyQuestionService.cs" />

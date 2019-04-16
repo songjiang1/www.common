@@ -50,6 +50,7 @@
     <Compile Include="AccountMap.cs" />
     <Compile Include="AppManage\MessageReadMap.cs" />
     <Compile Include="AppManage\MeetingMap.cs" />
+    <Compile Include="AppManage\CommentMap.cs" />
     <Compile Include="AppManage\NoticeMap.cs" />
     <Compile Include="AppManage\Survey\SurveyAnswerDetailMap.cs" />
     <Compile Include="AppManage\Survey\SurveyAnswerBaseMap.cs" />

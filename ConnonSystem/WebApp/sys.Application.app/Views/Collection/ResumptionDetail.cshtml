@@ -1,0 +1,133 @@
+﻿
+@{
+    Layout = null;
+    sys.Dal.Entity.TVShowManage.CollectionEntity entity = ViewBag.CollectionEntity;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/mui.min.js"></script>
+    <link rel="stylesheet" href="css/home_page.css" />
+    <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <a class=" mui-icon mui-icon-left-nav mui-pull-left" href="javascript:history.back();">返回</a>
+        <h1 class="mui-title">人大网络管理平台</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
+    <div class="NPC">
+        <div class="NPC_List">
+            <div class="NPC_View">
+                <div class="Nv_Title">
+                    <span style="color:@entity.TitleColor">@entity.Title</span>
+                </div>
+                <div class="Nv_Fb">
+                    <div class="Nv_Fb_Subheading">
+                        <span>选民留言堂</span>
+                    </div>
+                    <div class="Nv_FB_Img"><img src="images/wl3.jpg"> </div>
+                </div>
+                <div class="Nv_Fb">
+                    <div class="Nv_Fb_Subheading">
+                        <span>代表回音壁</span>
+                        <p>2017年5月10日，选民李彦龙反映现在村民操办敛财问题严重，希望镇纪委能够出台相应政策，狠刹操办敛财不正之风。</p>
+                    </div>
+                    <div class="Nv_FB_Img"><img src="images/wl1.jpg"></div>
+                </div>
+                <div class="Nv_Fb">
+                    <div class="Nv_Fb_Subheading">
+                        <span>取得效果</span>
+                        <p>代表吕春霞了解后，把问题反映给了镇纪委，随后我镇纪委组织工商所、派出所等相关部门对各村屯大礼堂、镇内饭店举行检查，现在大操大办情况在我镇已经得到了改善。</p>
+                    </div>
+                    <div class="Nv_FB_Img"><img src="images/wl2.jpg"></div>
+                </div>
+                <div class="Nv_Fb">
+                    <div class="Nv_Fb_Subheading">
+
+                        <p>通过吕春霞代表与镇纪检查部门协调后，牛家镇大操大办问题得到了改善，选民对代表给与了肯定。</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="NPC_List_Pl">
+            <div class="NPC_Dianzan">
+                <div class="NPC_Dz_t"><span>2019.4.8</span></div>
+                <div class="NPC_info">
+
+                    <img src="images/NPC_Y.png"><span>175</span>
+                    <img src="images/dmz .png"><span>175</span>
+                    <img src="images/Npc_Xx.png"><span>175</span>
+                </div>
+
+            </div>
+            <div class="List_Plq " id="Add">
+                <div class="List_Plq_bt">
+                    <div class="List_Plq_top">
+                        <div class="Plq_top_tx"><img src="images/10553687955795022058.jpg"> </div>
+                        <div class="Plq_top_Xq"><span>张三</span><br /><span>主席</span></div>
+                        <div class="Plq_top_date">2019.12.12</div>
+                    </div>
+                    <div class="List_Plq_txt">
+                        <span>1111111111111111111111111111</span>
+                    </div>
+                </div>
+                <div class="List_Plq_bt">
+                    <div class="List_Plq_top">
+                        <div class="Plq_top_tx"><img src="images/10553687955795022058.jpg"> </div>
+                        <div class="Plq_top_Xq"><span>张三</span><br /><span>主席</span></div>
+                        <div class="Plq_top_date">2019.12.12</div>
+                    </div>
+                    <div class="List_Plq_txt">
+                        <span>1111111111111111111111111111</span>
+                    </div>
+                </div>
+                <div class="List_Plq_bt">
+                    <div class="List_Plq_top">
+                        <div class="Plq_top_tx"><img src="images/10553687955795022058.jpg"> </div>
+                        <div class="Plq_top_Xq"><span>张三</span><br /><span>主席</span></div>
+                        <div class="Plq_top_date">2019.12.12</div>
+                    </div>
+                    <div class="List_Plq_txt">
+                        <span>1111111111111111111111111111</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form action="" class="NPc_footer">
+            <div class="mui-input-row mui-search">
+                <input id="search" type="search" class="mui-input-clear" placeholder="输入关键字搜索">
+                <img src="images/biaoqing.png" class="biaoqian">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+<script>
+
+    //			mui('body').on('tap','a',function(){document.location.href=this.href;});
+    $(function () {
+        $(".NPC_List").height($(window).height());
+        $(".NPC_info img").click(function () {
+            alert(1);
+            $(".NPC_Dianzan").css("border-bottom", "1px solid #d4d4d4");
+            $(".List_Plq").toggleClass();
+            $(".NPc_footer").css("display", "block");
+        });
+        $(".biaoqian").click(function () {
+
+            var $str = " <div class='List_Plq_bt'><div class='List_Plq_top'><div class='Plq_top_tx'><img src='images/ss.png'> </div><div class='Plq_top_Xq'><span>张三</span><br/><span>主席</span></div><div class='Plq_top_date'>2019.12.12</div></div><div class='List_Plq_txt'><span>" + $('#search').val() + "</span></div></div>";
+
+            $("#Add").append($str);
+            $("input[type='search']").val("");
+        });
+    });
+</script>

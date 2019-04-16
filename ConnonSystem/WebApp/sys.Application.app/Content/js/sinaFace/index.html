@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../jquery-2.1.0.js"></script>
+    <link href="css/main.css" rel="stylesheet" />
+    <link href="css/sinaFaceAndEffec.css" rel="stylesheet" />
+    <script src="js/main.js"></script>
+    <script src="js/sinaFaceAndEffec.js?v=1.0.0.1"></script>
+    <style>
+        #emotions {
+            left: 0;
+            margin-top: 0px;
+        }
+        .face-icon {
+            height: 30px;
+            font-size: 25px;
+            float: left;
+            /* margin-right: 45px; */
+            margin-left: 18%;
+        }
+        .cont-box .text {
+            width: 88%; 
+        }
+        .comment .content {
+            width: 70%; 
+        }
+        .face-sub {
+            height: 20px;
+            line-height: 22px;
+            font-size: 14px;
+            float: right;
+            padding: 8px 8px;
+            border-radius: 8px;
+            background-color: blue;
+            color: #fff;
+        }
+        .comment .head-face {
+            width: 30%;
+            height: 120px;
+            float: left;
+            text-align: center;
+        }
+        .content {
+            height: auto;
+        }
+        .comment .content { 
+            height: auto!important; 
+        }
+        .cont-box { 
+            border-radius: 5px;  
+        }
+        #emotions {
+            width:90%!important;
+        }
+    </style>
+</head>
+<body>
+    <div id="content" style="width: 100%; height: auto;">
+        <div class="wrap">
+            <div class="comment">
+
+                <div class="content"  style="float:left;">
+                    <div class="cont-box" style="height: 35px;">
+                        <textarea class="text" placeholder="请输入..." style="height: 25px;line-height:25px;" oninput="OnInput (event)" onpropertychange="OnPropChanged (event)"></textarea>
+                    </div>
+                    <div class="tools-box" style="display:none;">
+                        <div class="operator-box-btn">
+                        <span class="face-icon">☺</span>
+                        <!--<span class="img-icon">▧</span>-->
+                        </div>
+                        <div class="submit-btn"><input type="button" onClick="out()" value="提交评论" /></div>
+                    </div>
+                </div>
+                <div class="head-face"  style="float:right;display:block;">
+                    <div class="operator-box-btn">
+                        <span class="face-icon">☺</span>
+                        <span class="face-sub" style="display:none;" onclick="out()">提交</span>
+                    </div>
+                </div>
+            </div>
+            <div id="info-show" style="display:none;">
+                <ul></ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    // 绑定表情
+    $('.face-icon').SinaEmotion($('.text'));
+    // 测试本地解析
+    function out() {
+        var inputText = $('.text').val();
+        if (inputText == "") {
+        } else {
+            var data = {};
+            data.keyValue= "";
+            data.Content = AnalyticEmotion(inputText);
+            data.Category = "MessageReply";
+            $.ajax({
+                url: "/Home/SaveForm",
+                data: data,
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    //forMsg(data.message); 
+                    parent.window.forMsg(data.message)
+                    } 
+            });
+            //$('#info-show ul').append(reply(AnalyticEmotion(inputText)));
+        }
+    }
+    // Firefox, Google Chrome, Opera, Safari, Internet Explorer from version 9
+    function OnInput(event) {
+        //alert("The new content: " + event.target.value);
+        textShow();
+    }
+    // Internet Explorer
+    function OnPropChanged(event) {
+        if (event.propertyName.toLowerCase() == "value") {
+            //alert("The new content: " + event.srcElement.value);
+            textShow();
+        }
+    } 
+    //$(".text").keyup(function() {
+    //    textShow();
+    //})
+    //$(".text").keydown(function () {
+    //    textShow();
+    //})
+    $(".text").blur(function () {
+        textShow();
+    })
+     
+    function textShow() {
+        if ($(".text").val().trim() != "") {
+            $(".face-sub").show();
+        }
+        else {
+            $(".face-sub").hide();
+        }
+    }
+    var html;
+    function reply(content) {
+        html = '<li>';
+        html += '<div class="head-face">';
+        html += '<img src="images/1.jpg" / >';
+        html += '</div>';
+        html += '<div class="reply-cont">';
+        html += '<p class="username">小小红色飞机</p>';
+        html += '<p class="comment-body">' + content + '</p>';
+        html += '<p class="comment-footer">2016年10月5日　回复　点赞54　转发12</p>';
+        html += '</div>';
+        html += '</li>';
+        return html;
+    }
+</script>
+</html>

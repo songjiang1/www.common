@@ -40,3 +40,12 @@ String.prototype.format = function () {
         s = s.replace(new RegExp("\\{" + i + "\\}", "g"), arguments[i]);
     return s;
 };
+//提示
+function forMsg(msg, time) {
+    time = time == undefined ? 2 : time;
+    layer.open({
+        content: msg
+        , time: time
+        , skin: 'msg'
+    });
+}

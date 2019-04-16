@@ -253,6 +253,11 @@ namespace sys.Dal.Entity.TVShowManage
         /// 学历
         /// </summary>
         public string Education { get; set; }
+
+        /// <summary>
+        /// 评论数量
+        /// </summary>
+        public int? CommentCount { get; set; }
         
 
         #endregion
